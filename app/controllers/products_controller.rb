@@ -1,15 +1,25 @@
 class ProductsController < ApplicationController
-  def index
-    @categories = Product.active.distinct.order(:category).pluck(:category)
-    @brands = Product.active.distinct.order(:brand).pluck(:brand)
+  PRODUCTS_PER_PAGE = 24
 
-    @products = Product.active
-                       .by_category(params[:category])
-                       .by_brand(params[:brand])
-                       .order(created_at: :desc)
+  def index
+    @visible_count = visible_count
+    base_scope = Product.active.where("LOWER(brand) = ?", "elporta").order(:title)
+
+    @products = base_scope.limit(@visible_count)
+    @total_products_count = base_scope.count
+    @show_more = @visible_count < @total_products_count
   end
 
   def show
     @product = Product.active.find_by!(slug: params[:id])
+  end
+
+  private
+
+  def visible_count
+    count = params.fetch(:limit, PRODUCTS_PER_PAGE).to_i
+    return PRODUCTS_PER_PAGE if count <= 0
+
+    count
   end
 end

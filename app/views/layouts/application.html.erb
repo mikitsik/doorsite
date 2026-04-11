@@ -1,29 +1,137 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Doorsite" %></title>
+    <title>DoorSite</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Doorsite">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
+    <style>
+      :root {
+        --text: #111111;
+        --muted: #666666;
+        --line: #e5e5e5;
+        --bg: #ffffff;
+      }
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+      * {
+        box-sizing: border-box;
+      }
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+      html {
+        margin: 0;
+        padding: 0;
+      }
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      .site-header {
+        border-bottom: 1px solid var(--line);
+        padding: 20px 16px;
+      }
+
+      .site-header__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .site-title {
+        margin: 0 0 10px 0;
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+
+      .site-phones {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      .site-main {
+        min-height: calc(100vh - 180px);
+      }
+
+      .site-footer {
+        border-top: 1px solid var(--line);
+        padding: 24px 16px;
+        margin-top: 40px;
+      }
+
+      .site-footer__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .button-link {
+        display: inline-block;
+        padding: 12px 22px;
+        border: 1px solid #222;
+        border-radius: 6px;
+        text-decoration: none;
+      }
+
+      .button-link--light {
+        border-color: #cccccc;
+      }
+
+      @media (max-width: 800px) {
+        .site-title {
+          font-size: 22px;
+        }
+
+        .site-phones {
+          font-size: 16px;
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <h1 class="site-title">dveri_molodechno_region</h1>
+
+        <div class="site-phones">
+          <div>
+            <a href="tel:+375292746333">+375 (29) 274-63-33</a>
+          </div>
+          <div>
+            <a href="tel:+375296885529">+375 (29) 688-55-29</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <%= yield %>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        elporta
+      </div>
+    </footer>
   </body>
 </html>
