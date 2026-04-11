@@ -84,21 +84,9 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+#
+# RENDER production
 production:
-  primary: &primary_production
-    <<: *default
-    database: doorsite_production
-    username: doorsite
-    password: <%= ENV["DOORSITE_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: doorsite_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: doorsite_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: doorsite_production_cable
-    migrations_paths: db/cable_migrate
+  primary:
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
