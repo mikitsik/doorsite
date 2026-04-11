@@ -1,59 +1,371 @@
-<div style="max-width: 1200px; margin: 0 auto; padding: 32px 16px 60px;">
-  <h2 style="text-align: center; font-size: 28px; margin-bottom: 20px;">
-    Elporta
-  </h2>
+<style>
+  .doorsite-shell {
+    max-width: var(--site-container);
+    margin: 0 auto;
+    padding: 28px 18px 80px;
+  }
 
-  <h3 style="text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 32px;">
-    <%= @products.first.category %>
-  </h3>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 34px;
+    padding: 64px 28px 54px;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.68)),
+      linear-gradient(120deg, #ece7de 0%, #f7f4ee 100%);
+    box-shadow: var(--site-shadow);
+    backdrop-filter: blur(12px);
+    margin-bottom: 36px;
+  }
 
-  <div style="overflow-x: auto;">
-    <table style="width: 100%; border-collapse: collapse;">
-      <thead>
-        <tr style="border-bottom: 2px solid #ddd;">
-        </tr>
-      </thead>
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: auto -80px -120px auto;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.52);
+    filter: blur(12px);
+  }
 
-      <tbody>
-        <% @products.each do |product| %>
-          <tr
-            onclick="window.location='<%= product_path(product) %>'"
-            style="border-bottom: 1px solid #e5e5e5; cursor: pointer;"
-            onmouseover="this.style.background='#f9f9f9'"
-            onmouseout="this.style.background='white'"
-          >
-            <td style="padding: 12px 10px; width: 120px;">
-              <% if product.image_url.present? %>
-                <img
-                  src="<%= product.image_url %>"
-                  alt="<%= product.title %>"
-                  style="width: 90px; height: 120px; object-fit: cover; display: block;"
-                >
-              <% end %>
-            </td>
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: -70px auto auto -70px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+    filter: blur(10px);
+  }
 
-            <td style="padding: 12px 10px; vertical-align: top; font-weight: 600; text-align: center">
-              <%= product.title %>
-            </td>
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
 
-            <td style="padding: 12px 10px; vertical-align: top; white-space: nowrap;">
-              <% if product.price.present? %>
-                <%= number_with_precision(product.price, precision: 2) %> <%= product.currency %>
-              <% else %>
-                —
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  .hero-label {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.06);
+    color: var(--site-muted);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
 
-  <% if @show_more %>
-    <div style="text-align: center; margin-top: 28px;">
-      <%= link_to "Показать больше",
-          root_path(limit: @visible_count + ProductsController::PRODUCTS_PER_PAGE),
-          class: "button-link" %>
+  .hero-title {
+    margin: 0;
+    font-size: clamp(36px, 7vw, 74px);
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-subtitle {
+    margin: 20px auto 0;
+    max-width: 760px;
+    font-size: clamp(17px, 2vw, 22px);
+    line-height: 1.6;
+    color: var(--site-muted);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+
+  .section-title {
+    margin: 0;
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .section-note {
+    color: var(--site-muted);
+    font-size: 15px;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .product-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 28px;
+    overflow: hidden;
+    background: var(--site-panel);
+    border: 1px solid var(--site-border);
+    box-shadow: var(--site-shadow);
+    backdrop-filter: blur(10px);
+    transform: translateY(0) scale(1);
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px) scale(1.012);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.14);
+    border-color: rgba(0,0,0,0.14);
+  }
+
+  .product-image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.85), rgba(236,232,224,0.95));
+  }
+
+  .product-image-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.10) 100%);
+    pointer-events: none;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    transition: transform 0.55s ease;
+  }
+
+  .product-card:hover .product-image {
+    transform: scale(1.06);
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.86);
+    border: 1px solid rgba(0,0,0,0.06);
+    font-size: 13px;
+    font-weight: 600;
+    color: #3f3f3f;
+    backdrop-filter: blur(8px);
+  }
+
+  .product-content {
+    padding: 18px;
+  }
+
+  .product-brand {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--site-muted);
+    margin-bottom: 10px;
+  }
+
+  .product-title {
+    margin: 0 0 12px 0;
+    font-size: 24px;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    min-height: 52px;
+  }
+
+  .product-bottom {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .product-price {
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .product-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--site-muted);
+    transition: gap 0.25s ease, color 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .product-card:hover .product-more {
+    gap: 12px;
+    color: var(--site-accent);
+  }
+
+  .product-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--site-muted);
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footer-note {
+    margin-top: 40px;
+    text-align: center;
+    color: var(--site-muted);
+    font-size: 14px;
+  }
+
+  @media (max-width: 1100px) {
+    .products-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .doorsite-shell {
+      padding: 18px 14px 52px;
+    }
+
+    .hero {
+      padding: 42px 18px 34px;
+      border-radius: 26px;
+      margin-bottom: 24px;
+    }
+
+    .section-head {
+      display: block;
+    }
+
+    .section-note {
+      margin-top: 8px;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .product-title {
+      min-height: auto;
+      font-size: 22px;
+    }
+
+    .product-price {
+      font-size: 21px;
+    }
+  }
+</style>
+
+<div class="doorsite-shell">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-label">door boutique</div>
+
+      <h1 class="hero-title">
+        dveri_molodechno_region
+      </h1>
+
+      <p class="hero-subtitle">
+        Современные межкомнатные двери в спокойной эстетике:
+        чистые формы, актуальные коллекции и удобный каталог без лишнего шума.
+      </p>
     </div>
-  <% end %>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Каталог дверей</h2>
+        <div class="section-note">
+          Большие карточки, чистая подача и акцент на визуале.
+        </div>
+      </div>
+
+      <div class="section-note">
+        <%= @products.size %> моделей
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <% @products.each do |product| %>
+        <%= link_to product_path(product), class: "product-card" do %>
+          <div class="product-image-wrap">
+            <div class="product-badge">
+              <%= product.brand.presence || "Door" %>
+            </div>
+
+            <% if product.image_url.present? %>
+              <img
+                src="<%= product.image_url %>"
+                alt="<%= product.title %>"
+                class="product-image"
+                loading="lazy"
+              >
+            <% else %>
+              <div class="product-empty">
+                Изображение скоро появится
+              </div>
+            <% end %>
+          </div>
+
+          <div class="product-content">
+            <div class="product-brand">
+              <%= product.category.presence || product.brand.presence || "Каталог" %>
+            </div>
+
+            <h3 class="product-title">
+              <%= product.title %>
+            </h3>
+
+            <div class="product-bottom">
+              <div class="product-price">
+                <% if product.price.present? %>
+                  <%= number_with_precision(product.price, precision: 2) %> <%= product.currency %>
+                <% else %>
+                  Цена по запросу
+                <% end %>
+              </div>
+
+              <div class="product-more">
+                Смотреть
+                <span>→</span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    Каталог дверей для Молодечно и региона
+  </div>
 </div>
