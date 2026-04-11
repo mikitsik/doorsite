@@ -12,4 +12,12 @@ class Product < ApplicationRecord
   def to_param
     slug
   end
+
+  def brand_slug
+    brand.parameterize
+  end
+
+  def category_slug
+    category.parameterize
+  end
 end

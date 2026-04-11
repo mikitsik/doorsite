@@ -1,2 +1,48 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+  <div>
+    <% if @product.image_url.present? %>
+      <img src="<%= @product.image_url %>" alt="<%= @product.title %>" style="width: 100%; max-width: 500px;">
+    <% end %>
+  </div>
+
+  <div>
+    <h1><%= @product.title %></h1>
+
+    <p><strong>Производитель:</strong> <%= @product.brand %></p>
+    <p><strong>Категория:</strong> <%= @product.category %></p>
+
+    <% if @product.price.present? %>
+      <p><strong>Цена:</strong> <%= @product.price %> <%= @product.currency %></p>
+    <% end %>
+
+    <% if @product.description.present? %>
+      <p><%= simple_format(@product.description) %></p>
+    <% end %>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
+      <a href="tel:+375291111111">Позвонить</a>
+      <a href="#lead-form">Заказать звонок</a>
+      <button type="button">Примерить у себя</button>
+    </div>
+  </div>
+</div>
+
+<hr style="margin: 30px 0;">
+
+<div id="lead-form">
+  <h2>Заказать звонок</h2>
+
+  <form>
+    <div style="margin-bottom: 12px;">
+      <label>Телефон</label><br>
+      <input type="text" name="phone">
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <label>Комментарий</label><br>
+      <textarea name="comment"></textarea>
+    </div>
+
+    <button type="submit">Отправить</button>
+  </form>
+</div>

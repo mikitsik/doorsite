@@ -1,2 +1,79 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<h1>Каталог дверей</h1>
+
+<h3>Производители</h3>
+<ul>
+  <% @brands.each do |brand| %>
+    <li>
+      <%= link_to brand, brand_path(brand: brand.parameterize) %>
+    </li>
+  <% end %>
+</ul>
+
+<h1>
+  <% if params[:brand] %>
+    Двери <%= params[:brand].capitalize %>
+  <% elsif params[:category] %>
+    <%= params[:category].capitalize %> двери
+  <% else %>
+    Каталог дверей
+  <% end %>
+</h1>
+
+<h3>Категории</h3>
+<ul>
+  <% @categories.each do |category| %>
+    <li>
+      <%= link_to category, category_path(category: category) %>
+    </li>
+  <% end %>
+</ul>
+
+<div style="margin-bottom: 20px;">
+  <%= form_with url: products_path, method: :get, local: true do %>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <div>
+        <label>Категория</label><br>
+        <%= select_tag :category,
+          options_for_select([["Все", ""]] + @categories.map { |c| [c, c] }, params[:category]) %>
+      </div>
+
+      <div>
+        <label>Производитель</label><br>
+        <%= select_tag :brand,
+          options_for_select([["Все", ""]] + @brands.map { |b| [b, b] }, params[:brand]) %>
+      </div>
+
+      <div style="align-self: end;">
+        <%= submit_tag "Фильтровать" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+  <% @products.each do |product| %>
+    <div style="border: 1px solid #ddd; padding: 12px; border-radius: 8px;">
+      <% if product.image_url.present? %>
+        <%= link_to product_path(product) do %>
+          <img src="<%= product.image_url %>" alt="<%= product.title %>" style="width: 100%; height: 260px; object-fit: cover;">
+        <% end %>
+      <% end %>
+
+      <h3 style="margin-top: 12px;">
+        <%= link_to product.title, product_path(product) %>
+      </h3>
+
+      <p><strong>Производитель:</strong> <%= product.brand %></p>
+      <p><strong>Категория:</strong> <%= product.category %></p>
+
+      <% if product.price.present? %>
+        <p><strong>Цена:</strong> <%= product.price %> <%= product.currency %></p>
+      <% end %>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <a href="tel:+375291111111">Позвонить</a>
+        <%= link_to "Подробнее", product_path(product) %>
+      </div>
+    </div>
+  <% end %>
+</div>
