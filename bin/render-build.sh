@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -o errexit
 
+export RAILS_ENV=production
+
 bundle install
 bin/rails assets:precompile
-RAILS_ENV=production bin/rails db:prepare
+bin/rails db:prepare
+

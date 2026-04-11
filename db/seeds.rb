@@ -1,50 +1,22 @@
-# require "csv"
-
-# Product.delete_all
-
-# csv_path = Rails.root.join("db/products.csv")
-
-# CSV.foreach(csv_path, headers: true) do |row|
-#   Product.create!(
-#     slug: row["slug"],
-#     title: row["title"],
-#     brand: row["brand"],
-#     category: row["category"],
-#     price: row["price"],
-#     currency: row["currency"],
-#     image_url: row["image_url"],
-#     description: row["description"],
-#     active: row["active"] == "true"
-#   )
-# end
-
-# puts "Created #{Product.count} products"
-
-require "csv"
 require "base64"
+require "csv"
 
-Product.delete_all
+encoded = ENV["PRODUCTS_CSV_BASE64"]
+raise "No PRODUCTS_CSV_BASE64" if encoded.blank?
 
-if ENV["PRODUCTS_CSV_BASE64"].present?
-  decoded = Base64.decode64(ENV["PRODUCTS_CSV_BASE64"])
+csv_data = Base64.decode64(encoded)
 
-  CSV.parse(decoded, headers: true) do |row|
-    Product.create!(
-      slug: row["slug"],
-      title: row["title"],
-      brand: row["brand"],
-      category: row["category"],
-      price: row["price"],
-      currency: row["currency"],
-      image_url: row["image_url"],
-      description: row["description"],
-      active: row["active"] == "true"
-    )
+CSV.parse(csv_data, headers: true) do |row|
+  Product.find_or_create_by!(slug: row["slug"]) do |p|
+    p.title = row["title"]
+    p.brand = row["brand"]
+    p.category = row["category"]
+    p.price = row["price"]
+    p.currency = row["currency"]
+    p.image_url = row["image_url"]
+    p.description = row["description"]
+    p.active = row["active"] == "true"
   end
-
-  puts "Loaded products from ENV"
-else
-  puts "No CSV provided"
 end
 
-puts "Total: #{Product.count}"
+puts "Seeded #{Product.count} products"
