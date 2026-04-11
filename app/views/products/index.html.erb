@@ -1,41 +1,39 @@
 <div style="max-width: 1200px; margin: 0 auto; padding: 32px 16px 60px;">
-  <h2 style="text-align: center; font-size: 28px; text-transform: lowercase; margin-bottom: 32px;">
-    elporta
+  <h2 style="text-align: center; font-size: 28px; margin-bottom: 20px;">
+    Elporta
   </h2>
+
+  <h3 style="text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 32px;">
+    <%= @products.first.category %>
+  </h3>
 
   <div style="overflow-x: auto;">
     <table style="width: 100%; border-collapse: collapse;">
       <thead>
         <tr style="border-bottom: 2px solid #ddd;">
-          <th style="text-align: left; padding: 12px 10px;">Фото</th>
-          <th style="text-align: left; padding: 12px 10px;">Модель</th>
-          <th style="text-align: left; padding: 12px 10px;">Категория</th>
-          <th style="text-align: left; padding: 12px 10px;">Цена</th>
-          <th style="text-align: left; padding: 12px 10px;">Ссылка</th>
         </tr>
       </thead>
 
       <tbody>
         <% @products.each do |product| %>
-          <tr style="border-bottom: 1px solid #e5e5e5;">
+          <tr
+            onclick="window.location='<%= product_path(product) %>'"
+            style="border-bottom: 1px solid #e5e5e5; cursor: pointer;"
+            onmouseover="this.style.background='#f9f9f9'"
+            onmouseout="this.style.background='white'"
+          >
             <td style="padding: 12px 10px; width: 120px;">
               <% if product.image_url.present? %>
-                <%= link_to product_path(product) do %>
-                  <img
-                    src="<%= product.image_url %>"
-                    alt="<%= product.title %>"
-                    style="width: 90px; height: 120px; object-fit: cover; display: block;"
-                  >
-                <% end %>
+                <img
+                  src="<%= product.image_url %>"
+                  alt="<%= product.title %>"
+                  style="width: 90px; height: 120px; object-fit: cover; display: block;"
+                >
               <% end %>
             </td>
 
-            <td style="padding: 12px 10px; vertical-align: top;">
-              <%= link_to product.title, product_path(product), style: "color: #111; text-decoration: none; font-weight: 600;" %>
-            </td>
-
-            <td style="padding: 12px 10px; vertical-align: top;">
-              <%= product.category %>
+            <td style="padding: 12px 10px; vertical-align: top; font-weight: 600; text-align: center">
+              <%= product.title %>
             </td>
 
             <td style="padding: 12px 10px; vertical-align: top; white-space: nowrap;">
@@ -44,10 +42,6 @@
               <% else %>
                 —
               <% end %>
-            </td>
-
-            <td style="padding: 12px 10px; vertical-align: top;">
-              <%= link_to "Открыть", product_path(product), style: "white-space: nowrap;" %>
             </td>
           </tr>
         <% end %>
