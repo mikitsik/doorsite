@@ -39,14 +39,20 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" style="--hero-bg: url('<%= asset_path("hero-room.png") %>');">
   <div class="container hero__inner">
-    <div>
+    <div class="hero__content">
       <div class="hero__eyebrow">Каталог дверей в Молодечно</div>
 
-      <h1>Современные двери<br>для квартиры, дома и офиса</h1>
+      <h1 class="hero__title">
+        Современные двери
+        <br>
+        для квартиры, дома
+        <br>
+        и офиса
+      </h1>
 
-      <p>
+      <p class="hero__text">
         Подберём межкомнатные и входные двери.
         Спокойный каталог, понятные цены, быстрая связь.
       </p>
@@ -56,31 +62,30 @@
         <a href="tel:+375292746333" class="btn btn--light">Позвонить</a>
       </div>
     </div>
-
-    <div class="hero__visual">
-      <div class="hero__door-panel">
-        <% hero_product = @featured_products.first %>
-
-        <% if hero_product&.image_url.present? %>
-          <img
-            src="<%= hero_product.image_url %>"
-            alt="<%= hero_product.title %>"
-            style="width: 100%; height: 100%; object-fit: cover;"
-          >
-        <% else %>
-          <div class="hero__door"></div>
-        <% end %>
-      </div>
-    </div>
   </div>
 </section>
 
 <section class="benefits">
   <div class="container benefits__grid">
-    <div class="benefit-item">🪟 Подбор по стилю интерьера</div>
-    <div class="benefit-item">⭐ Популярные бренды</div>
-    <div class="benefit-item">🚚 Доставка и установка</div>
-    <div class="benefit-item">📞 Консультация по телефону</div>
+    <div class="benefit-item">
+      <span class="benefit-item__icon">🪟</span>
+      <span class="benefit-item__text">Подбор по стилю интерьера</span>
+    </div>
+
+    <div class="benefit-item">
+      <span class="benefit-item__icon">⭐</span>
+      <span class="benefit-item__text">Популярные бренды</span>
+    </div>
+
+    <div class="benefit-item">
+      <span class="benefit-item__icon">🚚</span>
+      <span class="benefit-item__text">Доставка и установка</span>
+    </div>
+
+    <div class="benefit-item">
+      <span class="benefit-item__icon">📞</span>
+      <span class="benefit-item__text">Консультация по телефону</span>
+    </div>
   </div>
 </section>
 

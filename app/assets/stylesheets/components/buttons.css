@@ -5,16 +5,19 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .btn,
 .call-button {
-  min-height: 44px;
-  padding: 0 20px;
-  border-radius: var(--radius-md);
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 14px;
 }
 
 .call-button {
+  flex: 0 0 auto;
+  min-width: 144px;
   background: var(--color-orange);
   color: #fff;
 }

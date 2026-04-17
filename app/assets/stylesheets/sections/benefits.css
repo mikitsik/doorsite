@@ -1,20 +1,29 @@
 .benefits {
-  background: var(--color-surface);
-  border-top: 1px solid #ececec;
+  background: #fbfbfc;
   border-bottom: 1px solid #ececec;
 
   &__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    padding: 18px 0;
+    gap: 18px;
+    padding: 20px 0;
   }
 }
 
 .benefit-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  color: #374056;
+  gap: 12px;
+  color: #303b55;
+
+  &__icon {
+    flex: 0 0 auto;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 1.35;
+  }
 }

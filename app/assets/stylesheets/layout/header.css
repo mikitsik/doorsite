@@ -5,15 +5,17 @@
   &__inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    min-height: 54px;
+    gap: 28px;
+    min-height: 74px;
   }
 }
 
 .logo {
-  font-size: 38px;
+  flex: 0 0 auto;
+  font-size: 40px;
   font-weight: 700;
   line-height: 1;
+  white-space: nowrap;
 
   &__blue {
     color: var(--color-blue-dark);
@@ -25,7 +27,7 @@
 }
 
 .header-search {
-  flex: 1;
-  max-width: 560px;
-  margin: 0 24px;
+  flex: 1 1 auto;
+  max-width: none;
+  margin: 0;
 }

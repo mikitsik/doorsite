@@ -1,17 +1,18 @@
 .topbar {
   background: var(--color-surface);
-  border-bottom: 1px solid #e9e9e9;
+  border-bottom: 1px solid #ececec;
 
   &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 54px;
+    min-height: 40px;
   }
 
   &__left {
-    color: #6a7283;
-    font-size: 14px;
+    color: #7a8496;
+    font-size: 13px;
+    line-height: 1;
   }
 
   &__phones {
@@ -20,8 +21,9 @@
     flex-wrap: wrap;
 
     a {
-      color: #6a7283;
-      font-size: 14px;
+      color: #6d7890;
+      font-size: 13px;
+      line-height: 1;
     }
   }
 }
