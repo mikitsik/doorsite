@@ -61,3 +61,6 @@ Thumbs.db
 
 /db/products.csv
 *.csv
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
