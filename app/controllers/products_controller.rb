@@ -1,25 +1,36 @@
 class ProductsController < ApplicationController
-  PRODUCTS_PER_PAGE = 24
-
   def index
-    @visible_count = visible_count
-    base_scope = Product.active.where("LOWER(brand) = ?", "elporta").order(:title)
+    @brands = Product.active.distinct.order(:brand).pluck(:brand)
 
-    @products = base_scope.limit(@visible_count)
-    @total_products_count = base_scope.count
-    @show_more = @visible_count < @total_products_count
+    @products = Product.active
+    @products = @products.where("title ILIKE ?", "%#{params[:q]}%") if params[:q].present?
+    @products = @products.where(brand: params[:brand]) if params[:brand].present?
+    @products = @products.order(created_at: :desc)
+
+    @featured_products = Product.active.limit(4)
+    @steps = [
+      {
+        number: "01",
+        title: "Выберите модель",
+        text: "Поможем подобрать дверь под интерьер и бюджет",
+        button: "Подробнее"
+      },
+      {
+        number: "02",
+        title: "Свяжитесь с нами",
+        text: "Быстро уточним размеры и подскажем лучший вариант",
+        button: "Позвонить"
+      },
+      {
+        number: "03",
+        title: "Согласуем",
+        text: "Уточним доставку, установку и итоговую стоимость",
+        button: "Открыть каталог"
+      }
+    ]
   end
 
   def show
     @product = Product.active.find_by!(slug: params[:id])
-  end
-
-  private
-
-  def visible_count
-    count = params.fetch(:limit, PRODUCTS_PER_PAGE).to_i
-    return PRODUCTS_PER_PAGE if count <= 0
-
-    count
   end
 end
