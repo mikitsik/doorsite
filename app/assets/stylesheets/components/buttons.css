@@ -1,0 +1,52 @@
+.btn,
+.call-button,
+.mini-call-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.btn,
+.call-button {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius-md);
+}
+
+.call-button {
+  background: var(--color-orange);
+  color: #fff;
+}
+
+.btn {
+  &--orange {
+    background: var(--color-orange);
+    color: #fff;
+  }
+
+  &--blue {
+    background: var(--color-blue);
+    color: #fff;
+  }
+
+  &--light {
+    background: #fff;
+    color: #29324c;
+    border: 1px solid #d9dee8;
+  }
+
+  &--white {
+    background: #fff;
+    color: #25304f;
+  }
+}
+
+.mini-call-button {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius-sm);
+  background: var(--color-orange);
+  color: #fff;
+  font-size: 14px;
+}

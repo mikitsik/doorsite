@@ -1,0 +1,154 @@
+.category-cards,
+.catalog-grid,
+.steps-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.category-cards,
+.catalog-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.category-card,
+.product-card,
+.step-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+}
+
+/* CATEGORY CARD */
+.category-card {
+  &__image-wrap {
+    display: block;
+    aspect-ratio: 3 / 4;
+    background: #f6f7f9;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7a8295;
+  }
+
+  &__body {
+    padding: 14px;
+  }
+
+  &__title {
+    margin: 0 0 10px;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #25304f;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  &__price {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+}
+
+/* PRODUCT CARD */
+.product-card {
+  &__image-wrap {
+    display: block;
+    aspect-ratio: 3 / 4;
+    background: #f6f7f9;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7a8295;
+  }
+
+  &__body {
+    padding: 14px;
+  }
+
+  &__brand {
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  &__title {
+    margin: 0 0 10px;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #25304f;
+
+    a {
+      color: #25304f;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  &__price {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+}
+
+/* STEP CARD */
+.step-card {
+  padding: 22px;
+  background: linear-gradient(135deg, #4aa3f3 0%, #f7b62d 100%);
+  color: #fff;
+
+  &__number {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    min-height: 52px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+}

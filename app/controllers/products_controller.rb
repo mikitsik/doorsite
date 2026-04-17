@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     @products = @products.order(created_at: :desc)
 
     @featured_products = Product.active.limit(4)
+
     @steps = [
       {
         number: "01",

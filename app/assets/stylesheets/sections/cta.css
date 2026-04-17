@@ -1,0 +1,42 @@
+.cta-section {
+  background: var(--color-surface);
+  padding: 34px 0;
+  border-bottom: 1px solid #ececec;
+
+  &__inner {
+    text-align: center;
+  }
+
+  h2 {
+    margin: 0 0 22px;
+    font-size: 34px;
+  }
+
+  p {
+    max-width: 720px;
+    margin: 0 auto 18px;
+    color: #5d6679;
+    line-height: 1.6;
+  }
+
+  &__phones {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+
+    a {
+      color: var(--color-text);
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}

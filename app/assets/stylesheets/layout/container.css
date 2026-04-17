@@ -1,0 +1,10 @@
+.container {
+  width: min(var(--container-width), calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.home-page {
+  padding: 24px 0 48px;
+}
+
+

@@ -1,0 +1,46 @@
+<% if products.any? %>
+  <div class="catalog-grid">
+    <% products.each do |product| %>
+      <article class="product-card">
+        <%= link_to product_path(product), class: "product-card__image-wrap" do %>
+          <% if product.image_url.present? %>
+            <img
+              src="<%= product.image_url %>"
+              alt="<%= product.title %>"
+              class="product-card__image"
+              loading="lazy"
+            >
+          <% else %>
+            <div class="product-card__placeholder">Изображение скоро появится</div>
+          <% end %>
+        <% end %>
+
+        <div class="product-card__body">
+          <div class="product-card__brand">
+            <%= product.brand.presence || "Каталог" %>
+          </div>
+
+          <h3 class="product-card__title">
+            <%= link_to product.title, product_path(product) %>
+          </h3>
+
+          <div class="product-card__bottom">
+            <div class="product-card__price">
+              <% if product.price.present? %>
+                <%= number_with_precision(product.price, precision: 2) %> <%= product.currency %>
+              <% else %>
+                Цена по запросу
+              <% end %>
+            </div>
+
+            <a href="tel:+375292746333" class="mini-call-button">Позвонить</a>
+          </div>
+        </div>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="catalog-empty">
+    По вашему запросу ничего не найдено.
+  </div>
+<% end %>

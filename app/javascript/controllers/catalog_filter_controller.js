@@ -4,7 +4,10 @@ export default class extends Controller {
   static targets = ["brandField"]
 
   connect() {
-    this.submitDebounced = this.debounce(this.submit.bind(this), 300)
+    this.submitLater = this.debounce(() => {
+      const form = this.element.tagName === "FORM" ? this.element : this.element.querySelector("form")
+      if (form) form.requestSubmit()
+    }, 300)
   }
 
   setBrand(event) {
@@ -17,9 +20,8 @@ export default class extends Controller {
     })
   }
 
-  submit(event) {
-    const form = event.target.form
-    if (form) form.requestSubmit()
+  submitDebounced() {
+    this.submitLater()
   }
 
   debounce(fn, delay) {

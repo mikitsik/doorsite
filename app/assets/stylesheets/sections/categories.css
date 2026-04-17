@@ -1,0 +1,16 @@
+.popular-categories {
+  background: var(--color-surface);
+  padding: 34px 0;
+  border-bottom: 1px solid #ececec;
+
+  h2 {
+    margin: 0 0 22px;
+    font-size: 34px;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

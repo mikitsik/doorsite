@@ -1,0 +1,30 @@
+.footer {
+  background: var(--color-surface);
+  padding-top: 24px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 18px;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+
+    a {
+      color: #6a7283;
+      font-size: 14px;
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid #ececec;
+    text-align: center;
+    color: #7a8295;
+    font-size: 13px;
+    padding: 16px 0 0;
+  }
+}

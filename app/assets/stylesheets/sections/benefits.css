@@ -1,0 +1,20 @@
+.benefits {
+  background: var(--color-surface);
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    padding: 18px 0;
+  }
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #374056;
+}
