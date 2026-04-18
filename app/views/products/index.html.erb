@@ -93,34 +93,34 @@
       <h2>Популярные категории</h2>
 
       <div class="popular-categories__grid">
-        <% @featured_products.each do |product| %>
-          <article class="category-card">
-            <%= link_to product_path(product), class: "category-card__image-wrap" do %>
-              <% if product.image_url.present? %>
-                <img
-                  src="<%= product.image_url %>"
-                  alt="<%= product.title %>"
-                  class="category-card__image"
-                  loading="lazy"
-                >
-              <% else %>
-                <div class="category-card__placeholder">Нет изображения</div>
-              <% end %>
-            <% end %>
+        <% @featured_categories.each_with_index do |item, index| %>
+          <article class="category-card category-card--<%= index + 1 %>">
+            <a href="<%= item[:href] %>" class="category-card__image-wrap">
+              <img
+                src="<%= item[:image_url] %>"
+                alt="<%= item[:title] %>"
+                class="category-card__image"
+                loading="lazy"
+              >
+            </a>
 
             <div class="category-card__body">
-              <h3 class="category-card__title"><%= product.category.presence || product.title %></h3>
+              <div class="category-card__title-bar">
+                <h3 class="category-card__title"><%= item[:title] %></h3>
+              </div>
 
-              <div class="category-card__bottom">
-                <div class="category-card__price">
-                  <% if product.price.present? %>
-                    от <%= number_with_precision(product.price, precision: 0) %> <%= product.currency %>
-                  <% else %>
-                    Цена по запросу
-                  <% end %>
-                </div>
+              <div class="category-card__price-row">
+                <div class="category-card__price"><%= item[:price] %></div>
+              </div>
 
-                <a href="tel:+375292746333" class="mini-call-button">Позвонить</a>
+              <div class="category-card__actions">
+                <a href="<%= item[:href] %>" class="mini-action-button mini-action-button--catalog">
+                  Подробнее
+                </a>
+
+                <a href="tel:+375292746635" class="mini-action-button mini-action-button--phone">
+                  Позвонить
+                </a>
               </div>
             </div>
           </article>
@@ -133,45 +133,14 @@
     <div class="container">
       <h2>Каталог дверей</h2>
 
-      <div
-        class="catalog-toolbar"
-        data-controller="catalog-filter"
-      >
-        <div class="brand-tabs">
-          <%= button_tag "Все",
-                        type: "button",
-                        class: "brand-tab #{'is-active' if params[:brand].blank?}",
-                        data: { action: "click->catalog-filter#setBrand", brand: "" } %>
-
-          <% @brands.each do |brand| %>
-            <%= button_tag brand,
-                          type: "button",
-                          class: "brand-tab #{'is-active' if params[:brand] == brand}",
-                          data: { action: "click->catalog-filter#setBrand", brand: brand } %>
-          <% end %>
-        </div>
-
-        <div class="catalog-toolbar__form">
-          <%= form_with url: products_path,
-                        method: :get,
-                        data: { turbo_frame: "catalog_frame" },
-                        class: "search-form" do %>
-            <%= hidden_field_tag :brand, params[:brand], data: { catalog_filter_target: "brandField" } %>
-
-            <%= text_field_tag :q,
-                              params[:q],
-                              placeholder: "Поиск по каталогу...",
-                              class: "catalog-toolbar__search",
-                              data: { action: "input->catalog-filter#submitDebounced" } %>
-
-            <button type="submit" class="search-button">⌕</button>
-          <% end %>
-        </div>
+      <div class="brand-links">
+        <% @brand_links.each do |brand| %>
+          <a href="<%= brand[:href] %>" class="brand-link <%= brand[:class_name] %>">
+            <span><%= brand[:name] %></span>
+          </a>
+        <% end %>
       </div>
 
-      <turbo-frame id="catalog_frame">
-        <%= render "catalog", products: @products %>
-      </turbo-frame>
     </div>
   </section>
 
@@ -181,19 +150,17 @@
 
       <div class="steps-grid">
         <% @steps.each do |step| %>
-          <article class="step-card">
+          <article class="step-card <%= step[:card_class] %>">
             <div class="step-card__number"><%= step[:number] %></div>
-            <div class="step-card__title"><%= step[:title] %></div>
-            <div class="step-card__text"><%= step[:text] %></div>
+            <div class="step-card__content">
+              <div class="step-card__title"><%= step[:title] %></div>
+              <div class="step-card__text"><%= step[:text] %></div>
 
-            <div class="step-card__actions">
-              <% if step[:button] == "Позвонить" %>
-                <a href="tel:+375292746333" class="btn btn--white"><%= step[:button] %></a>
-              <% elsif step[:button] == "Открыть каталог" %>
-                <a href="#catalog" class="btn btn--white"><%= step[:button] %></a>
-              <% else %>
-                <a href="#catalog" class="btn btn--white"><%= step[:button] %></a>
-              <% end %>
+              <div class="step-card__actions">
+                <a href="<%= step[:href] %>" class="btn btn--white btn--step">
+                  <%= step[:button] %>
+                </a>
+              </div>
             </div>
           </article>
         <% end %>
@@ -211,12 +178,12 @@
       </p>
 
       <div class="cta-section__phones">
-        <a href="tel:+375292746333">+375 (29) 274-66-35</a>
+        <a href="tel:+375292746635">+375 (29) 274-66-35</a>
         <a href="tel:+375296685629">+375 (29) 668-56-29</a>
       </div>
 
       <div class="cta-section__actions">
-        <a href="tel:+375292746333" class="btn btn--orange">Позвонить</a>
+        <a href="tel:+375292746635" class="btn btn--orange">Позвонить</a>
         <a href="#catalog" class="btn btn--light">Открыть каталог</a>
       </div>
     </div>
@@ -224,19 +191,20 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      <%= link_to root_path, class: "logo" do %>
+      <a href="<%= root_path %>" class="footer__logo">
         <span class="logo__blue">Дверной</span> <span class="logo__orange">бел</span>
-      <% end %>
+      </a>
 
       <nav class="footer__nav">
         <a href="#catalog">Каталог</a>
-        <a href="#">Контакты</a>
-        <a href="#">О компании</a>
+        <a href="#catalog">Комплекты</a>
+        <a href="#catalog">Каталог +</a>
+        <a href="#catalog">Контакты</a>
       </nav>
     </div>
 
     <div class="container footer__bottom">
-      © 2026 Дверной.бел. Все права защищены.
+      © 2024 Дверной бел. Все права защищены.
     </div>
   </footer>
 </div>

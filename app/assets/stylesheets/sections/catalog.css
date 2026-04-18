@@ -1,37 +1,70 @@
 .catalog-section {
   background: #fff;
-  padding: 32px 0;
-  border-top: 1px solid #ececec;
+  padding: 30px 0 34px;
+  border-bottom: 1px solid #ececec;
+
+  h2 {
+    margin: 0 0 20px;
+    font-size: 26px;
+    line-height: 1.15;
+    color: #24314d;
+    font-weight: 700;
+  }
 }
 
-.catalog-section h2 {
-  margin: 0 0 20px;
-  font-size: 30px;
-}
-
-.brand-tabs {
-  display: flex;
+.brand-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.brand-tab {
-  padding: 10px 16px;
-  border-radius: 10px;
-  border: 1px solid #dce2ec;
-  background: #f7f8fa;
-  font-weight: 600;
-  cursor: pointer;
+.brand-link {
+  min-height: 74px;
+  border: 1px solid #dde3ed;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 10px 12px;
 
-  &.is-active {
-    background: var(--color-blue);
-    color: #fff;
-    border-color: var(--color-blue);
+  span {
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  &--elporta span {
+    font-size: 28px;
+    font-weight: 700;
+    color: #79b54a;
+    letter-spacing: 0.01em;
+  }
+
+  &--bravo span {
+    font-size: 22px;
+    font-weight: 700;
+    color: #9d6d2d;
+    letter-spacing: 0.06em;
+  }
+
+  &--podoor span {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2f6fbb;
+    text-align: center;
+  }
+
+  &--yurkas span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #737373;
   }
 }
 
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 18px;
 }

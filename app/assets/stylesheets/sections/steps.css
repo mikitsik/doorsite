@@ -1,40 +1,74 @@
 .how-to-order {
   background: #fff;
-  padding: 36px 0;
-}
+  padding: 30px 0 36px;
+  border-bottom: 1px solid #ececec;
 
-.how-to-order h2 {
-  margin-bottom: 22px;
-  font-size: 30px;
+  h2 {
+    margin: 0 0 20px;
+    font-size: 26px;
+    line-height: 1.15;
+    color: #24314d;
+    font-weight: 700;
+  }
 }
 
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 14px;
 }
 
 .step-card {
-  border-radius: 14px;
-  padding: 20px;
+  min-height: 162px;
+  border-radius: 8px;
+  padding: 18px 18px 16px;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 14px;
   color: #fff;
-  background: linear-gradient(135deg, #4aa3f3, #f2af33);
+  position: relative;
+  overflow: hidden;
+
+  &--blue {
+    background: linear-gradient(135deg, #56a8f5 0%, #2f80d8 100%);
+  }
+
+  &--orange {
+    background: linear-gradient(135deg, #ffca52 0%, #f2af33 100%);
+  }
+
+  &--orange-2 {
+    background: linear-gradient(135deg, #ffc44f 0%, #f0a51b 100%);
+  }
 
   &__number {
-    font-size: 42px;
+    font-size: 50px;
+    line-height: 1;
     font-weight: 700;
-    margin-bottom: 10px;
+    opacity: 0.95;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   &__title {
-    font-size: 20px;
+    font-size: 22px;
+    line-height: 1.05;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   &__text {
-    font-size: 15px;
-    line-height: 1.5;
-    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.35;
+    max-width: 230px;
+    margin-bottom: auto;
+  }
+
+  &__actions {
+    margin-top: 14px;
   }
 }
