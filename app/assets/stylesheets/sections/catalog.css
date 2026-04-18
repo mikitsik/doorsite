@@ -1,56 +1,37 @@
 .catalog-section {
-  background: var(--color-surface);
-  padding: 34px 0;
-  border-bottom: 1px solid #ececec;
-
-  h2 {
-    margin: 0 0 22px;
-    font-size: 34px;
-  }
+  background: #fff;
+  padding: 32px 0;
+  border-top: 1px solid #ececec;
 }
 
-.catalog-toolbar {
-  display: grid;
-  gap: 16px;
-  margin-bottom: 20px;
-
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__form {
-    max-width: 380px;
-  }
+.catalog-section h2 {
+  margin: 0 0 20px;
+  font-size: 30px;
 }
 
 .brand-tabs {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .brand-tab {
-  border: 1px solid #dbe2eb;
-  background: #fff;
+  padding: 10px 16px;
   border-radius: 10px;
-  padding: 10px 14px;
-  cursor: pointer;
-  color: #30405d;
+  border: 1px solid #dce2ec;
+  background: #f7f8fa;
   font-weight: 600;
+  cursor: pointer;
 
   &.is-active {
     background: var(--color-blue);
-    border-color: var(--color-blue);
     color: #fff;
+    border-color: var(--color-blue);
   }
 }
 
-.catalog-empty {
-  padding: 26px;
-  border: 1px dashed #d7dce5;
-  border-radius: var(--radius-lg);
-  color: #69758b;
-  background: #fafbfd;
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }

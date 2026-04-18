@@ -1,29 +1,31 @@
 .benefits {
-  background: #fbfbfc;
-  border-bottom: 1px solid #ececec;
+  background: #f7f5f4;
+  border-bottom: 1px solid #e9e6e5;
 
   &__grid {
+    min-height: 92px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    padding: 20px 0;
+    gap: 28px;
+    align-items: center;
   }
 }
 
 .benefit-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #303b55;
+  gap: 14px;
+  color: #263552;
 
   &__icon {
     flex: 0 0 auto;
-    font-size: 20px;
+    font-size: 28px;
     line-height: 1;
   }
 
   &__text {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.35;
+    font-weight: 600;
   }
 }

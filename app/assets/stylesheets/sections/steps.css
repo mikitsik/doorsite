@@ -1,45 +1,40 @@
 .how-to-order {
-  background: var(--color-surface);
-  padding: 34px 0;
-  border-bottom: 1px solid #ececec;
+  background: #fff;
+  padding: 36px 0;
+}
 
-  h2 {
-    margin: 0 0 22px;
-    font-size: 34px;
-  }
+.how-to-order h2 {
+  margin-bottom: 22px;
+  font-size: 30px;
 }
 
 .steps-grid {
   display: grid;
-  gap: 18px;
   grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 
 .step-card {
-  padding: 22px;
-  background: linear-gradient(135deg, #4aa3f3 0%, #f7b62d 100%);
+  border-radius: 14px;
+  padding: 20px;
   color: #fff;
+  background: linear-gradient(135deg, #4aa3f3, #f2af33);
 
   &__number {
     font-size: 42px;
     font-weight: 700;
-    line-height: 1;
     margin-bottom: 10px;
   }
 
   &__title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 10px;
   }
 
   &__text {
-    min-height: 52px;
+    font-size: 15px;
     line-height: 1.5;
-    margin-bottom: 18px;
-  }
-
-  &__actions {
-    margin-top: auto;
+    margin-bottom: 16px;
   }
 }
