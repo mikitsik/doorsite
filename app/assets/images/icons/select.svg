@@ -1,0 +1,23 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 47H26" stroke="currentColor" stroke-linecap="round"/>
+  <path d="M18 54H48" stroke="currentColor" stroke-linecap="round"/>
+
+  <path d="M48 20V13C48 11.9 47.1 11 46 11H14C12.9 11 12 11.9 12 13V45C12 46.1 12.9 47 14 47H26" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 42V16H43V28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M21 20H39V38H21V20Z" stroke="currentColor" stroke-width="1.8" opacity="0.35"/>
+  <path d="M17 26H38" stroke="currentColor" stroke-linecap="round"/>
+  <path d="M30 16V42" stroke="currentColor" stroke-linecap="round"/>
+  <rect x="20.5" y="20.5" width="4" height="4" rx="1" fill="var(--icon-accent, #F2B23C)"/>
+
+  <path d="M42 24H51L54 34H42L44 24Z" fill="var(--icon-accent, #F2B23C)" stroke="currentColor" stroke-linejoin="round"/>
+  <path d="M45.5 22.2H48.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.4"/>
+  <path d="M48 34V50" stroke="currentColor" stroke-linecap="round"/>
+  <path d="M44 50H52" stroke="currentColor" stroke-linecap="round"/>
+  <circle cx="53" cy="38" r="2.2" fill="var(--icon-accent, #F2B23C)" stroke="currentColor" stroke-width="2.5"/>
+
+  <path d="M36 42V48" stroke="currentColor" stroke-linecap="round"/>
+  <path d="M33 54C31.2 54 30 52.6 30 50.8V46H42V50.8C42 52.6 40.8 54 39 54H33Z" fill="white" stroke="currentColor" stroke-linejoin="round"/>
+  <path d="M35.5 39C35.5 42.1 38 44.5 41 44.5C41 41.4 38.6 39 35.5 39Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30 42.5C30 45.1 32.1 47.2 34.7 47.2C34.7 44.6 32.6 42.5 30 42.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

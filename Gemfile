@@ -72,3 +72,5 @@ end
 gem "rspec-rails", "~> 8.0", groups: [:development, :test]
 
 gem "cssbundling-rails", "~> 1.4"
+
+gem "inline_svg"

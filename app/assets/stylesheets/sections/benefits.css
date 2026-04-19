@@ -14,13 +14,18 @@
 .benefit-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: #263552;
+  gap: 12px;
 
   &__icon {
+    width: 60px;
+    height: 60px;
+    color: #183f73;
+    --icon-accent: #f2b23c;
     flex: 0 0 auto;
-    font-size: 28px;
-    line-height: 1;
+
+    svg {
+      stroke-width: 2.2;
+    }
   }
 
   &__text {

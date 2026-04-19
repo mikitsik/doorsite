@@ -7,27 +7,27 @@ class ProductsController < ApplicationController
 
     @featured_categories = [
       {
-        title: "Межкомнатные двери",
-        price: "от 420 BYN",
-        image_url: "https://elporta.by/storage/products/original/porta-22-bianco-veralinga.jpg",
-        href: "#catalog"
-      },
-      {
         title: "Входные двери",
+        price: "от 420 BYN",
+        image_name: "vhodnye-model.webp",
+        href: "#catalog"
+      },
+      {
+        title: "Межкомнатные двери",
         price: "от 510 BYN",
-        image_url: "https://elporta.by/storage/products/original/porta-s-4-wenge-veralinga.jpg",
+        image_name: "mezk-model.webp",
         href: "#catalog"
       },
       {
-        title: "Светлые модели",
+        title: "Входные примеры установки",
         price: "от 980 BYN",
-        image_url: "https://elporta.by/storage/products/original/porta-28-bianco-veralinga.jpg",
+        image_name: "vhodnye-real.webp",
         href: "#catalog"
       },
       {
-        title: "Современный стиль",
+        title: "Межкомнатные примеры установкиы",
         price: "от 380 BYN",
-        image_url: "https://elporta.by/storage/products/original/porta-29-malvek.jpg",
+        image_name: "mezk-real.webp",
         href: "#catalog"
       }
     ]

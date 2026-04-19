@@ -40,7 +40,7 @@
     </div>
   </header>
 
-  <section class="hero" style="--hero-bg: url('<%= asset_path("hero-room.png") %>');">
+  <section class="hero" style="--hero-bg: url('<%= asset_path("hero-room.webp") %>');">
     <div class="container hero__inner">
       <div class="hero__content">
         <div class="hero__eyebrow">Каталог дверей в Молодечно</div>
@@ -67,22 +67,30 @@
   <section class="benefits">
     <div class="container benefits__grid">
       <div class="benefit-item">
-        <span class="benefit-item__icon">🪟</span>
+        <span class="benefit-item__icon">
+          <%= inline_svg_tag "icons/select.svg" %>
+        </span>
         <span class="benefit-item__text">Подбор по стилю интерьера</span>
       </div>
 
       <div class="benefit-item">
-        <span class="benefit-item__icon">⭐</span>
+        <span class="benefit-item__icon">
+          <%= inline_svg_tag "icons/brands.svg" %>
+        </span>
         <span class="benefit-item__text">Популярные бренды</span>
       </div>
 
       <div class="benefit-item">
-        <span class="benefit-item__icon">🚚</span>
+        <span class="benefit-item__icon">
+          <%= inline_svg_tag "icons/delivery.svg" %>
+        </span>
         <span class="benefit-item__text">Доставка и установка</span>
       </div>
 
       <div class="benefit-item">
-        <span class="benefit-item__icon">📞</span>
+        <span class="benefit-item__icon">
+          <%= inline_svg_tag "icons/call.svg" %>
+        </span>
         <span class="benefit-item__text">Консультация по телефону</span>
       </div>
     </div>
@@ -96,12 +104,7 @@
         <% @featured_categories.each_with_index do |item, index| %>
           <article class="category-card category-card--<%= index + 1 %>">
             <a href="<%= item[:href] %>" class="category-card__image-wrap">
-              <img
-                src="<%= item[:image_url] %>"
-                alt="<%= item[:title] %>"
-                class="category-card__image"
-                loading="lazy"
-              >
+              <%= image_tag item[:image_name], class: "category-card__image", loading: "lazy" %>
             </a>
 
             <div class="category-card__body">
