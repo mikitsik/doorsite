@@ -3,8 +3,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  padding: 0 24px;
+  min-height: 48px;
+  padding: 0 22px;
   border-radius: 12px;
   font-size: 15px;
   line-height: 1;
@@ -12,13 +12,24 @@
   text-decoration: none;
   white-space: nowrap;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-  box-shadow: 0 8px 20px rgba(20, 45, 84, 0.06);
 }
 
 .call-button {
   background: var(--color-orange);
   color: #fff;
   border: 1px solid var(--color-orange);
+  min-width: 128px;
+  padding: 0 18px;
+  gap: 8px;
+  box-shadow: none;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    flex: 0 0 auto;
+    transform: translateY(-0.5px);
+  }
 }
 
 .btn {
@@ -26,6 +37,7 @@
     background: var(--color-blue);
     color: #fff;
     border: 1px solid var(--color-blue);
+    box-shadow: 0 10px 22px rgba(47, 128, 216, 0.16);
   }
 
   &--orange {

@@ -9,55 +9,60 @@
     background-image:
       linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.92) 28%,
-        rgba(255, 255, 255, 0.72) 43%,
-        rgba(255, 255, 255, 0.36) 58%,
-        rgba(255, 255, 255, 0.08) 72%,
+        rgba(255, 255, 255, 0.97) 0%,
+        rgba(255, 255, 255, 0.94) 24%,
+        rgba(255, 255, 255, 0.82) 38%,
+        rgba(255, 255, 255, 0.52) 53%,
+        rgba(255, 255, 255, 0.18) 68%,
         rgba(255, 255, 255, 0) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0) 35%
       ),
       var(--hero-bg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    overflow: hidden;
   }
 
   &__content {
     width: 100%;
-    max-width: 610px;
+    max-width: 590px;
+    padding-top: 4px;
   }
 
   &__eyebrow {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
 
   &__eyebrow-badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    min-height: 40px;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(4px);
+    gap: 8px;
+    min-height: 28px;
+    background: transparent;
   }
 
   &__eyebrow-icon {
-    width: 25px;
-    height: 25px;
+    width: 18px;
+    height: 18px;
     flex: 0 0 auto;
     color: #183f73;
     --icon-accent: #f2b23c;
 
     svg {
       display: block;
-      stroke-width: 2.7;
       width: 100%;
       height: 100%;
+      stroke-width: 2.35;
+      transform: translateY(-0.5px);
     }
   }
 
   &__eyebrow-text {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1;
     font-weight: 500;
     color: #4f5f78;
@@ -65,12 +70,12 @@
   }
 
   &__title {
-    margin: 0 0 28px;
+    margin: 0 0 26px;
     color: #1b315b;
-    font-size: 60px;
+    font-size: 58px;
     font-weight: 700;
     line-height: 1.08;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.045em;
   }
 
   &__text {
@@ -84,7 +89,7 @@
   &__actions {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 16px;
     flex-wrap: wrap;
   }
 }

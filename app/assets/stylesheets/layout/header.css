@@ -7,17 +7,17 @@
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
   }
 }
 
 .logo {
   display: inline-flex;
   align-items: baseline;
-  font-size: 58px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   white-space: nowrap;
 
   &__blue {

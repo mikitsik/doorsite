@@ -27,7 +27,7 @@
   gap: 14px;
   color: #fff;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   &--blue {
     background: linear-gradient(135deg, #56a8f5 0%, #2f80d8 100%);

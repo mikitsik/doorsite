@@ -2,13 +2,13 @@
   .main-header {
     &__inner {
       gap: 14px;
-      flex-wrap: wrap;
+      grid-template-columns: auto minmax(0, 1fr);
     }
   }
 
   .topbar {
     &__inner {
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
     }
   }
@@ -23,6 +23,7 @@
   .header-search {
     width: 100%;
     order: 3;
+    grid-column: 1 / -1;
   }
 
   .benefits__grid,
@@ -33,15 +34,18 @@
   }
 
   .hero {
-    background-position: 68% center;
-
     &__inner {
-      min-height: 620px;
-      padding: 52px 0 60px;
+      min-height: 560px;
+      padding: 0;
+      background-position: 68% center;
     }
 
     &__content {
-      max-width: 540px;
+      max-width: 520px;
+    }
+
+    &__title {
+      font-size: 48px;
     }
   }
 }
@@ -56,7 +60,7 @@
   }
 
   .logo {
-    font-size: 32px;
+    font-size: 34px;
   }
 
   .call-button {
@@ -65,21 +69,20 @@
   }
 
   .hero {
-    background-image:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.9) 34%,
-        rgba(255, 255, 255, 0.78) 56%,
-        rgba(255, 255, 255, 0.45) 100%
-      ),
-      var(--hero-bg);
-    background-position: center center;
-
     &__inner {
       min-height: 520px;
       align-items: flex-start;
       padding: 34px 0 42px;
+      background-image:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.97) 0%,
+          rgba(255, 255, 255, 0.92) 34%,
+          rgba(255, 255, 255, 0.8) 56%,
+          rgba(255, 255, 255, 0.42) 100%
+        ),
+        var(--hero-bg);
+      background-position: center center;
     }
 
     &__title {

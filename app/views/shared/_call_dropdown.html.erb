@@ -1,0 +1,20 @@
+<div
+  class="call-dropdown"
+  data-controller="call-dropdown"
+>
+  <button
+    class="<%= local_assigns[:button_class] || 'call-button' %> call-dropdown__toggle"
+    type="button"
+    data-action="click->call-dropdown#toggle"
+  >
+    <%= local_assigns[:button_text] || "Позвонить" %>
+  </button>
+
+  <div
+    class="call-dropdown__menu"
+    data-call-dropdown-target="menu"
+  >
+    <a href="tel:+375292746333">МТС +375 (29) 274-63-33</a>
+    <a href="tel:+375296885529">А1 +375 (29) 688-55-29</a>
+  </div>
+</div>
