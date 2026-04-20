@@ -19,13 +19,13 @@ class ProductsController < ApplicationController
         href: "#catalog"
       },
       {
-        title: "Входные примеры установки",
+        title: "Установка входных дверей",
         price: "от 980 BYN",
         image_name: "vhodnye-real.webp",
         href: "#catalog"
       },
       {
-        title: "Межкомнатные примеры установкиы",
+        title: "Установка межкомнатных дверей",
         price: "от 380 BYN",
         image_name: "mezk-real.webp",
         href: "#catalog"
@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
       },
       {
         number: "03",
-        title: "Согласуем",
+        title: "Согласуем детали",
         text: "Уточним доставку, установку и итоговую стоимость",
         button: "Открыть каталог",
         href: "#catalog",
