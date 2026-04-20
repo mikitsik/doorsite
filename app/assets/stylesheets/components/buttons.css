@@ -10,8 +10,8 @@
   font-weight: 600;
   transform: translateY(0);
   transition:
-    transform var(--motion-fast) var(--ease-standard),
-    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-base) var(--ease-standard),
+    box-shadow var(--motion-base) var(--ease-standard),
     background-color var(--motion-fast) var(--ease-standard),
     border-color var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard),
@@ -129,12 +129,19 @@
 .call-button:hover,
 .mini-call-button:hover,
 .mini-action-button:hover {
-  transform: translateY(-0.125rem);
+  transform: translateY(-0.1875rem);
+}
+
+.btn:active,
+.call-button:active,
+.mini-call-button:active,
+.mini-action-button:active {
+  transform: translateY(-0.03125rem);
 }
 
 .btn--blue:hover {
   box-shadow:
-    0 0.875rem 1.75rem rgba(47, 128, 216, 0.24),
+    0 1rem 2rem rgba(47, 128, 216, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
@@ -143,7 +150,7 @@
 .mini-call-button:hover,
 .mini-action-button--phone:hover {
   box-shadow:
-    0 0.875rem 1.75rem rgba(242, 175, 51, 0.24),
+    0 1rem 2rem rgba(242, 175, 51, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
@@ -151,15 +158,13 @@
 .btn--white:hover,
 .mini-action-button--catalog:hover {
   box-shadow:
-    0 0.75rem 1.5rem rgba(36, 49, 77, 0.11),
+    0 0.875rem 1.75rem rgba(36, 49, 77, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
 .btn:active,
-.call-button:active,
-.mini-call-button:active,
-.mini-action-button:active {
-  transform: translateY(-0.03125rem);
+.call-button:active {
+  transform: translateY(-0.0625rem) scale(0.985);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -19,6 +19,7 @@
   align-items: center;
   gap: var(--space-3);
   padding-inline: var(--space-1);
+  transition: transform var(--motion-base) var(--ease-standard);
 
   &__icon {
     width: 3.5rem;
@@ -29,6 +30,7 @@
     justify-content: center;
     color: #183f73;
     --icon-accent: #f2b23c;
+    transition: transform var(--motion-base) var(--ease-standard);
 
     svg {
       width: 100%;
@@ -36,6 +38,14 @@
       display: block;
       stroke-width: 2.5;
     }
+  }
+
+  &:hover {
+    transform: translateY(-0.125rem);
+  }
+
+  &:hover &__icon {
+    transform: scale(1.08);
   }
 
   &:nth-child(3) .benefit-item__icon svg {

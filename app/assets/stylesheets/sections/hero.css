@@ -132,6 +132,21 @@
       position: relative;
       z-index: 6;
     }
+
+    .btn--blue,
+    .call-dropdown .call-button {
+      box-shadow:
+        0 0.75rem 1.5rem rgba(25, 41, 75, 0.14),
+        0 0.25rem 0.625rem rgba(25, 41, 75, 0.08);
+    }
+
+    .btn--blue:hover,
+    .call-dropdown .call-button:hover {
+      transform: translateY(-0.25rem);
+      box-shadow:
+        0 1.25rem 2.25rem rgba(25, 41, 75, 0.2),
+        0 0.5rem 1rem rgba(25, 41, 75, 0.1);
+    }
   }
 }
 
@@ -149,8 +164,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero__content,
-  .hero__actions .btn,
-  .hero__actions .call-button {
+  .hero__actions {
     animation: none;
   }
 }
