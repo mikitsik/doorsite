@@ -11,7 +11,12 @@
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .call-button {
@@ -21,7 +26,9 @@
   min-width: 128px;
   padding: 0 18px;
   gap: 8px;
-  box-shadow: none;
+  box-shadow:
+    0 10px 22px rgba(242, 175, 51, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 
   svg {
     width: 18px;
@@ -37,25 +44,37 @@
     background: var(--color-blue);
     color: #fff;
     border: 1px solid var(--color-blue);
-    box-shadow: 0 10px 22px rgba(47, 128, 216, 0.16);
+    box-shadow:
+      0 10px 22px rgba(47, 128, 216, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
   }
 
   &--orange {
     background: var(--color-orange);
     color: #fff;
     border: 1px solid var(--color-orange);
+    box-shadow:
+      0 10px 22px rgba(242, 175, 51, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
   }
 
   &--light {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.92);
     color: #24314d;
     border: 1px solid #d7dce7;
+    box-shadow:
+      0 8px 18px rgba(36, 49, 77, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(4px);
   }
 
   &--white {
     background: #fff;
     color: #24314d;
     border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 8px 18px rgba(36, 49, 77, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
   }
 
   &--step {
@@ -64,5 +83,9 @@
     border-radius: 999px;
     font-size: 12px;
     font-weight: 600;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
   }
 }
