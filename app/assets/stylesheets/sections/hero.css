@@ -26,7 +26,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 92px;
+    height: 5.75rem;
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 0%,
@@ -38,7 +38,7 @@
   &__inner {
     position: relative;
     z-index: 1;
-    min-height: 500px;
+    min-height: 31.25rem;
     display: flex;
     align-items: center;
     padding-top: var(--space-7);
@@ -66,25 +66,25 @@
 
   &__content {
     width: 100%;
-    max-width: 560px;
-    padding-top: 6px;
+    max-width: 35rem;
+    padding-top: 0.375rem;
   }
 
   &__eyebrow {
-    margin-bottom: 18px;
+    margin-bottom: 1.125rem;
   }
 
   &__eyebrow-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    min-height: 28px;
+    gap: var(--space-2);
+    min-height: 1.75rem;
     background: transparent;
   }
 
   &__eyebrow-icon {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    height: 1.125rem;
     flex: 0 0 auto;
     color: #183f73;
     --icon-accent: #f2b23c;
@@ -94,12 +94,12 @@
       width: 100%;
       height: 100%;
       stroke-width: 2.35;
-      transform: translateY(-0.5px);
+      transform: translateY(-0.03125rem);
     }
   }
 
   &__eyebrow-text {
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1;
     font-weight: 500;
     color: #4f5f78;
@@ -108,22 +108,22 @@
   }
 
   &__title {
-    margin: 0 0 24px;
+    margin: 0 0 1.5rem;
     color: #1b315b;
-    font-size: 58px;
+    font-size: 3.625rem;
     font-weight: 700;
     line-height: 1.06;
     letter-spacing: -0.045em;
     text-shadow:
       0 1px 0 rgba(255, 255, 255, 0.68),
-      0 10px 24px rgba(27, 49, 91, 0.08);
+      0 0.625rem 1.5rem rgba(27, 49, 91, 0.08);
   }
 
   &__text {
-    max-width: 470px;
-    margin: 0 0 32px;
+    max-width: 29.375rem;
+    margin: 0 0 var(--space-5);
     color: #58667b;
-    font-size: 17px;
+    font-size: 1.0625rem;
     line-height: 1.6;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
   }
@@ -131,7 +131,36 @@
   &__actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: var(--space-3);
     flex-wrap: wrap;
+  }
+}
+
+.hero__content {
+  animation: hero-fade-up 520ms ease both;
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__actions .btn,
+.hero__actions .call-button {
+  animation: hero-fade-up 620ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__content,
+  .hero__actions .btn,
+  .hero__actions .call-button {
+    animation: none;
   }
 }

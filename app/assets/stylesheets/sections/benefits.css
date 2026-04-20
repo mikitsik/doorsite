@@ -3,24 +3,26 @@
   border-bottom: 1px solid #e9e6e5;
 
   &__grid {
-    min-height: 92px;
+    min-height: 5.5rem;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-4);
-    padding: var(--space-3) 0;
     align-items: center;
+    padding-block: var(--space-3);
+    padding-inline: var(--space-2);
   }
 }
 
 .benefit-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   min-width: 0;
+  padding-inline: var(--space-1);
 
   &__icon {
-    width: 56px;
-    height: 56px;
+    width: 3.5rem;
+    height: 3.5rem;
     color: #183f73;
     --icon-accent: #f2b23c;
     flex: 0 0 auto;
@@ -38,18 +40,18 @@
 
   &:nth-child(3) {
     .benefit-item__icon svg {
-      transform: scale(1.06) translateY(1px);
+      transform: scale(1.06) translateY(0.0625rem);
     }
   }
 
   &:nth-child(4) {
     .benefit-item__icon svg {
-      transform: scale(0.92) translateY(1px);
+      transform: scale(0.92) translateY(0.0625rem);
     }
   }
 
   &__text {
-    font-size: 15px;
+    font-size: 0.9375rem;
     line-height: 1.35;
     font-weight: 600;
     color: #23375e;

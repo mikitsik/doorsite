@@ -4,11 +4,10 @@
   border-bottom: 1px solid #ececec;
 
   h2 {
-    margin: 0 0 24px;
-    font-size: 30px;
-    letter-spacing: -0.025em;
+    margin: 0 0 var(--space-4);
+    font-size: 1.875rem;
     line-height: 1.15;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     color: #1d315a;
   }
 

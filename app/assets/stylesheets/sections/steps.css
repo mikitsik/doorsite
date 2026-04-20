@@ -1,15 +1,13 @@
 .how-to-order {
   background: var(--color-surface);
-  padding: 34px 0 42px;
-  border-bottom: 1px solid #ececec;
   padding: var(--space-7) 0;
+  border-bottom: 1px solid #ececec;
 
   h2 {
     margin: 0 0 var(--space-4);
-    font-size: 30px;
-    letter-spacing: -0.025em;
+    font-size: 1.875rem;
     line-height: 1.15;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     color: #1d315a;
   }
 }
@@ -21,15 +19,15 @@
 }
 
 .step-card {
-  min-height: 170px;
+  min-height: 10.625rem;
   padding: var(--space-4);
-  border-radius: 14px;
+  border-radius: 0.875rem;
   color: #fff;
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 4.5rem 1fr;
   align-items: start;
   gap: var(--space-3);
-  box-shadow: 0 10px 24px rgba(25, 41, 75, 0.06);
+  box-shadow: 0 0.625rem 1.5rem rgba(25, 41, 75, 0.06);
 
   &--blue {
     background: linear-gradient(135deg, #59a2ee 0%, #3b86df 100%);
@@ -41,7 +39,7 @@
   }
 
   &__number {
-    font-size: 56px;
+    font-size: 3.5rem;
     font-weight: 700;
     line-height: 0.92;
     letter-spacing: -0.04em;
@@ -53,24 +51,50 @@
   }
 
   &__title {
-    margin-bottom: 8px;
-    font-size: 21px;
+    margin-bottom: var(--space-2);
+    font-size: 1.3125rem;
     font-weight: 700;
     line-height: 1.15;
     color: #fff;
   }
 
   &__text {
-    min-height: 64px;
-    max-width: 260px;
-    margin-bottom: 14px;
-    font-size: 15px;
-    line-height: 1.45;
+    min-height: 4rem;
+    margin-bottom: 0.875rem;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    max-width: 15rem;
     color: rgba(255, 255, 255, 0.96);
   }
 
   &__actions {
     display: flex;
     align-items: center;
+  }
+}
+
+.step-card {
+  transform: translateY(0);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+  will-change: transform, box-shadow;
+}
+
+.step-card:hover {
+  transform: translateY(-0.1875rem);
+  box-shadow: 0 1rem 2rem rgba(25, 41, 75, 0.1);
+  filter: saturate(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-card {
+    transition: none;
+  }
+
+  .step-card:hover {
+    transform: none;
+    filter: none;
   }
 }
