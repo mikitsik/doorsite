@@ -5,8 +5,8 @@
   &__grid {
     min-height: 92px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
     align-items: center;
   }
 }
@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 
   &__icon {
     width: 56px;
@@ -50,5 +51,6 @@
     font-size: 15px;
     line-height: 1.35;
     font-weight: 600;
+    color: #23375e;
   }
 }
