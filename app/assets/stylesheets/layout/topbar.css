@@ -56,3 +56,8 @@
     }
   }
 }
+
+.topbar,
+.topbar__inner {
+  overflow: visible;
+}

@@ -33,3 +33,8 @@
 .header-search {
   min-width: 0;
 }
+
+.main-header,
+.main-header__inner {
+  overflow: visible;
+}

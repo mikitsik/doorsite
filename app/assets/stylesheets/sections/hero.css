@@ -164,3 +164,149 @@
     animation: none;
   }
 }
+
+.hero {
+  overflow: visible;
+}
+
+.hero__inner {
+  overflow: visible;
+}
+
+.hero__actions {
+  position: relative;
+  z-index: 5;
+
+  .btn,
+  .call-button,
+  .call-dropdown {
+    position: relative;
+    z-index: 6;
+  }
+
+  .btn,
+  .call-button {
+    transform: translateY(0);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .btn:hover,
+  .call-button:hover {
+    transform: translateY(-0.125rem);
+    filter: saturate(1.02);
+  }
+
+  .btn--blue:hover {
+    box-shadow:
+      0 0.875rem 1.75rem rgba(47, 128, 216, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .btn--orange:hover,
+  .call-button:hover {
+    box-shadow:
+      0 0.875rem 1.75rem rgba(242, 175, 51, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .btn--light:hover,
+  .btn--white:hover {
+    box-shadow:
+      0 0.75rem 1.5rem rgba(36, 49, 77, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__actions {
+    .btn,
+    .call-button {
+      transition: none;
+    }
+
+    .btn:hover,
+    .call-button:hover {
+      transform: none;
+      filter: none;
+    }
+  }
+}
+
+.hero__actions {
+  .btn,
+  .call-button,
+  .mini-call-button,
+  .mini-action-button {
+    transform: translateY(0) scale(1);
+    transition:
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 220ms ease,
+      filter 220ms ease !important;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+  }
+
+  .btn:hover,
+  .call-button:hover,
+  .mini-call-button:hover,
+  .mini-action-button:hover {
+    transform: translateY(-0.1875rem) scale(1.02) !important;
+    filter: saturate(1.03);
+  }
+
+  .btn:active,
+  .call-button:active,
+  .mini-call-button:active,
+  .mini-action-button:active {
+    transform: translateY(-0.0625rem) scale(0.995) !important;
+  }
+
+  .btn--blue:hover,
+  .mini-action-button--catalog:hover {
+    box-shadow:
+      0 1rem 1.875rem rgba(47, 128, 216, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+  }
+
+  .btn--orange:hover,
+  .call-button:hover,
+  .mini-call-button:hover,
+  .mini-action-button--phone:hover {
+    box-shadow:
+      0 1rem 1.875rem rgba(242, 175, 51, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+  }
+
+  .btn--light:hover,
+  .btn--white:hover {
+    box-shadow:
+      0 0.875rem 1.625rem rgba(36, 49, 77, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__actions {
+    .btn,
+    .call-button,
+    .mini-call-button,
+    .mini-action-button {
+      transition: none !important;
+    }
+
+    .btn:hover,
+    .call-button:hover,
+    .mini-call-button:hover,
+    .mini-action-button:hover,
+    .btn:active,
+    .call-button:active,
+    .mini-call-button:active,
+    .mini-action-button:active {
+      transform: none !important;
+      filter: none;
+    }
+  }
+}
