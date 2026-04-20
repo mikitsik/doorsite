@@ -1,12 +1,37 @@
+.btn,
+.call-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 8px 20px rgba(20, 45, 84, 0.06);
+}
+
+.call-button {
+  background: var(--color-orange);
+  color: #fff;
+  border: 1px solid var(--color-orange);
+}
+
 .btn {
   &--blue {
     background: var(--color-blue);
     color: #fff;
+    border: 1px solid var(--color-blue);
   }
 
   &--orange {
     background: var(--color-orange);
     color: #fff;
+    border: 1px solid var(--color-orange);
   }
 
   &--light {
@@ -18,12 +43,14 @@
   &--white {
     background: #fff;
     color: #24314d;
+    border: 1px solid rgba(255, 255, 255, 0.75);
   }
 
   &--step {
-    min-height: 36px;
-    padding: 0 16px;
-    border-radius: 8px;
-    font-size: 14px;
+    min-height: 34px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
   }
 }

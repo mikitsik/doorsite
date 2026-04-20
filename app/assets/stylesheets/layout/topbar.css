@@ -1,34 +1,55 @@
 .topbar {
-  background: var(--color-bg);
-  border-bottom: 1px solid #e3e3e3;
+  background: var(--color-surface);
+  border-bottom: 1px solid #ececec;
 
   &__inner {
-    min-height: 54px;
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
     align-items: center;
-    gap: 24px;
+    justify-content: space-between;
+    font-size: 15px;
+    min-height: 40px;
+    gap: 16px;
   }
 
   &__left {
-    color: #5f6572;
-    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #6d7890;
     line-height: 1;
-    white-space: nowrap;
+    --icon-accent: #f2b23c;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+      flex: 0 0 auto;
+      stroke-width: 1.7;
+    }
   }
 
   &__phones {
     display: flex;
     align-items: center;
-    gap: 42px;
-    justify-content: flex-end;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 16px;
 
     a {
-      color: #30384a;
-      font-size: 14px;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #6d7890;
       line-height: 1;
-      white-space: nowrap;
+      text-decoration: none;
+      --icon-accent: #f2b23c;
+
+      svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+        flex: 0 0 auto;
+      }
     }
   }
 }

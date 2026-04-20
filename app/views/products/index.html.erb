@@ -1,11 +1,19 @@
 <div class="page">
   <div class="topbar">
     <div class="container topbar__inner">
-      <div class="topbar__left">Молодечно и район</div>
+      <div class="topbar__left">
+        <%= inline_svg_tag "icons/location.svg" %>
+        <span>Молодечно Ошмяны Островец Минск</span>
+      </div>
 
       <div class="topbar__phones">
-        <a href="tel:+375292746635">+375 (29) 274-66-35</a>
-        <a href="tel:+375296685629">+375 (29) 668-56-29</a>
+        <a href="tel:+375292746333">
+          <%= inline_svg_tag "icons/phone.svg" %>
+          +375 (29) 274-63-33
+        </a>
+        <a href="tel:+375296685629">
+          +375 (29) 668-56-29
+        </a>
       </div>
     </div>
   </div>
@@ -32,28 +40,40 @@
                             class: "search-input",
                             data: { action: "input->catalog-filter#submitDebounced" } %>
 
-          <button type="submit" class="search-button">⌕</button>
+          <button class="search-button" type="submit" aria-label="Поиск">
+            <%= inline_svg_tag "icons/search.svg" %>
+          </button>
         <% end %>
       </div>
 
-      <a href="tel:+375292746635" class="call-button">Позвонить</a>
+      <a href="tel:+375292746333" class="call-button">
+        <%= inline_svg_tag "icons/phone.svg" %>
+        Позвонить
+      </a>
     </div>
   </header>
 
   <section class="hero" style="--hero-bg: url('<%= asset_path("hero-room.webp") %>');">
     <div class="container hero__inner">
       <div class="hero__content">
-        <div class="hero__eyebrow">Каталог дверей в Молодечно</div>
+        <div class="hero__eyebrow">
+          <span class="hero__eyebrow-badge">
+            <span class="hero__eyebrow-icon">
+              <%= inline_svg_tag "icons/brands.svg" %>
+            </span>
+            <span class="hero__eyebrow-text">Популярные Бренды</span>
+          </span>
+        </div>
 
         <h1 class="hero__title">
-          Современные двери
+          Современные Двери
           <br>
-          для квартиры, дома и офиса
+          для Квартиры Дома Офиса
         </h1>
 
         <p class="hero__text">
-          Подберём межкомнатные и входные двери.
-          Спокойный каталог, понятные цены, быстрая связь.
+          Премиум и Эконом Класс<br>
+          Гарантия
         </p>
 
         <div class="hero__actions">
@@ -68,30 +88,30 @@
     <div class="container benefits__grid">
       <div class="benefit-item">
         <span class="benefit-item__icon">
+          <%= inline_svg_tag "icons/credit.svg" %>
+        </span>
+        <span class="benefit-item__text">Рассрочка 0%<br>Кредит</span>
+      </div>
+
+      <div class="benefit-item">
+        <span class="benefit-item__icon">
           <%= inline_svg_tag "icons/select.svg" %>
         </span>
-        <span class="benefit-item__text">Подбор по стилю интерьера</span>
+        <span class="benefit-item__text">Подбор Оптимального Варианта</span>
       </div>
 
       <div class="benefit-item">
         <span class="benefit-item__icon">
-          <%= inline_svg_tag "icons/brands.svg" %>
+          <%= inline_svg_tag "icons/mesure-delivery.svg" %>
         </span>
-        <span class="benefit-item__text">Популярные бренды</span>
-      </div>
-
-      <div class="benefit-item">
-        <span class="benefit-item__icon">
-          <%= inline_svg_tag "icons/delivery.svg" %>
-        </span>
-        <span class="benefit-item__text">Доставка и установка</span>
+        <span class="benefit-item__text">Замер и Доставка<br>Чистый Монтаж</span>
       </div>
 
       <div class="benefit-item">
         <span class="benefit-item__icon">
           <%= inline_svg_tag "icons/call.svg" %>
         </span>
-        <span class="benefit-item__text">Консультация по телефону</span>
+        <span class="benefit-item__text">Консультация по Телефону</span>
       </div>
     </div>
   </section>
