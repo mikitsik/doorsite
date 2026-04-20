@@ -1,49 +1,20 @@
 <div class="call-dropdown" data-controller="call-dropdown">
   <button
     type="button"
-    class="call-button call-dropdown__trigger"
+    class="call-button call-dropdown__toggle"
     data-action="click->call-dropdown#toggle"
+    aria-expanded="false"
   >
     Позвонить
   </button>
 
   <div class="call-dropdown__menu" data-call-dropdown-target="menu">
-    <div class="call-dropdown__list">
+    <a href="tel:+375292746333" class="call-dropdown__link">
+      <span class="call-dropdown__label">MTC +375 (29) 274-63-33</span>
+    </a>
 
-      <div class="call-dropdown__item">
-        <a href="tel:+375292746333" class="call-dropdown__link">
-          <span class="call-dropdown__icon">
-            <%= inline_svg_tag "icons/call.svg" %>
-          </span>
-
-          <span class="call-dropdown__text">
-            <span class="call-dropdown__title">
-              +375 (29) 274-63-33
-            </span>
-            <span class="call-dropdown__meta">
-              Основной номер
-            </span>
-          </span>
-        </a>
-      </div>
-
-      <div class="call-dropdown__item">
-        <a href="tel:+375296885529" class="call-dropdown__link">
-          <span class="call-dropdown__icon">
-            <%= inline_svg_tag "icons/call.svg" %>
-          </span>
-
-          <span class="call-dropdown__text">
-            <span class="call-dropdown__title">
-              +375 (29) 688-55-29
-            </span>
-            <span class="call-dropdown__meta">
-              Дополнительный номер
-            </span>
-          </span>
-        </a>
-      </div>
-
-    </div>
+    <a href="tel:+375296885529" class="call-dropdown__link">
+      <span class="call-dropdown__label">A1 +375 (29) 688-55-29</span>
+    </a>
   </div>
 </div>

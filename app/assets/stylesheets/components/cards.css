@@ -3,7 +3,7 @@
   border-radius: 0.625rem;
   background: #fff;
   box-shadow: var(--shadow-card);
-  overflow: hidden;
+  overflow: visible;
 
   &__image-wrap {
     display: block;

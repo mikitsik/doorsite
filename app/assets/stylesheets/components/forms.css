@@ -66,10 +66,10 @@
     width: 1.375rem;
     height: 1.375rem;
     display: block;
+    pointer-events: none;
     transition:
       transform var(--motion-fast) var(--ease-standard),
       opacity var(--motion-fast) var(--ease-standard);
-    pointer-events: none;
   }
 
   &:hover {
