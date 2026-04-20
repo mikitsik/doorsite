@@ -5,7 +5,8 @@
 
   h2 {
     margin: 0 0 24px;
-    font-size: 28px;
+    font-size: 30px;
+    letter-spacing: -0.025em;
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: #1d315a;
@@ -20,7 +21,7 @@
 
 .step-card {
   min-height: 170px;
-  padding: 20px 20px 18px;
+  padding: 22px 20px 20px;
   border-radius: 14px;
   color: #fff;
   display: grid;
@@ -33,7 +34,8 @@
     background: linear-gradient(135deg, #59a2ee 0%, #3b86df 100%);
   }
 
-  &--orange {
+  &--orange,
+  &--orange-2 {
     background: linear-gradient(135deg, #f4c34b 0%, #f1b12d 100%);
   }
 
@@ -41,8 +43,8 @@
     font-size: 56px;
     font-weight: 700;
     line-height: 0.92;
-    opacity: 0.92;
     letter-spacing: -0.04em;
+    opacity: 0.92;
   }
 
   &__content {
@@ -54,14 +56,16 @@
     font-size: 21px;
     font-weight: 700;
     line-height: 1.15;
+    color: #fff;
   }
 
   &__text {
     min-height: 64px;
+    max-width: 260px;
     margin-bottom: 14px;
     font-size: 15px;
     line-height: 1.45;
-    max-width: 260px;
+    color: rgba(255, 255, 255, 0.96);
   }
 
   &__actions {

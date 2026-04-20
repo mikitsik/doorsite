@@ -41,8 +41,8 @@
     min-height: 500px;
     display: flex;
     align-items: center;
-    padding-top: 68px;
-    padding-bottom: 84px;
+    padding-top: var(--space-7);
+    padding-bottom: var(--space-8);
     background-image:
       linear-gradient(
         90deg,

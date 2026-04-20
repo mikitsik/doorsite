@@ -5,7 +5,8 @@
 
   h2 {
     margin: 0 0 24px;
-    font-size: 28px;
+    font-size: 30px;
+    letter-spacing: -0.025em;
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: #1d315a;
@@ -44,5 +45,22 @@
     line-height: 1;
     font-weight: 700;
     text-align: center;
+  }
+
+  &--elporta span {
+    color: #76b82a;
+  }
+
+  &--bravo span {
+    color: #ab7422;
+    letter-spacing: 0.03em;
+  }
+
+  &--podoor span {
+    color: #2e6fc7;
+  }
+
+  &--yurkas span {
+    color: #6b6f78;
   }
 }

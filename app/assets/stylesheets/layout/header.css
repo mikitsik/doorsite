@@ -19,6 +19,7 @@
   line-height: 1;
   letter-spacing: -0.045em;
   white-space: nowrap;
+  text-decoration: none;
 
   &__blue {
     color: #2f80d8;
