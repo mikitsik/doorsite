@@ -6,8 +6,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 38px;
-    gap: 18px;
+    min-height: 40px; /* кратно 8 */
+    gap: var(--space-3);
   }
 
   &__left {

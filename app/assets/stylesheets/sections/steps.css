@@ -2,9 +2,10 @@
   background: var(--color-surface);
   padding: 34px 0 42px;
   border-bottom: 1px solid #ececec;
+  padding: var(--space-7) 0;
 
   h2 {
-    margin: 0 0 24px;
+    margin: 0 0 var(--space-4);
     font-size: 30px;
     letter-spacing: -0.025em;
     line-height: 1.15;
@@ -16,18 +17,18 @@
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: var(--space-3);
 }
 
 .step-card {
   min-height: 170px;
-  padding: 22px 20px 20px;
+  padding: var(--space-4);
   border-radius: 14px;
   color: #fff;
   display: grid;
   grid-template-columns: 72px 1fr;
   align-items: start;
-  gap: 14px;
+  gap: var(--space-3);
   box-shadow: 0 10px 24px rgba(25, 41, 75, 0.06);
 
   &--blue {

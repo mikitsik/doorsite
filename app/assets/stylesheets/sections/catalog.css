@@ -1,10 +1,10 @@
 .catalog-section {
   background: var(--color-surface);
-  padding: 34px 0 44px;
+  padding: var(--space-7) 0;
   border-bottom: 1px solid #ececec;
 
   h2 {
-    margin: 0 0 24px;
+    margin: 0 0 var(--space-4);;
     font-size: 30px;
     letter-spacing: -0.025em;
     line-height: 1.15;
@@ -16,7 +16,7 @@
 .brand-links {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: var(--space-3);
 }
 
 .brand-link {

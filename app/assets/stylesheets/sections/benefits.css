@@ -6,7 +6,8 @@
     min-height: 92px;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
     align-items: center;
   }
 }
