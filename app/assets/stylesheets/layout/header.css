@@ -2,6 +2,11 @@
   background: var(--color-surface);
   border-bottom: 1px solid #e8e8e8;
 
+  &,
+  &__inner {
+    overflow: visible;
+  }
+
   &__inner {
     min-height: 5.125rem;
     display: grid;
@@ -22,19 +27,14 @@
   text-decoration: none;
 
   &__blue {
-    color: #2f80d8;
+    color: var(--color-blue);
   }
 
   &__orange {
-    color: #f2af33;
+    color: var(--color-orange);
   }
 }
 
 .header-search {
   min-width: 0;
-}
-
-.main-header,
-.main-header__inner {
-  overflow: visible;
 }

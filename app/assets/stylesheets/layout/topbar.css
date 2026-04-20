@@ -2,6 +2,11 @@
   background: var(--color-surface);
   border-bottom: 1px solid #ececec;
 
+  &,
+  &__inner {
+    overflow: visible;
+  }
+
   &__inner {
     display: flex;
     align-items: center;
@@ -10,11 +15,12 @@
     gap: var(--space-3);
   }
 
-  &__left {
+  &__left,
+  &__phones a {
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
-    color: #70809a;
+    color: #6f7f98;
     font-size: 0.8125rem;
     line-height: 1;
     letter-spacing: -0.01em;
@@ -23,8 +29,8 @@
     svg {
       width: 1rem;
       height: 1rem;
-      display: block;
       flex: 0 0 auto;
+      display: block;
       transform: translateY(-0.03125rem);
     }
   }
@@ -34,30 +40,5 @@
     align-items: center;
     gap: 1.125rem;
     flex-wrap: wrap;
-
-    a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      color: #6f7f98;
-      font-size: 0.8125rem;
-      line-height: 1;
-      letter-spacing: -0.01em;
-      text-decoration: none;
-      --icon-accent: #f2b23c;
-
-      svg {
-        width: 1rem;
-        height: 1rem;
-        display: block;
-        flex: 0 0 auto;
-        transform: translateY(-0.03125rem);
-      }
-    }
   }
-}
-
-.topbar,
-.topbar__inner {
-  overflow: visible;
 }

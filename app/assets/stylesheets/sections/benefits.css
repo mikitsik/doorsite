@@ -1,59 +1,55 @@
 .benefits {
-  background: #f7f5f4;
+  background: var(--color-bg);
   border-bottom: 1px solid #e9e6e5;
 
   &__grid {
     min-height: 5.5rem;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-4);
     align-items: center;
+    gap: var(--space-4);
     padding-block: var(--space-3);
     padding-inline: var(--space-2);
   }
 }
 
 .benefit-item {
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  min-width: 0;
   padding-inline: var(--space-1);
 
   &__icon {
     width: 3.5rem;
     height: 3.5rem;
-    color: #183f73;
-    --icon-accent: #f2b23c;
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: #183f73;
+    --icon-accent: #f2b23c;
 
     svg {
-      display: block;
       width: 100%;
       height: 100%;
+      display: block;
       stroke-width: 2.5;
     }
   }
 
-  &:nth-child(3) {
-    .benefit-item__icon svg {
-      transform: scale(1.06) translateY(0.0625rem);
-    }
+  &:nth-child(3) .benefit-item__icon svg {
+    transform: scale(1.06) translateY(0.0625rem);
   }
 
-  &:nth-child(4) {
-    .benefit-item__icon svg {
-      transform: scale(0.92) translateY(0.0625rem);
-    }
+  &:nth-child(4) .benefit-item__icon svg {
+    transform: scale(0.92) translateY(0.0625rem);
   }
 
   &__text {
+    color: #23375e;
     font-size: 0.9375rem;
     line-height: 1.35;
     font-weight: 600;
-    color: #23375e;
   }
 }

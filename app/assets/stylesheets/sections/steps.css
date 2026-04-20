@@ -1,14 +1,14 @@
 .how-to-order {
   background: var(--color-surface);
-  padding: var(--space-7) 0;
+  padding-block: var(--space-7);
   border-bottom: 1px solid #ececec;
 
   h2 {
     margin: 0 0 var(--space-4);
+    color: #1d315a;
     font-size: 1.875rem;
     line-height: 1.15;
     letter-spacing: -0.025em;
-    color: #1d315a;
   }
 }
 
@@ -20,14 +20,20 @@
 
 .step-card {
   min-height: 10.625rem;
-  padding: var(--space-4);
-  border-radius: 0.875rem;
-  color: #fff;
   display: grid;
   grid-template-columns: 4.5rem 1fr;
   align-items: start;
   gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: 0.875rem;
+  color: #fff;
   box-shadow: 0 0.625rem 1.5rem rgba(25, 41, 75, 0.06);
+  transform: translateY(0);
+  transition:
+    transform var(--motion-base) var(--ease-standard),
+    box-shadow var(--motion-base) var(--ease-standard),
+    filter var(--motion-base) var(--ease-standard);
+  will-change: transform, box-shadow;
 
   &--blue {
     background: linear-gradient(135deg, #59a2ee 0%, #3b86df 100%);
@@ -38,10 +44,16 @@
     background: linear-gradient(135deg, #f4c34b 0%, #f1b12d 100%);
   }
 
+  &:hover {
+    transform: translateY(-0.1875rem);
+    box-shadow: 0 1rem 2rem rgba(25, 41, 75, 0.1);
+    filter: saturate(1.02);
+  }
+
   &__number {
     font-size: 3.5rem;
-    font-weight: 700;
     line-height: 0.92;
+    font-weight: 700;
     letter-spacing: -0.04em;
     opacity: 0.92;
   }
@@ -52,40 +64,25 @@
 
   &__title {
     margin-bottom: var(--space-2);
+    color: #fff;
     font-size: 1.3125rem;
     font-weight: 700;
     line-height: 1.15;
-    color: #fff;
   }
 
   &__text {
     min-height: 4rem;
+    max-width: 15rem;
     margin-bottom: 0.875rem;
+    color: rgba(255, 255, 255, 0.96);
     font-size: 0.9375rem;
     line-height: 1.4;
-    max-width: 15rem;
-    color: rgba(255, 255, 255, 0.96);
   }
 
   &__actions {
     display: flex;
     align-items: center;
   }
-}
-
-.step-card {
-  transform: translateY(0);
-  transition:
-    transform 220ms ease,
-    box-shadow 220ms ease,
-    filter 220ms ease;
-  will-change: transform, box-shadow;
-}
-
-.step-card:hover {
-  transform: translateY(-0.1875rem);
-  box-shadow: 0 1rem 2rem rgba(25, 41, 75, 0.1);
-  filter: saturate(1.02);
 }
 
 @media (prefers-reduced-motion: reduce) {

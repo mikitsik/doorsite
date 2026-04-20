@@ -1,5 +1,9 @@
-html,
+html {
+  background: var(--color-bg);
+}
+
 body {
+  min-height: 100vh;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-base);

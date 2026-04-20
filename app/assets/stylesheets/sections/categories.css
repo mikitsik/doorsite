@@ -1,14 +1,14 @@
 .popular-categories {
   background: var(--color-surface);
-  padding: var(--space-7) 0;
+  padding-block: var(--space-7);
   border-bottom: 1px solid #ececec;
 
   h2 {
     margin: 0 0 var(--space-4);
+    color: #1d315a;
     font-size: 1.875rem;
     line-height: 1.15;
     letter-spacing: -0.025em;
-    color: #1d315a;
   }
 
   &__grid {

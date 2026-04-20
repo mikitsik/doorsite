@@ -3,20 +3,26 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 4.5rem;
   align-items: stretch;
+  transition: filter var(--motion-fast) var(--ease-standard);
 }
 
 .search-input,
 .catalog-toolbar__search {
   width: 100%;
   height: 3.125rem;
-  padding: 0 1.375rem;
-  border: 1px solid #d9dee8;
+  padding-inline: 1.375rem;
+  border: 1px solid var(--color-border-strong);
   border-right: 0;
   border-radius: 1.625rem 0 0 1.625rem;
   background: #fff;
   color: #2b3650;
   font-size: 1rem;
   outline: none;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
 
   &::placeholder {
     color: #9aa3b3;
@@ -27,34 +33,43 @@
   width: 4.5rem;
   height: 3.125rem;
   margin-left: -1px;
-  background: var(--color-blue);
-  border: 1px solid var(--color-blue);
-  border-radius: 0 1.625rem 1.625rem 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--color-blue);
+  border-radius: 0 1.625rem 1.625rem 0;
+  background: var(--color-blue);
+  color: #fff;
+  transform: translateY(0);
+  transition:
+    transform var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
   --icon-accent: #f2b23c;
 
   svg {
     width: 1.375rem;
     height: 1.375rem;
     display: block;
-    color: #fff;
+    transition:
+      transform var(--motion-fast) var(--ease-standard),
+      opacity var(--motion-fast) var(--ease-standard);
   }
-}
 
-.search-form {
-  transition: filter 180ms ease;
-}
+  &:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.625rem 1.25rem rgba(47, 128, 216, 0.18);
 
-.search-input,
-.catalog-toolbar__search,
-.search-button {
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease;
+    svg {
+      transform: scale(1.06);
+    }
+  }
+
+  &:active {
+    transform: translateY(-0.03125rem);
+  }
 }
 
 .search-form:hover .search-input,
@@ -83,41 +98,6 @@
   .search-form,
   .search-input,
   .catalog-toolbar__search,
-  .search-button {
-    transition: none;
-  }
-}
-
-.search-button {
-  transform: translateY(0);
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
-
-  svg {
-    transition:
-      transform 180ms ease,
-      opacity 180ms ease;
-  }
-
-  &:hover {
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.625rem 1.25rem rgba(47, 128, 216, 0.18);
-
-    svg {
-      transform: scale(1.06);
-    }
-  }
-
-  &:active {
-    transform: translateY(-0.03125rem);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
   .search-button,
   .search-button svg {
     transition: none;
