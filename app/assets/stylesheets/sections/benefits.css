@@ -1,6 +1,7 @@
 .benefits {
-  background: var(--color-bg);
+  background: rgba(255, 255, 255, 0.82);
   border-bottom: 1px solid #e9e6e5;
+  backdrop-filter: blur(0.375rem);
 
   &__grid {
     min-height: 5.5rem;
@@ -19,11 +20,13 @@
   align-items: center;
   gap: var(--space-3);
   padding-inline: var(--space-1);
-  transition: transform var(--motion-base) var(--ease-standard);
+  transition:
+    transform var(--motion-base) var(--ease-standard),
+    opacity var(--motion-fast) var(--ease-standard);
 
   &__icon {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.375rem;
+    height: 3.375rem;
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
@@ -41,7 +44,7 @@
   }
 
   &:hover {
-    transform: translateY(-0.125rem);
+    transform: translateY(-0.09375rem);
   }
 
   &:hover &__icon {
@@ -59,7 +62,7 @@
   &__text {
     color: #23375e;
     font-size: 0.9375rem;
-    line-height: 1.35;
+    line-height: 1.32;
     font-weight: 600;
   }
 }

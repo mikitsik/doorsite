@@ -14,7 +14,7 @@
   border: 1px solid var(--color-border-strong);
   border-right: 0;
   border-radius: 1.625rem 0 0 1.625rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.96);
   color: #2b3650;
   font-size: 1rem;
   outline: none;
@@ -49,7 +49,7 @@
   justify-content: center;
   border: 1px solid var(--color-blue);
   border-radius: 0 1.625rem 1.625rem 0;
-  background: var(--color-blue);
+  background: linear-gradient(180deg, #4090e6 0%, #2f80d8 100%);
   color: #fff;
   cursor: pointer;
   transform: translateY(0);

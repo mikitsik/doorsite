@@ -35,7 +35,7 @@
   padding-inline: 1.125rem;
   gap: var(--space-2);
   border: 1px solid var(--color-orange);
-  background: var(--color-orange);
+  background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
   color: #fff;
   box-shadow:
     0 0.625rem 1.375rem rgba(242, 175, 51, 0.18),
@@ -53,7 +53,7 @@
 .btn {
   &--blue {
     border: 1px solid var(--color-blue);
-    background: var(--color-blue);
+    background: linear-gradient(180deg, #4090e6 0%, #2f80d8 100%);
     color: #fff;
     box-shadow:
       0 0.625rem 1.375rem rgba(47, 128, 216, 0.16),
@@ -62,7 +62,7 @@
 
   &--orange {
     border: 1px solid var(--color-orange);
-    background: var(--color-orange);
+    background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
     color: #fff;
     box-shadow:
       0 0.625rem 1.375rem rgba(242, 175, 51, 0.16),
@@ -107,20 +107,20 @@
 .mini-call-button {
   padding-inline: 0.875rem;
   border: 1px solid var(--color-orange);
-  background: var(--color-orange);
+  background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
   color: #fff;
   box-shadow: 0 0.375rem 0.875rem rgba(242, 175, 51, 0.14);
 }
 
 .mini-action-button {
   &--catalog {
-    background: var(--color-blue);
+    background: linear-gradient(180deg, #4090e6 0%, #2f80d8 100%);
     color: #fff;
     box-shadow: 0 0.375rem 0.875rem rgba(47, 128, 216, 0.14);
   }
 
   &--phone {
-    background: var(--color-orange);
+    background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
     color: #fff;
     box-shadow: 0 0.375rem 0.875rem rgba(242, 175, 51, 0.14);
   }
