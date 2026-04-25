@@ -14,8 +14,8 @@
   border: 1px solid var(--color-border-strong);
   border-right: 0;
   border-radius: 1.625rem 0 0 1.625rem;
-  background: rgba(255, 255, 255, 0.96);
-  color: #2b3650;
+  background: rgba(255, 251, 247, 0.96);
+  color: var(--color-text);
   font-size: 1rem;
   outline: none;
   transition:
@@ -25,18 +25,19 @@
     color var(--motion-fast) var(--ease-standard);
 
   &::placeholder {
-    color: #9aa3b3;
+    color: #a29384;
   }
 
   &:hover {
-    border-color: var(--color-blue);
+    border-color: rgba(139, 107, 76, 0.58);
   }
 
   &:focus {
-    border-color: var(--color-blue);
+    border-color: var(--color-primary);
     box-shadow:
-      inset 0 0 0 1px rgba(47, 128, 216, 0.08),
-      0 0 0 0.1875rem rgba(47, 128, 216, 0.12);
+      inset 0 0 0 1px rgba(139, 107, 76, 0.08),
+      0 0 0 0.1875rem rgba(202, 164, 114, 0.16),
+      0 0.5rem 1.25rem rgba(111, 84, 58, 0.08);
   }
 }
 
@@ -47,9 +48,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-blue);
+  border: 1px solid var(--color-primary-dark);
   border-radius: 0 1.625rem 1.625rem 0;
-  background: linear-gradient(180deg, #4090e6 0%, #2f80d8 100%);
+  background: linear-gradient(180deg, #9a7857 0%, var(--color-primary) 100%);
   color: #fff;
   cursor: pointer;
   transform: translateY(0);
@@ -60,7 +61,7 @@
     border-color var(--motion-fast) var(--ease-standard),
     color var(--motion-fast) var(--ease-standard);
 
-  --icon-accent: #f2b23c;
+  --icon-accent: var(--color-accent);
 
   svg {
     width: 1.375rem;
@@ -74,7 +75,7 @@
 
   &:hover {
     transform: translateY(-0.125rem);
-    box-shadow: 0 0.75rem 1.5rem rgba(47, 128, 216, 0.2);
+    box-shadow: 0 0.75rem 1.5rem rgba(111, 84, 58, 0.2);
 
     svg {
       transform: scale(1.06);
@@ -88,19 +89,19 @@
   &:focus-visible {
     outline: none;
     box-shadow:
-      0 0 0 0.1875rem rgba(47, 128, 216, 0.14),
-      0 0.75rem 1.5rem rgba(47, 128, 216, 0.2);
+      0 0 0 0.1875rem rgba(202, 164, 114, 0.22),
+      0 0.75rem 1.5rem rgba(111, 84, 58, 0.16);
   }
 }
 
 .search-form:hover .search-button {
-  box-shadow: 0 0.625rem 1.25rem rgba(47, 128, 216, 0.16);
+  box-shadow: 0 0.625rem 1.25rem rgba(111, 84, 58, 0.16);
 }
 
 .search-input:focus + .search-button,
 .catalog-toolbar__search:focus + .search-button {
   box-shadow:
-    0 0.75rem 1.5rem rgba(47, 128, 216, 0.2),
+    0 0.75rem 1.5rem rgba(111, 84, 58, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 

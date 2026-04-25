@@ -1,14 +1,14 @@
 .category-card {
-  border: 1px solid #e2e6ee;
+  border: 1px solid var(--color-border);
   border-radius: 0.625rem;
-  background: #fff;
+  background: linear-gradient(180deg, #ffffff 0%, #fcf9f5 100%);
   box-shadow: var(--shadow-card);
   overflow: visible;
 
   &__image-wrap {
     display: block;
     aspect-ratio: 0.78;
-    background: #f6f7f9;
+    background: #f1ebe4;
     border-top-left-radius: 0.625rem;
     border-top-right-radius: 0.625rem;
     overflow: hidden;
@@ -38,12 +38,12 @@
 
   &--1 &__title-bar,
   &--2 &__title-bar {
-    background: var(--color-blue);
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
   }
 
   &--3 &__title-bar,
   &--4 &__title-bar {
-    background: var(--color-orange);
+    background: linear-gradient(135deg, #d7ba93 0%, var(--color-accent) 100%);
   }
 
   &__title {
@@ -56,11 +56,11 @@
 
   &__price-row {
     padding: var(--space-3) var(--space-3) var(--space-2);
-    background: #fff;
+    background: transparent;
   }
 
   &__price {
-    color: #24314d;
+    color: var(--color-primary-dark);
     font-size: 0.875rem;
     line-height: 1.2;
     font-weight: 700;
@@ -89,7 +89,7 @@
 .product-card:hover {
   transform: translateY(-0.1875rem);
   box-shadow: var(--shadow-card-hover);
-  border-color: #d8deea;
+  border-color: #d8cdbf;
 }
 
 .category-card:hover .category-card__image,

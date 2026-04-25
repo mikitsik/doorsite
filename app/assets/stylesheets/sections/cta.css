@@ -1,7 +1,7 @@
 .cta-section {
-  background: var(--color-surface);
+  background: linear-gradient(180deg, #fbf8f4 0%, #f4eee6 100%);
   padding: 2.5rem 0 2.25rem;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid var(--color-border);
 
   &__inner {
     max-width: 45rem;
@@ -12,7 +12,7 @@
   h2 {
     max-width: 42rem;
     margin: 0 auto 1rem;
-    color: #1d315a;
+    color: #34281f;
     font-size: 1.875rem;
     line-height: 1.18;
     letter-spacing: -0.03em;
@@ -21,7 +21,7 @@
   p {
     max-width: 43.75rem;
     margin: 0 auto 1.25rem;
-    color: #67758c;
+    color: var(--color-text-soft);
     font-size: 0.9375rem;
     line-height: 1.7;
   }
@@ -34,7 +34,7 @@
     margin-bottom: 1.25rem;
 
     a {
-      color: #24314d;
+      color: var(--color-primary-dark);
       font-size: 1.125rem;
       line-height: 1.2;
       font-weight: 700;

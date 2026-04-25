@@ -58,9 +58,11 @@ Thumbs.db
 # === Editors ===
 .vscode/
 .idea/
+.codex*
 
 /db/products.csv
 *.csv
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+

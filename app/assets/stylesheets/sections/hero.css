@@ -1,17 +1,17 @@
 .hero {
   position: relative;
-  background: var(--color-surface);
-  border-bottom: 1px solid #ececec;
+  background: linear-gradient(180deg, #fcfaf7 0%, #f4eee6 100%);
+  border-bottom: 1px solid var(--color-border);
   overflow: visible;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    inset 0 -1px 0 rgba(22, 39, 73, 0.04);
+    inset 0 -1px 0 rgba(73, 50, 31, 0.05);
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 18% 32%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 42%);
+    background: radial-gradient(circle at 18% 32%, rgba(255, 248, 239, 0.34) 0%, rgba(255, 255, 255, 0) 42%);
     pointer-events: none;
   }
 
@@ -22,7 +22,7 @@
     right: 0;
     bottom: 0;
     height: 5.75rem;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(246, 244, 243, 0.86) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(244, 238, 230, 0.9) 100%);
     pointer-events: none;
   }
 
@@ -38,14 +38,14 @@
     background-image:
       linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.975) 0%,
-        rgba(255, 255, 255, 0.95) 22%,
-        rgba(255, 255, 255, 0.84) 37%,
-        rgba(255, 255, 255, 0.54) 52%,
-        rgba(255, 255, 255, 0.2) 68%,
+        rgba(252, 248, 242, 0.98) 0%,
+        rgba(252, 248, 242, 0.95) 22%,
+        rgba(250, 243, 234, 0.86) 37%,
+        rgba(247, 236, 223, 0.58) 52%,
+        rgba(246, 233, 218, 0.24) 68%,
         rgba(255, 255, 255, 0) 100%
       ),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 34%),
+      linear-gradient(90deg, rgba(234, 216, 189, 0.18) 0%, rgba(255, 255, 255, 0) 34%),
       var(--hero-bg);
     background-repeat: no-repeat;
     background-position: center center;
@@ -75,8 +75,8 @@
     width: 1.125rem;
     height: 1.125rem;
     flex: 0 0 auto;
-    color: #183f73;
-    --icon-accent: #f2b23c;
+    color: var(--color-primary-dark);
+    --icon-accent: var(--color-accent);
 
     svg {
       width: 100%;
@@ -88,7 +88,7 @@
   }
 
   &__eyebrow-text {
-    color: #4f5f78;
+    color: var(--color-text-soft);
     font-size: 0.875rem;
     line-height: 1;
     font-weight: 500;
@@ -98,20 +98,20 @@
 
   &__title {
     margin: 0 0 var(--space-4);
-    color: #1b315b;
+    color: #34281f;
     font-size: 3.625rem;
     font-weight: 700;
     line-height: 1.06;
     letter-spacing: -0.045em;
     text-shadow:
       0 1px 0 rgba(255, 255, 255, 0.68),
-      0 0.625rem 1.5rem rgba(27, 49, 91, 0.08);
+      0 0.625rem 1.5rem rgba(73, 50, 31, 0.08);
   }
 
   &__text {
     max-width: 29.375rem;
     margin: 0 0 var(--space-5);
-    color: #58667b;
+    color: var(--color-text-soft);
     font-size: 1.0625rem;
     line-height: 1.6;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
@@ -136,16 +136,16 @@
     .btn--blue,
     .call-dropdown .call-button {
       box-shadow:
-        0 0.75rem 1.5rem rgba(25, 41, 75, 0.14),
-        0 0.25rem 0.625rem rgba(25, 41, 75, 0.08);
+        0 0.75rem 1.5rem rgba(73, 50, 31, 0.15),
+        0 0.25rem 0.625rem rgba(73, 50, 31, 0.09);
     }
 
     .btn--blue:hover,
     .call-dropdown .call-button:hover {
       transform: translateY(-0.25rem);
       box-shadow:
-        0 1.25rem 2.25rem rgba(25, 41, 75, 0.2),
-        0 0.5rem 1rem rgba(25, 41, 75, 0.1);
+        0 1.25rem 2.25rem rgba(73, 50, 31, 0.2),
+        0 0.5rem 1rem rgba(73, 50, 31, 0.1);
     }
   }
 }

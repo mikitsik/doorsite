@@ -34,12 +34,12 @@
   min-width: 8rem;
   padding-inline: 1.125rem;
   gap: var(--space-2);
-  border: 1px solid var(--color-orange);
-  background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
+  border: 1px solid var(--color-primary-dark);
+  background: linear-gradient(180deg, #9a7857 0%, var(--color-primary) 100%);
   color: #fff;
   box-shadow:
-    0 0.625rem 1.375rem rgba(242, 175, 51, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    0 0.75rem 1.5rem rgba(111, 84, 58, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 
   svg {
     width: 1.125rem;
@@ -52,39 +52,39 @@
 
 .btn {
   &--blue {
-    border: 1px solid var(--color-blue);
-    background: linear-gradient(180deg, #4090e6 0%, #2f80d8 100%);
+    border: 1px solid var(--color-primary-dark);
+    background: linear-gradient(180deg, #9a7857 0%, var(--color-primary) 100%);
     color: #fff;
     box-shadow:
-      0 0.625rem 1.375rem rgba(47, 128, 216, 0.16),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      0 0.75rem 1.5rem rgba(111, 84, 58, 0.17),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
   }
 
   &--orange {
-    border: 1px solid var(--color-orange);
-    background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
-    color: #fff;
+    border: 1px solid rgba(202, 164, 114, 0.7);
+    background: linear-gradient(180deg, #efdfc8 0%, var(--color-accent-soft) 100%);
+    color: var(--color-primary-dark);
     box-shadow:
-      0 0.625rem 1.375rem rgba(242, 175, 51, 0.16),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      0 0.625rem 1.25rem rgba(202, 164, 114, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
   &--light {
     border: 1px solid var(--color-border-strong);
-    background: rgba(255, 255, 255, 0.94);
-    color: #24314d;
+    background: rgba(255, 252, 248, 0.96);
+    color: var(--color-text);
     box-shadow:
-      0 0.5rem 1.125rem rgba(36, 49, 77, 0.06),
+      0 0.5rem 1.125rem rgba(73, 50, 31, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(0.25rem);
   }
 
   &--white {
-    border: 1px solid rgba(255, 255, 255, 0.82);
-    background: #fff;
-    color: #24314d;
+    border: 1px solid rgba(255, 250, 244, 0.88);
+    background: rgba(255, 252, 248, 0.98);
+    color: var(--color-text);
     box-shadow:
-      0 0.5rem 1.125rem rgba(36, 49, 77, 0.06),
+      0 0.5rem 1.125rem rgba(73, 50, 31, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.72);
   }
 
@@ -106,23 +106,23 @@
 
 .mini-call-button {
   padding-inline: 0.875rem;
-  border: 1px solid var(--color-orange);
-  background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
+  border: 1px solid var(--color-primary-dark);
+  background: linear-gradient(180deg, #9a7857 0%, var(--color-primary) 100%);
   color: #fff;
-  box-shadow: 0 0.375rem 0.875rem rgba(242, 175, 51, 0.14);
+  box-shadow: 0 0.375rem 0.875rem rgba(111, 84, 58, 0.14);
 }
 
 .mini-action-button {
   &--catalog {
-    background: linear-gradient(180deg, #4090e6 0%, #2f80d8 100%);
+    background: linear-gradient(180deg, #9a7857 0%, var(--color-primary) 100%);
     color: #fff;
-    box-shadow: 0 0.375rem 0.875rem rgba(47, 128, 216, 0.14);
+    box-shadow: 0 0.375rem 0.875rem rgba(111, 84, 58, 0.14);
   }
 
   &--phone {
-    background: linear-gradient(180deg, #f4b742 0%, #f2af33 100%);
-    color: #fff;
-    box-shadow: 0 0.375rem 0.875rem rgba(242, 175, 51, 0.14);
+    background: linear-gradient(180deg, #efdfc8 0%, var(--color-accent-soft) 100%);
+    color: var(--color-primary-dark);
+    box-shadow: 0 0.375rem 0.875rem rgba(202, 164, 114, 0.16);
   }
 }
 
@@ -142,8 +142,8 @@
 
 .btn--blue:hover {
   box-shadow:
-    0 1rem 2rem rgba(47, 128, 216, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    0 1rem 2rem rgba(111, 84, 58, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .btn--orange:hover,
@@ -151,15 +151,15 @@
 .mini-call-button:hover,
 .mini-action-button--phone:hover {
   box-shadow:
-    0 1rem 2rem rgba(242, 175, 51, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    0 1rem 2rem rgba(136, 103, 69, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .btn--light:hover,
 .btn--white:hover,
 .mini-action-button--catalog:hover {
   box-shadow:
-    0 0.875rem 1.75rem rgba(36, 49, 77, 0.14),
+    0 0.875rem 1.75rem rgba(73, 50, 31, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 

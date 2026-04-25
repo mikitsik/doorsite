@@ -1,5 +1,5 @@
 .footer {
-  background: var(--color-surface);
+  background: #fcfaf7;
   padding-block: 0.875rem;
 
   &__inner {
@@ -27,22 +27,22 @@
     flex-wrap: wrap;
 
     a {
-      color: #616c81;
+      color: var(--color-text-soft);
       font-size: 0.875rem;
       text-decoration: none;
       transition: color var(--motion-fast) var(--ease-standard);
 
       &:hover {
-        color: #23375e;
+        color: var(--color-primary-dark);
       }
     }
   }
 
   &__bottom {
-    border-top: 1px solid #ececec;
+    border-top: 1px solid var(--color-border);
     padding-top: 0.875rem;
     text-align: center;
     font-size: 0.75rem;
-    color: #8a93a5;
+    color: var(--color-muted);
   }
 }
