@@ -34,8 +34,8 @@ class ProductsController < ApplicationController
 
     @brand_links = [
       { name: "Elporta", href: "#catalog", class_name: "brand-link--elporta" },
-      { name: "BRAVO", href: "#catalog", class_name: "brand-link--bravo" },
-      { name: "PODOLI DOORS", href: "#catalog", class_name: "brand-link--podoor" },
+      { name: "torex", href: "#catalog", class_name: "brand-link--torex" },
+      { name: "dverimagna", href: "#catalog", class_name: "brand-link--dverimagna" },
       { name: "ЮРКАС", href: "#catalog", class_name: "brand-link--yurkas" }
     ]
 
