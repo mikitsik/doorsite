@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ["layer"]
 
   connect() {
-    this.duration = 5400
+    this.duration = 6480
   }
 
   play(event) {

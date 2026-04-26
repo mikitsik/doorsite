@@ -9,6 +9,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag "favicon.ico" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
@@ -86,24 +87,24 @@
           }
 
           .catalog-animation.is-active .catalog-scene {
-            animation: catalogGrow 5400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation: catalogGrow 6480ms cubic-bezier(0.22, 1, 0.36, 1) both;
           }
 
           .catalog-animation.is-active .catalog-title {
-            animation: catalogTitleZoom 1950ms cubic-bezier(0.22, 1, 0.36, 1) 1350ms both;
+            animation: catalogTitleZoom 2340ms cubic-bezier(0.22, 1, 0.36, 1) 1620ms both;
           }
 
           .catalog-animation.is-active .catalog-title-outline {
-            animation: catalogTitleZoom 1950ms cubic-bezier(0.22, 1, 0.36, 1) 1350ms both;
+            animation: catalogTitleZoom 2340ms cubic-bezier(0.22, 1, 0.36, 1) 1620ms both;
           }
 
           .catalog-animation.is-active .catalog-rays {
-            animation: rayBurst 3000ms ease-out forwards;
+            animation: rayBurst 3600ms ease-out forwards;
           }
 
           .catalog-animation.is-active .catalog-confetti circle,
           .catalog-animation.is-active .catalog-confetti path {
-            animation: confettiPop 3600ms ease-out forwards;
+            animation: confettiPop 4320ms ease-out forwards;
           }
 
           .dot-blue { fill: #3fa0ff; }
