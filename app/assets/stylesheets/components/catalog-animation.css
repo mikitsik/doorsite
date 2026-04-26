@@ -1,0 +1,45 @@
+.catalog-animation {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+
+  opacity: 0;
+  transform: scale(0.8);
+
+  &.is-active {
+    animation: catalogBurst 1800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  svg {
+    width: min(80vw, 34rem);
+    height: auto;
+  }
+}
+
+@keyframes catalogBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  25% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}

@@ -118,7 +118,7 @@
       <div class="popular-categories__grid">
         <% @featured_categories.each_with_index do |item, index| %>
           <article class="category-card category-card--<%= index + 1 %>">
-            <a href="<%= item[:href] %>" class="category-card__image-wrap">
+            <a href="<%= item[:href] %>" class="category-card__image-wrap" data-action="click->catalog-animation#play">
               <%= image_tag item[:image_name], class: "category-card__image", loading: "lazy" %>
             </a>
 
@@ -132,7 +132,7 @@
               </div>
 
               <div class="category-card__actions">
-                <a href="<%= item[:href] %>" class="mini-action-button mini-action-button--catalog">
+                <a href="<%= item[:href] %>" class="mini-action-button mini-action-button--catalog" data-action="click->catalog-animation#play">
                   Подробнее
                 </a>
 
@@ -158,7 +158,7 @@
 
       <div class="brand-links">
         <% @brand_links.each do |brand| %>
-          <a href="<%= brand[:href] %>" class="brand-link <%= brand[:class_name] %>">
+          <a href="<%= brand[:href] %>" class="brand-link <%= brand[:class_name] %>" data-action="click->catalog-animation#play">
             <% if (logo = brand_logos[brand[:class_name]]) %>
               <%= image_tag logo[:src], class: "brand-logo", alt: logo[:alt], loading: "lazy" %>
             <% else %>
