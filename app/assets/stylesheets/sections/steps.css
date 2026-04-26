@@ -1,3 +1,5 @@
+.popular-categories,
+.catalog-section,
 .how-to-order {
   background: var(--color-surface);
   padding-block: var(--space-7);
