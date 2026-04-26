@@ -95,8 +95,7 @@
     grid-template-columns: minmax(0, 1fr) 3.75rem;
   }
 
-  .search-input,
-  .catalog-toolbar__search {
+  .search-input {
     height: 2.875rem;
     padding: 0 1.125rem;
     border-radius: 1.4375rem 0 0 1.4375rem;

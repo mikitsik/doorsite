@@ -6,8 +6,7 @@
   transition: filter var(--motion-fast) var(--ease-standard);
 }
 
-.search-input,
-.catalog-toolbar__search {
+.search-input {
   width: 100%;
   height: 3.125rem;
   padding-inline: 1.375rem;
@@ -98,8 +97,7 @@
   box-shadow: 0 0.625rem 1.25rem rgba(111, 84, 58, 0.16);
 }
 
-.search-input:focus + .search-button,
-.catalog-toolbar__search:focus + .search-button {
+.search-input:focus + .search-button {
   box-shadow:
     0 0.75rem 1.5rem rgba(111, 84, 58, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
@@ -108,7 +106,6 @@
 @media (prefers-reduced-motion: reduce) {
   .search-form,
   .search-input,
-  .catalog-toolbar__search,
   .search-button,
   .search-button svg {
     transition: none;
