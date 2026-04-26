@@ -184,9 +184,15 @@
               <div class="step-card__text"><%= step[:text] %></div>
 
               <div class="step-card__actions">
-                <a href="<%= step[:href] %>" class="btn btn--white btn--step">
-                  <%= step[:button] %>
-                </a>
+                <% if step[:number] == "02" && step[:button] == "Позвонить" %>
+                  <%= render "shared/call_dropdown",
+                             button_label: step[:button],
+                             button_classes: "btn btn--white btn--step" %>
+                <% else %>
+                  <a href="<%= step[:href] %>" class="btn btn--white btn--step">
+                    <%= step[:button] %>
+                  </a>
+                <% end %>
               </div>
             </div>
           </article>

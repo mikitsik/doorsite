@@ -1,11 +1,14 @@
+<% button_label = local_assigns.fetch(:button_label, "Позвонить") %>
+<% button_classes = local_assigns.fetch(:button_classes, "call-button") %>
+
 <div class="call-dropdown" data-controller="call-dropdown">
   <button
     type="button"
-    class="call-button call-dropdown__toggle"
+    class="<%= [button_classes, "call-dropdown__toggle"].join(" ") %>"
     data-action="click->call-dropdown#toggle"
     aria-expanded="false"
   >
-    Позвонить
+    <%= button_label %>
   </button>
 
   <div class="call-dropdown__menu" data-call-dropdown-target="menu">
