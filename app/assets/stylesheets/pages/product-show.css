@@ -11,6 +11,18 @@
     grid-template-columns: 1fr 1fr;
     align-items: start;
     gap: var(--space-5);
+
+    > div:first-child img,
+    > div:first-child .product-card__placeholder {
+      display: block;
+      width: 100%;
+      aspect-ratio: 0.78;
+      border-radius: 0.625rem;
+    }
+
+    > div:first-child img {
+      object-fit: cover;
+    }
   }
 
   &__brand {
@@ -68,4 +80,15 @@
     font-size: 1.0625rem;
     line-height: 1.7;
   }
+}
+
+.product-card__placeholder {
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  background: #f1ebe4;
+  color: var(--color-text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  text-align: center;
 }
