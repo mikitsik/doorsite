@@ -15,7 +15,8 @@ export default class extends Controller {
     const x = event.clientX
     const y = event.clientY
 
-    el.style.transformOrigin = `${x}px ${y}px`
+    el.style.left = `${x}px`
+    el.style.top = `${y}px`
 
     el.classList.remove("is-active")
     void el.offsetWidth
