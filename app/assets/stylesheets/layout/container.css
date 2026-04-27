@@ -1,16 +1,17 @@
 .page {
-  width: min(var(--container-width), calc(100% - 3rem));
-  margin: 0 auto;
+  width: min(var(--page-max), calc(100% - (var(--page-gutter) * 2)));
+  margin-inline: auto;
   background: var(--color-surface);
   border-radius: 0.875rem;
   box-shadow:
     0 1.125rem 3rem rgba(20, 33, 63, 0.07),
     0 0.25rem 0.75rem rgba(20, 33, 63, 0.04);
-  overflow: visible;
+  overflow: hidden;
 }
 
 .container {
   width: 100%;
-  margin: 0 auto;
-  padding-inline: var(--space-5);
+  max-width: none;
+  padding-inline: var(--container-pad);
+  margin-inline: auto;
 }

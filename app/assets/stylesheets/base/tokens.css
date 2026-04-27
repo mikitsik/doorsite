@@ -30,6 +30,9 @@
   --shadow-button: 0 0.5rem 1rem rgba(73, 50, 31, 0.12);
   --shadow-button-hover: 0 1rem 2rem rgba(73, 50, 31, 0.18);
 
+  --page-max: 80rem;
+  --page-gutter: 1.5rem;
+  --container-pad: 2rem;
   --container-width: 80rem;
   --font-base: Arial, sans-serif;
 

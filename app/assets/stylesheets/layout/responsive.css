@@ -1,10 +1,12 @@
 @media (max-width: 73.75rem) {
-  .page {
-    width: calc(100% - 1.75rem);
+  :root {
+    --page-gutter: 0rem;
+    --container-pad: 1.5rem;
   }
 
-  .container {
-    padding: 0 1.5rem;
+  .page {
+    width: 100%;
+    border-radius: 0;
   }
 
   .logo {
@@ -64,14 +66,16 @@
   }
 }
 
-@media (max-width: 47.5rem) {
-  .page {
-    width: calc(100% - 1rem);
-    border-radius: 0.625rem;
+@media (max-width: 43.75rem) {
+  :root {
+    --page-gutter: 0rem;
+    --container-pad: 1rem;
   }
 
-  .container {
-    padding: 0 1rem;
+  .page {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .topbar__inner {
