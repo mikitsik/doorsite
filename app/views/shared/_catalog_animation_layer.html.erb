@@ -1,0 +1,265 @@
+<div
+  id="catalog-animation"
+  class="catalog-animation"
+  data-catalog-animation-target="layer"
+>
+  <svg
+    viewBox="0 0 900 620"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Каталог в разработке"
+  >
+    <style>
+      .catalog-scene {
+        transform-box: view-box;
+        transform-origin: 50% 93%;
+      }
+
+      .catalog-title {
+        fill: #103b68;
+        font-family: Arial, sans-serif;
+        font-size: 42px;
+        font-weight: 800;
+        letter-spacing: 9px;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .catalog-title-outline {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 12;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        font-family: Arial, sans-serif;
+        font-size: 42px;
+        font-weight: 800;
+        letter-spacing: 9px;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .catalog-rays path {
+        fill: none;
+        stroke-width: 5;
+        stroke-linecap: round;
+        opacity: 0.9;
+      }
+
+      .catalog-rays {
+        transform-origin: center;
+      }
+
+      .ray-blue { stroke: #3fa0ff; }
+      .ray-orange { stroke: #ff9f2e; }
+      .ray-green { stroke: #58d69a; }
+      .ray-yellow { stroke: #ffc83d; }
+
+      .catalog-confetti circle,
+      .catalog-confetti path {
+        opacity: 0.95;
+        transform-origin: center;
+      }
+
+      .catalog-animation.is-active .catalog-scene {
+        animation: catalogGrow 6480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .catalog-animation.is-active .catalog-title {
+        animation: catalogTitleZoom 2340ms cubic-bezier(0.22, 1, 0.36, 1) 1620ms both;
+      }
+
+      .catalog-animation.is-active .catalog-title-outline {
+        animation: catalogTitleZoom 2340ms cubic-bezier(0.22, 1, 0.36, 1) 1620ms both;
+      }
+
+      .catalog-animation.is-active .catalog-rays {
+        animation: rayBurst 3600ms ease-out forwards;
+      }
+
+      .catalog-animation.is-active .catalog-confetti circle,
+      .catalog-animation.is-active .catalog-confetti path {
+        animation: confettiPop 4320ms ease-out forwards;
+      }
+
+      .dot-blue { fill: #3fa0ff; }
+      .dot-orange { fill: #ff9f2e; }
+      .dot-green { fill: #58d69a; }
+      .dot-yellow { fill: #ffc83d; }
+
+      .door {
+        filter: drop-shadow(0 12px 10px rgba(16, 59, 104, 0.14));
+      }
+
+      .door rect,
+      .door path,
+      .door line {
+        stroke: #103b68;
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .door path,
+      .door line {
+        fill: none;
+      }
+
+      .door-panel-blue { fill: #cfe8ff; }
+      .door-inner-blue { fill: #b7dcff; }
+
+      .door-panel-orange { fill: #ffd47a; }
+      .door-inner-orange { fill: #ffc65e; }
+
+      .door-panel-green { fill: #c9f4d9; }
+      .door-inner-green { fill: #aee9c4; }
+
+      .door-handle {
+        fill: #ffffff;
+      }
+
+      .catalog-origin {
+        fill: #103b68;
+      }
+
+      @keyframes catalogGrow {
+        0% {
+          opacity: 0;
+          transform: scale(0.12);
+        }
+
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes catalogTitleZoom {
+        0% {
+          opacity: 0;
+          transform: translateY(10px) scale(0.7);
+        }
+
+        60% {
+          opacity: 1;
+          transform: translateY(-2px) scale(1.06);
+        }
+
+        100% {
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes confettiPop {
+        0% {
+          transform: translate(0, 0) scale(0.4);
+          opacity: 0;
+        }
+
+        40% {
+          opacity: 1;
+        }
+
+        100% {
+          transform: translate(var(--dx), var(--dy)) scale(1);
+          opacity: 0;
+        }
+      }
+
+      @keyframes rayBurst {
+        0% {
+          transform: scale(0.6);
+          opacity: 0;
+        }
+
+        40% {
+          opacity: 1;
+        }
+
+        100% {
+          transform: scale(1.1);
+          opacity: 0;
+        }
+      }
+    </style>
+
+    <defs>
+      <path id="catalogArc" d="M 140 410 A 310 310 0 0 1 760 410" />
+    </defs>
+
+    <g class="catalog-scene">
+      <text class="catalog-title-outline">
+        <textPath href="#catalogArc" startOffset="50%" text-anchor="middle">
+          КАТАЛОГ В РАЗРАБОТКЕ
+        </textPath>
+      </text>
+
+      <text class="catalog-title">
+        <textPath href="#catalogArc" startOffset="50%" text-anchor="middle">
+          КАТАЛОГ В РАЗРАБОТКЕ
+        </textPath>
+      </text>
+
+      <g class="catalog-rays">
+        <path class="ray-blue" d="M155 290 L70 230" />
+        <path class="ray-blue" d="M165 390 L72 355" />
+        <path class="ray-blue" d="M235 475 L95 505" />
+        <path class="ray-orange" d="M260 215 L220 145" />
+        <path class="ray-orange" d="M385 455 L350 535" />
+        <path class="ray-orange" d="M640 455 L735 530" />
+        <path class="ray-green" d="M275 485 L170 565" />
+        <path class="ray-green" d="M625 490 L760 565" />
+        <path class="ray-green" d="M740 385 L825 350" />
+        <path class="ray-yellow" d="M450 170 L450 95" />
+        <path class="ray-yellow" d="M535 465 L590 545" />
+        <path class="ray-blue" d="M675 215 L720 145" />
+        <path class="ray-blue" d="M745 290 L830 230" />
+      </g>
+
+      <g class="catalog-confetti">
+        <circle class="dot-orange" cx="205" cy="275" r="6" style="--dx: -64px; --dy: -82px" />
+        <circle class="dot-green" cx="265" cy="210" r="5" style="--dx: -38px; --dy: -96px" />
+        <circle class="dot-blue" cx="370" cy="155" r="6" style="--dx: 18px; --dy: -104px" />
+        <circle class="dot-green" cx="510" cy="150" r="5" style="--dx: 74px; --dy: -86px" />
+        <circle class="dot-blue" cx="665" cy="255" r="5" style="--dx: 86px; --dy: -52px" />
+        <circle class="dot-orange" cx="700" cy="330" r="6" style="--dx: 124px; --dy: 36px" />
+        <circle class="dot-green" cx="760" cy="410" r="6" style="--dx: 98px; --dy: 62px" />
+        <circle class="dot-blue" cx="210" cy="400" r="5" style="--dx: -92px; --dy: 54px" />
+
+        <path class="dot-yellow" d="M115 345 l10 -22 l10 22 l22 10 l-22 10 l-10 22 l-10 -22 l-22 -10z" style="--dx: -104px; --dy: 12px" />
+        <path class="dot-yellow" d="M685 215 l10 -22 l10 22 l22 10 l-22 10 l-10 22 l-10 -22 l-22 -10z" style="--dx: 112px; --dy: -28px" />
+        <path class="dot-blue" d="M320 190 l8 -17 l8 17 l17 8 l-17 8 l-8 17 l-8 -17 l-17 -8z" style="--dx: -18px; --dy: -88px" />
+        <path class="dot-green" d="M740 320 l9 -9 l9 9 l-9 9z" style="--dx: 132px; --dy: 18px" />
+      </g>
+
+      <g class="door door-blue" transform="translate(275 225) rotate(-10)">
+        <rect class="door-panel-blue" x="0" y="0" width="135" height="250" rx="8" />
+        <rect class="door-inner-blue" x="20" y="25" width="95" height="200" rx="3" />
+        <line x1="20" y1="95" x2="115" y2="95" />
+        <line x1="20" y1="150" x2="115" y2="150" />
+        <line x1="20" y1="205" x2="115" y2="205" />
+        <rect class="door-handle" x="20" y="135" width="45" height="15" rx="3" />
+      </g>
+
+      <g class="door door-orange" transform="translate(385 200)">
+        <rect class="door-panel-orange" x="0" y="0" width="140" height="275" rx="8" />
+        <rect class="door-inner-orange" x="25" y="25" width="90" height="225" rx="3" />
+        <line x1="70" y1="25" x2="70" y2="250" />
+        <rect class="door-handle" x="47" y="128" width="48" height="16" rx="3" />
+      </g>
+
+      <g class="door door-green" transform="translate(520 225) rotate(10)">
+        <rect class="door-panel-green" x="0" y="0" width="135" height="250" rx="8" />
+        <rect class="door-inner-green" x="20" y="25" width="95" height="200" rx="3" />
+        <line x1="45" y1="25" x2="45" y2="225" />
+        <line x1="70" y1="75" x2="110" y2="75" />
+        <line x1="70" y1="115" x2="110" y2="115" />
+        <line x1="70" y1="155" x2="110" y2="155" />
+        <line x1="70" y1="195" x2="110" y2="195" />
+        <rect class="door-handle" x="15" y="138" width="45" height="15" rx="3" />
+      </g>
+    </g>
+
+    <circle class="catalog-origin" cx="450" cy="585" r="7" />
+  </svg>
+</div>

@@ -1,0 +1,28 @@
+<section class="hero" style="--hero-bg: url('<%= asset_path("hero-room.webp") %>');">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <div class="hero__eyebrow">
+        <span class="hero__eyebrow-badge">
+          <span class="hero__eyebrow-icon">
+            <%= inline_svg_tag "icons/brands.svg" %>
+          </span>
+          <span class="hero__eyebrow-text">Популярные бренды</span>
+        </span>
+      </div>
+
+      <h1 class="hero__title">
+        Современные двери для квартиры, дома и офиса
+      </h1>
+
+      <p class="hero__text">
+        Премиум и эконом класс<br>
+        Гарантия
+      </p>
+
+      <div class="hero__actions">
+        <a href="#catalog" class="btn btn--blue">Смотреть каталог</a>
+        <%= render "shared/call_dropdown" %>
+      </div>
+    </div>
+  </div>
+</section>

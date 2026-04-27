@@ -1,0 +1,9 @@
+<article class="product-card">
+  <a href="<%= product_path(product) %>" data-action="click->catalog-animation#play">
+    <% if product.image_url.present? %>
+      <%= image_tag product.image_url, alt: product.title, loading: "lazy" %>
+    <% else %>
+      <div class="product-card__placeholder">Нет изображения</div>
+    <% end %>
+  </a>
+</article>

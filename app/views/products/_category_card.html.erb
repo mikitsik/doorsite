@@ -1,0 +1,23 @@
+<article class="category-card category-card--<%= index + 1 %>">
+  <a href="<%= item[:href] %>" class="category-card__image-wrap" data-action="click->catalog-animation#play">
+    <%= image_tag item[:image_name], class: "category-card__image", loading: "lazy" %>
+  </a>
+
+  <div class="category-card__body">
+    <div class="category-card__title-bar">
+      <h3 class="category-card__title"><%= item[:title] %></h3>
+    </div>
+
+    <div class="category-card__price-row">
+      <div class="category-card__price"><%= item[:price] %></div>
+    </div>
+
+    <div class="category-card__actions">
+      <a href="<%= item[:href] %>" class="mini-action-button mini-action-button--catalog" data-action="click->catalog-animation#play">
+        Подробнее
+      </a>
+
+      <%= render "shared/call_dropdown" %>
+    </div>
+  </div>
+</article>

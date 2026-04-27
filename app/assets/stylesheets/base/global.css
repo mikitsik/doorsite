@@ -1,13 +1,11 @@
 html {
   background: var(--color-bg);
-  background: red;
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-base);
-  background: red;
 }
 
 a {
