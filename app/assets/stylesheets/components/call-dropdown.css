@@ -1,6 +1,7 @@
 .call-dropdown {
   position: relative;
   display: inline-flex;
+  min-width: 0;
   z-index: 40;
 
   &__toggle {

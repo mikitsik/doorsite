@@ -13,6 +13,7 @@
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
     gap: var(--space-4);
+    min-width: 0;
   }
 }
 
@@ -35,6 +36,8 @@
   }
 }
 
-.header-search {
+.main-header .container,
+.main-header__inner,
+.main-header__inner > * {
   min-width: 0;
 }
