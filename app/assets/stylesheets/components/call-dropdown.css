@@ -2,6 +2,7 @@
   position: relative;
   display: inline-flex;
   min-width: 0;
+  max-width: 100%;
   z-index: 40;
 
   &__toggle {
@@ -9,10 +10,16 @@
   }
 
   &__menu {
+    display: none;
     position: absolute;
     top: calc(100% + 0.5rem);
     left: 0;
-    min-width: 15rem;
+    z-index: 200;
+
+    width: max-content;
+    min-width: min(15rem, calc(100vw - 2rem));
+    max-width: calc(100vw - 2rem);
+
     padding: 0.375rem;
     border: 1px solid var(--color-border-strong);
     border-radius: 0.875rem;
@@ -21,6 +28,7 @@
       0 1rem 2rem rgba(73, 50, 31, 0.14),
       0 0.25rem 0.75rem rgba(73, 50, 31, 0.08);
     backdrop-filter: blur(0.5rem);
+
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -29,7 +37,6 @@
       opacity var(--motion-fast) var(--ease-standard),
       visibility var(--motion-fast) var(--ease-standard),
       transform var(--motion-fast) var(--ease-standard);
-    z-index: 200;
   }
 
   &__link {
@@ -62,13 +69,21 @@
 
   &.is-open {
     z-index: 120;
+
+    .call-dropdown__menu {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
   }
 
-  &.is-open .call-dropdown__menu {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
+  &--right {
+    .call-dropdown__menu {
+      left: auto;
+      right: 0;
+    }
   }
 }
 

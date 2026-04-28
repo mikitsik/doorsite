@@ -182,3 +182,23 @@
     transform: none !important;
   }
 }
+
+
+.hero__title {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: 2.5rem;
+    letter-spacing: -0.04em;
+  }
+
+  .header__main .container {
+    grid-template-columns: 1fr;
+  }
+
+  .header__logo {
+    font-size: 2.375rem;
+  }
+}
