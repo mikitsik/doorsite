@@ -50,17 +50,13 @@
 
 .btn,
 .call-button {
-  min-height: 3rem;
-  padding-inline: 1.375rem;
+  padding: 1rem 1.375rem;
   border-radius: var(--radius-md);
   font-size: 0.9375rem;
   line-height: 1;
 }
 
 .call-button {
-  min-width: 8rem;
-  padding-inline: 1.125rem;
-  gap: var(--space-2);
   border: 1px solid rgba(178, 131, 70, 1);
   background: rgba(178, 131, 70, 0.9);
   color: #fff;
@@ -75,9 +71,6 @@
 }
 
 .btn {
-  &--blue {
-  }
-
   &--orange {
     border: 1px solid rgba(202, 164, 114, 0.45);
     background: rgba(234, 216, 189, 0.52);
@@ -125,9 +118,6 @@
 }
 
 .mini-action-button {
-  &--catalog {
-  }
-
   &--phone {
     border: 1px solid rgba(202, 164, 114, 0.42);
     background: rgba(234, 216, 189, 0.52);

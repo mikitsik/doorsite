@@ -2,14 +2,16 @@
   &__top {
     background: #f8f4ee;
     border-bottom: 1px solid var(--color-border);
-    overflow: visible;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    min-height: 2.5rem;
-    gap: var(--space-3);
-    min-width: 0;
-    overflow: visible;
+    padding: 0.25rem 0;
+  }
+
+  &__location,
+  &__phones {
+    padding: 0.25rem 0;
   }
 
   &__location,
@@ -33,13 +35,6 @@
   }
 
   &__location {
-    min-width: 0;
-
-    span {
-      min-width: 0;
-      overflow-wrap: anywhere;
-    }
-
     svg {
       width: 1.25rem;
       height: 1.25rem;
@@ -52,7 +47,6 @@
     align-items: center;
     gap: 1.125rem;
     flex-wrap: wrap;
-    min-width: 0;
     justify-content: flex-end;
   }
 
@@ -60,14 +54,12 @@
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
 
-    .container {
-      min-height: 5.125rem;
+    &-container {
+      padding: 1.25rem 0;
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
       gap: var(--space-4);
-      min-width: 0;
-      overflow: visible;
     }
   }
 

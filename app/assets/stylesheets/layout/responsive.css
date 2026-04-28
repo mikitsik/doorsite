@@ -1,0 +1,64 @@
+@media (max-width: 48rem) {      /* ~768px */
+
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  .header {
+    &__main-container {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "logo button"
+        "search search";
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    &__top {
+      justify-content: space-around;
+    }
+
+    &__logo {
+      grid-area: logo;
+      justify-self: center;
+    }
+
+    &__search {
+      grid-area: search;
+    }
+
+    .call-button {
+      grid-area: button;
+      /* padding: 0.875rem 1.375rem; */
+    }
+  }
+
+  .search-button {
+    height: 2.75rem;
+  }
+}
+
+@media (max-width: 30rem) {   /* ~480 */
+  .container {
+    padding: 0 var(--space-3);
+  }
+
+  .header {
+    .search-button {
+      height: 2.5rem;
+    }
+  }
+}
+
+@media (max-width: 26rem) {   /* ~416 */
+  .header {
+    .search-button {
+      height: 2.25rem;
+    }
+  }
+
+  btn,
+  .call-button {
+    padding: 0.75rem 1.125rem;
+  }
+}

@@ -12,3 +12,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.container {
+  padding: 0 var(--space-5);
+}
