@@ -3,7 +3,6 @@
 @import "./base/global.css";
 
 @import "./layout/container.css";
-@import "./layout/topbar.css";
 @import "./layout/header.css";
 @import "./layout/footer.css";
 
@@ -20,7 +19,6 @@
 @import "./sections/categories.css";
 @import "./sections/catalog.css";
 @import "./sections/steps.css";
-@import "./sections/cta.css";
 
 @import "./pages/product-show.css";
 @import "./layout/responsive.css";

@@ -15,17 +15,11 @@
   </head>
 
   <body>
-    <% flash.each do |type, message| %>
-      <div class="flash flash--<%= type %>">
-        <%= message %>
-      </div>
-    <% end %>
+    <%= render "layout/flash" %>
+    <%= render "layout/header" %>
 
-    <%= render "shared/topbar" %>
-    <%= render "shared/header" %>
     <%= yield %>
-    <%= render "shared/cta" %>
-    <%= render "shared/footer" %>
 
+    <%= render "layout/footer" %>
   </body>
 </html>

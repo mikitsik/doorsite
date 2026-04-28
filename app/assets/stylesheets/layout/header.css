@@ -1,43 +1,92 @@
-.main-header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-
-  &,
-  &__inner {
+.header {
+  &__top {
+    background: #f8f4ee;
+    border-bottom: 1px solid var(--color-border);
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 2.5rem;
+    gap: var(--space-3);
+    min-width: 0;
     overflow: visible;
   }
 
-  &__inner {
-    min-height: 5.125rem;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+  &__location,
+  &__phones a {
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: 0.375rem;
+    color: var(--color-text-soft);
+    font-size: 0.875rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    --icon-accent: var(--color-accent);
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      flex: 0 0 auto;
+      display: block;
+      transform: translateY(-0.03125rem);
+    }
+  }
+
+  &__location {
     min-width: 0;
-  }
-}
 
-.logo {
-  display: inline-flex;
-  align-items: baseline;
-  font-size: 3.125rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.045em;
-  white-space: nowrap;
-  text-decoration: none;
+    span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
 
-  &__blue {
-    color: var(--color-primary-dark);
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke-width: 1.6;
+    }
   }
 
-  &__orange {
-    color: var(--color-accent);
+  &__phones {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    flex-wrap: wrap;
+    min-width: 0;
+    justify-content: flex-end;
   }
-}
 
-.main-header .container,
-.main-header__inner,
-.main-header__inner > * {
-  min-width: 0;
+  &__main {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+
+    .container {
+      min-height: 5.125rem;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-4);
+      min-width: 0;
+      overflow: visible;
+    }
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: baseline;
+    font-size: 3.125rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
+    text-decoration: none;
+
+    &-dark {
+      color: var(--color-primary-dark);
+    }
+
+    &-light {
+      color: var(--color-accent);
+    }
+  }
 }

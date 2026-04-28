@@ -1,0 +1,52 @@
+<header class="header">
+  <div class="container header__top">
+    <div class="header__location">
+      <%= inline_svg_tag "icons/location.svg" %>
+      <span>Молодечно Ошмяны Островец Минск</span>
+    </div>
+
+    <div class="header__phones">
+      <a href="tel:+375292746333">
+        <%= inline_svg_tag "icons/phone.svg" %>
+        +375 (29) 274-63-33
+      </a>
+      <a href="tel:+375296685629">
+        +375 (29) 668-56-29
+      </a>
+    </div>
+  </div>
+
+
+  <div class="header__main">
+    <div class="container">
+      <%= link_to root_path, class: "header__logo" do %>
+        <span class="header__logo-dark">Дверной.</span>
+        <span class="header__logo-light">бел</span>
+      <% end %>
+
+      <%= form_with url: products_path,
+                    method: :get,
+                    data: {
+                      controller: "catalog-filter",
+                      turbo_frame: "catalog_frame"
+                    },
+                    class: "search-form header__search" do %>
+        <%= hidden_field_tag :brand, params[:brand], data: { catalog_filter_target: "brandField" } %>
+
+        <%= text_field_tag :q,
+                          params[:q],
+                          placeholder: "Поиск дверей...",
+                          class: "search-input",
+                          data: { action: "input->catalog-filter#submitDebounced" } %>
+
+        <button class="search-button" type="submit" aria-label="Поиск">
+          <%= inline_svg_tag "icons/search.svg" %>
+        </button>
+      <% end %>
+
+      <div class="header__btn">
+        <%= render "shared/call_dropdown" %>
+      </div>
+    </div>
+  </div>
+</header>
