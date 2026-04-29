@@ -14,9 +14,9 @@
               <% if step[:number] == "02" && step[:button] == "Позвонить" %>
                 <%= render "shared/call_dropdown",
                             button_label: step[:button],
-                            button_classes: "btn btn--white btn--step" %>
+                            button_classes: "btn btn__call btn__step" %>
               <% else %>
-                <a href="<%= step[:href] %>" class="btn btn--white btn--step">
+                <a href="<%= step[:href] %>" class="btn btn__step">
                   <%= step[:button] %>
                 </a>
               <% end %>

@@ -4,10 +4,16 @@
   "brand-link--dverimagna" => { src: "brands/dverimagna.webp", alt: "dverimagna" },
   "brand-link--yurkas" => { src: "brands/jurkas.webp", alt: "ЮРКАС" }
 } %>
+<% brand_modifier_map = {
+  "brand-link--elporta" => "btn__brand-elporta",
+  "brand-link--torex" => "btn__brand-torex",
+  "brand-link--dverimagna" => "btn__brand-dverimagna",
+  "brand-link--yurkas" => "btn__brand-yurkas"
+} %>
 
 <div class="brand-links">
   <% brand_links.each do |brand| %>
-    <a href="<%= brand[:href] %>" class="brand-link <%= brand[:class_name] %>" data-action="click->catalog-animation#play">
+    <a href="<%= brand[:href] %>" class="btn btn__brand <%= brand_modifier_map[brand[:class_name]] %>" data-action="click->catalog-animation#play">
       <% if (logo = brand_logos[brand[:class_name]]) %>
         <%= image_tag logo[:src], class: "brand-logo", alt: logo[:alt], loading: "lazy" %>
       <% else %>

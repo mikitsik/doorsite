@@ -133,21 +133,20 @@
     animation-delay: 0.3s;
 
     .btn,
-    .call-button,
     .call-dropdown {
       position: relative;
       z-index: 6;
     }
 
     .btn--blue,
-    .call-dropdown .call-button {
+    .call-dropdown .btn__call {
       box-shadow:
         0 0.75rem 1.5rem rgba(73, 50, 31, 0.15),
         0 0.25rem 0.625rem rgba(73, 50, 31, 0.09);
     }
 
     .btn--blue:hover,
-    .call-dropdown .call-button:hover {
+    .call-dropdown .btn__call:hover {
       transform: translateY(-0.25rem);
       box-shadow:
         0 1.25rem 2.25rem rgba(73, 50, 31, 0.2),
@@ -155,7 +154,7 @@
     }
 
     .btn--blue:active,
-    .call-dropdown .call-button:active {
+    .call-dropdown .btn__call:active {
       transform: translateY(-0.0625rem) scale(0.985);
       box-shadow:
         0 0.75rem 1.5rem rgba(73, 50, 31, 0.16),

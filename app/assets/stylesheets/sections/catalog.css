@@ -4,57 +4,6 @@
   gap: var(--space-3);
 }
 
-.brand-link {
-  min-height: 4.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-inline: 1.125rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: linear-gradient(180deg, #fffdf9 0%, #f8f2eb 100%);
-  text-decoration: none;
-  box-shadow: 0 0.25rem 0.875rem rgba(73, 50, 31, 0.05);
-  transform: translateY(0);
-  transition:
-    transform var(--motion-fast) var(--ease-standard),
-    box-shadow var(--motion-fast) var(--ease-standard),
-    border-color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard);
-  will-change: transform, box-shadow;
-
-  &:hover {
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.75rem 1.5rem rgba(73, 50, 31, 0.1);
-    border-color: #d8cdbf;
-    background: linear-gradient(180deg, #ffffff 0%, #f6efe7 100%);
-  }
-
-  span {
-    font-size: 1.125rem;
-    line-height: 1;
-    font-weight: 700;
-    text-align: center;
-  }
-
-  &--elporta span {
-    color: #7d6247;
-  }
-
-  &--torex span {
-    color: var(--color-primary);
-    letter-spacing: 0.03em;
-  }
-
-  &--dverimagna span {
-    color: #8e7558;
-  }
-
-  &--yurkas span {
-    color: var(--color-muted);
-  }
-}
-
 .brand-logo {
   display: block;
   max-width: 100%;
@@ -64,11 +13,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand-link {
-    transition: none;
-  }
-
-  .brand-link:hover {
+  .btn__brand:hover {
     transform: none;
   }
 }

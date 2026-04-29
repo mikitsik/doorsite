@@ -1,5 +1,5 @@
 <% button_label = local_assigns.fetch(:button_label, "Позвонить") %>
-<% button_classes = local_assigns.fetch(:button_classes, "call-button") %>
+<% button_classes = local_assigns.fetch(:button_classes, "btn btn__call") %>
 <% dropdown_classes = local_assigns.fetch(:dropdown_classes, nil) %>
 
 <div class="<%= ["call-dropdown", dropdown_classes].compact.join(" ") %>" data-controller="call-dropdown">
