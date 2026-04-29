@@ -1,5 +1,4 @@
 .btn--blue,
-.mini-call-button,
 .mini-action-button--catalog {
   border: 1px solid var(--color-primary-dark);
   background: var(--color-primary);
@@ -18,7 +17,6 @@
   color: var(--color-text);
 }
 
-.mini-call-button,
 .mini-action-button--catalog {
   box-shadow:
     0 0.25rem 0.75rem rgba(111, 84, 58, 0.1),
@@ -27,7 +25,6 @@
 
 .btn,
 .call-button,
-.mini-call-button,
 .mini-action-button {
   display: inline-flex;
   align-items: center;
@@ -105,7 +102,6 @@
   }
 }
 
-.mini-call-button,
 .mini-action-button {
   min-height: 2.625rem;
   border-radius: 0.5625rem;
@@ -113,31 +109,14 @@
   line-height: 1;
 }
 
-.mini-call-button {
-  padding-inline: 0.875rem;
-}
-
-.mini-action-button {
-  &--phone {
-    border: 1px solid rgba(202, 164, 114, 0.42);
-    background: rgba(234, 216, 189, 0.52);
-    color: var(--color-primary-dark);
-    box-shadow:
-      0 0.25rem 0.75rem rgba(202, 164, 114, 0.09),
-      0 1px 2px rgba(202, 164, 114, 0.05);
-  }
-}
-
 .btn:hover,
 .call-button:hover,
-.mini-call-button:hover,
 .mini-action-button:hover {
   transform: translateY(-0.1875rem);
 }
 
 .btn:active,
 .call-button:active,
-.mini-call-button:active,
 .mini-action-button:active {
   transform: translateY(-0.03125rem);
 }
@@ -150,9 +129,7 @@
 }
 
 .btn--orange:hover,
-.call-button:hover,
-.mini-call-button:hover,
-.mini-action-button--phone:hover {
+.call-button:hover {
   background: rgba(158, 114, 56, 0.9);
   box-shadow:
     0 0.75rem 1.5rem rgba(136, 103, 69, 0.12),
@@ -181,18 +158,15 @@
 @media (prefers-reduced-motion: reduce) {
   .btn,
   .call-button,
-  .mini-call-button,
   .mini-action-button {
     transition: none;
   }
 
   .btn:hover,
   .call-button:hover,
-  .mini-call-button:hover,
   .mini-action-button:hover,
   .btn:active,
   .call-button:active,
-  .mini-call-button:active,
   .mini-action-button:active {
     transform: none;
   }
