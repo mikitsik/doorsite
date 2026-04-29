@@ -21,7 +21,7 @@
     filter var(--motion-base) var(--ease-standard);
   will-change: transform, box-shadow;
 
-  &--blue {
+  &--more {
     background: linear-gradient(135deg, #6f543a 0%, #8b6b4c 100%);
   }
 
