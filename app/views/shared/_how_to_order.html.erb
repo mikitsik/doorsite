@@ -1,0 +1,49 @@
+<section class="how-to-order">
+  <div class="container">
+    <h2>Как заказать</h2>
+
+    <div class="steps-grid">
+      <article class="step-card step-card--blue">
+        <div class="step-card__number">01</div>
+        <div class="step-card__content">
+          <div class="step-card__title">Выберите модель</div>
+          <div class="step-card__text">Быстро покажем варианты и поможем определиться с дизайном</div>
+
+          <div class="step-card__actions">
+            <a href="#catalog" class="btn btn__step">
+              Подробнее
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="step-card step-card--orange">
+        <div class="step-card__number">02</div>
+        <div class="step-card__content">
+          <div class="step-card__title">Свяжитесь с нами</div>
+          <div class="step-card__text">Быстро уточним размеры и подскажем лучший вариант</div>
+
+          <div class="step-card__actions">
+            <%= render "shared/call_dropdown",
+                        button_label: "Позвонить",
+                        button_classes: "btn btn__call btn__step" %>
+          </div>
+        </div>
+      </article>
+
+      <article class="step-card step-card--orange-2">
+        <div class="step-card__number">03</div>
+        <div class="step-card__content">
+          <div class="step-card__title">Согласуем детали</div>
+          <div class="step-card__text">Уточним доставку, установку и итоговую стоимость</div>
+
+          <div class="step-card__actions">
+            <a href="#catalog" class="btn btn__step">
+              Открыть каталог
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
