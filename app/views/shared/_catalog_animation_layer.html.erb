@@ -61,6 +61,21 @@
         transform-origin: center;
       }
 
+      .catalog-title-section,
+      .catalog-title-outline-section {
+        display: none;
+      }
+
+      .catalog-animation.is-section .catalog-title-default,
+      .catalog-animation.is-section .catalog-title-outline-default {
+        display: none;
+      }
+
+      .catalog-animation.is-section .catalog-title-section,
+      .catalog-animation.is-section .catalog-title-outline-section {
+        display: block;
+      }
+
       .catalog-animation.is-active .catalog-scene {
         animation: catalogGrow 6480ms cubic-bezier(0.22, 1, 0.36, 1) both;
       }
@@ -188,15 +203,27 @@
     </defs>
 
     <g class="catalog-scene">
-      <text class="catalog-title-outline">
+      <text class="catalog-title-outline catalog-title-outline-default">
         <textPath href="#catalogArc" startOffset="50%" text-anchor="middle">
           КАТАЛОГ В РАЗРАБОТКЕ
         </textPath>
       </text>
 
-      <text class="catalog-title">
+      <text class="catalog-title catalog-title-default">
         <textPath href="#catalogArc" startOffset="50%" text-anchor="middle">
           КАТАЛОГ В РАЗРАБОТКЕ
+        </textPath>
+      </text>
+
+      <text class="catalog-title-outline catalog-title-outline-section">
+        <textPath href="#catalogArc" startOffset="50%" text-anchor="middle">
+          СЕКЦИЯ В РАЗРАБОТКЕ
+        </textPath>
+      </text>
+
+      <text class="catalog-title catalog-title-section">
+        <textPath href="#catalogArc" startOffset="50%" text-anchor="middle">
+          СЕКЦИЯ В РАЗРАБОТКЕ
         </textPath>
       </text>
 

@@ -11,6 +11,7 @@ export default class extends Controller {
     event.preventDefault()
 
     const el = this.layerTarget
+    const mode = event.currentTarget.dataset.catalogAnimationMode
 
     const x = event.clientX
     const y = event.clientY
@@ -18,6 +19,7 @@ export default class extends Controller {
     el.style.left = `${x}px`
     el.style.top = `${y}px`
 
+    el.classList.toggle("is-section", mode === "section")
     el.classList.remove("is-active")
     void el.offsetWidth
 
