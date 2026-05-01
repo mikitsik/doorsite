@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title><%= content_for(:title) || "Дверной.бел" %></title>
+    <title><%= content_for(:title) || "Дверной.бел — двери в Молодечно" %></title>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8">
-    <meta name="description" content="<%= content_for(:meta_description) || "Каталог межкомнатных и входных дверей" %>">
+
+    <meta
+      name="description"
+      content="<%= content_for(:meta_description) || "Двери в Молодечно, Ошмянах, Островце и Минске. Межкомнатные и входные двери, консультация, доставка и установка." %>"
+    >
+
+    <link rel="canonical" href="<%= request.original_url.split('?').first %>">
+
+    <link rel="icon" href="<%= asset_path 'favicon.ico' %>" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= asset_path 'favicon-32.png' %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= asset_path 'favicon-16.png' %>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path 'apple-touch-icon.png' %>">
+    <link rel="manifest" href="/manifest.json">
+
+    <meta name="theme-color" content="#6f543a">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= content_for(:title) || "Дверной.бел — двери в Молодечно" %>">
+    <meta property="og:description" content="<%= content_for(:meta_description) || "Межкомнатные и входные двери. Консультация, доставка и установка." %>">
+    <meta property="og:url" content="<%= request.original_url.split('?').first %>">
+    <meta property="og:image" content="<%= asset_url 'og-image.jpg' %>">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= content_for(:title) || "Дверной.бел — двери в Молодечно" %>">
+    <meta name="twitter:description" content="<%= content_for(:meta_description) || "Межкомнатные и входные двери. Консультация, доставка и установка." %>">
+    <meta name="twitter:image" content="<%= asset_url 'og-image.jpg' %>">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= favicon_link_tag "favicon.ico" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
