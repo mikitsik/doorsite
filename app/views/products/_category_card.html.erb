@@ -10,13 +10,6 @@
 
     <div class="category-card__price-row">
       <div class="category-card__price"><%= item[:price] %></div>
-    </div>
-
-    <div class="category-card__actions">
-      <a href="<%= item[:href] %>" class="btn btn__card" data-action="click->catalog-animation#play">
-        Подробнее
-      </a>
-
       <%= render "shared/call_dropdown", dropdown_classes: "call-dropdown--right" %>
     </div>
   </div>
