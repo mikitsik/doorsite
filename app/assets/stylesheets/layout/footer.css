@@ -71,6 +71,14 @@
     letter-spacing: -0.02em;
     white-space: nowrap;
     text-decoration: none;
+
+    &-dark {
+      color: var(--color-primary-dark);
+    }
+
+    &-light {
+      color: var(--color-accent);
+    }
   }
 
   &__nav {
