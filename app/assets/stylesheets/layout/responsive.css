@@ -68,6 +68,12 @@
       }
     }
   }
+
+  .popular-categories {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
 }
 
 @media (max-width: 30rem) {   /* ~480 */
@@ -104,18 +110,12 @@
   .benefit {
     &__grid {
       grid-template-columns: 1fr;
-      /* gap: 0; */
     }
 
     &-item {
       &__text {
         font-size: 0.8125rem;
       }
-
-      /* &__icon {
-        width: 2.5rem;
-        height: 2.5rem;
-      } */
     }
   }
 }
@@ -138,6 +138,26 @@
   .hero {
     &__inner {
       min-height: 29.25rem;
+    }
+  }
+
+  .popular-categories {
+    &__grid {
+      gap: var(--space-2);
+    }
+  }
+
+  .category-card {
+    &__title {
+      font-size: 1rem;
+      padding: 0 var(--space-2);
+      min-height: 4rem;
+      display: flex;
+      align-items: center;
+    }
+
+    &__price-row {
+      padding: var(--space-2) var(--space-2) var(--space-2);
     }
   }
 }

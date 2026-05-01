@@ -5,3 +5,103 @@
     gap: var(--space-3);
   }
 }
+
+.category-card {
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fcf9f5 100%);
+  box-shadow: var(--shadow-card);
+  overflow: visible;
+  transform: translateY(0);
+  transition:
+    transform var(--motion-base) var(--ease-standard),
+    box-shadow var(--motion-base) var(--ease-standard),
+    border-color var(--motion-base) var(--ease-standard);
+  will-change: transform, box-shadow;
+
+  &__image-wrap {
+    display: block;
+    aspect-ratio: 0.78;
+    background: #f1ebe4;
+    border-top-left-radius: 0.625rem;
+    border-top-right-radius: 0.625rem;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 320ms var(--ease-standard);
+    will-change: transform;
+  }
+
+  &__title {
+    padding: 0 0.875rem;
+    color: #fff;
+    line-height: 1.2;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    min-height: 3.125rem;
+    display: flex;
+    align-items: center;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  &--1 &__title,
+  &--2 &__title {
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  }
+
+  &--3 &__title,
+  &--4 &__title {
+    background: linear-gradient(135deg, #d7ba93 0%, var(--color-accent) 100%);
+  }
+
+  &__price-row {
+    padding: var(--space-3) var(--space-3) var(--space-2);
+    background: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &__price {
+    color: var(--color-primary-dark);
+    font-size: 1rem;
+    line-height: 1.2;
+    font-weight: 700;
+    align-self: center;
+  }
+}
+
+.category-card:hover {
+  transform: translateY(-0.1875rem);
+  box-shadow: var(--shadow-card-hover);
+  border-color: #d8cdbf;
+}
+
+.category-card:hover .category-card__image {
+  transform: scale(1.016);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-card,
+  .category-card__image {
+    transition: none;
+  }
+
+  .category-card:hover {
+    transform: none;
+  }
+
+  .category-card:hover .category-card__image {
+    transform: none;
+  }
+}
+

@@ -3,14 +3,10 @@
     <%= image_tag item[:image_name], class: "category-card__image", loading: "lazy" %>
   </a>
 
-  <div class="category-card__body">
-    <div class="category-card__title-bar">
-      <h3 class="category-card__title"><%= item[:title] %></h3>
-    </div>
+  <h3 class="category-card__title"><%= item[:title] %></h3>
 
-    <div class="category-card__price-row">
-      <div class="category-card__price"><%= item[:price] %></div>
-      <%= render "shared/call_dropdown", dropdown_classes: "call-dropdown--right" %>
-    </div>
+  <div class="category-card__price-row">
+    <div class="category-card__price"><%= item[:price] %></div>
+    <%= render "shared/call_dropdown", dropdown_classes: "call-dropdown--right" %>
   </div>
 </article>
