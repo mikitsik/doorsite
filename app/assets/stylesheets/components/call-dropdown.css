@@ -11,10 +11,10 @@
 
   &__menu {
     display: none;
-    position: absolute;
-    top: calc(100% + 0.5rem);
+    position: fixed;
+    top: 0;
     left: 0;
-    z-index: 200;
+    z-index: 9999;
 
     width: max-content;
     min-width: min(15rem, calc(100vw - 2rem));
@@ -66,36 +66,12 @@
     color: var(--color-text);
     white-space: nowrap;
   }
-
-  &.is-open {
-    z-index: 120;
-
-    .call-dropdown__menu {
-      display: block;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-  }
-
-  &--right {
-    .call-dropdown__menu {
-      left: auto;
-      right: 0;
-    }
-  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .call-dropdown {
-    &__menu,
-    &__link {
-      transition: none;
-    }
-
-    &__link:hover {
-      transform: none;
-    }
-  }
+.call-dropdown__menu.is-open {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
 }
