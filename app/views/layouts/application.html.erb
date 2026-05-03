@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title><%= content_for(:title) || "Дверной.бел — двери в Молодечно" %></title>
+    <% site_name = "Дверной.бел" %>
+    <% default_title = "Двери в Молодечно — входные и межкомнатные | #{site_name}" %>
+    <% default_description = "Двери в Молодечно, Ошмянах, Островце и Минске. Межкомнатные и входные двери, рассрочка 0%, кредит, доставка и установка." %>
+
+    <% page_title = content_for?(:title) ? yield(:title) : default_title %>
+    <% page_description = content_for?(:meta_description) ? yield(:meta_description) : default_description %>
+    <% canonical_url = content_for?(:canonical_url) ? yield(:canonical_url) : "https://дверной.бел/" %>
+
+    <title><%= page_title %></title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8">
+    <meta name="description" content="<%= page_description %>">
+    <meta name="robots" content="index, follow">
 
-    <meta
-      name="description"
-      content="<%= content_for(:meta_description) || "Двери в Молодечно, Ошмянах, Островце и Минске. Межкомнатные и входные двери, консультация, доставка и установка." %>"
-    >
-
-    <link rel="canonical" href="<%= request.original_url.split('?').first %>">
-    <link rel="canonical" href="https://дверной.бел/">
-    <meta property="og:url" content="https://дверной.бел/">
+    <link rel="canonical" href="<%= canonical_url %>">
 
     <link rel="icon" href="<%= asset_path 'favicon.ico' %>" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="<%= asset_path 'favicon-32.png' %>">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= asset_path 'favicon-16.png' %>">
     <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path 'apple-touch-icon.png' %>">
     <link rel="manifest" href="/manifest.json">
-
     <meta name="theme-color" content="#6f543a">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="<%= content_for(:title) || "Дверной.бел — двери в Молодечно" %>">
-    <meta property="og:description" content="<%= content_for(:meta_description) || "Межкомнатные и входные двери. Консультация, доставка и установка." %>">
-    <meta property="og:url" content="<%= request.original_url.split('?').first %>">
+    <meta property="og:site_name" content="<%= site_name %>">
+    <meta property="og:title" content="<%= page_title %>">
+    <meta property="og:description" content="<%= page_description %>">
+    <meta property="og:url" content="<%= canonical_url %>">
     <meta property="og:image" content="<%= asset_url 'og-image.jpg' %>">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<%= content_for(:title) || "Дверной.бел — двери в Молодечно" %>">
-    <meta name="twitter:description" content="<%= content_for(:meta_description) || "Межкомнатные и входные двери. Консультация, доставка и установка." %>">
-    <meta name="twitter:image" content="<%= asset_url 'og-image.jpg' %>">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= page_title %>">
+    <meta name="twitter:description" content="<%= page_description %>">
+    <meta name="twitter:image" content="<%= asset_url 'og-image.jpg' %>">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
