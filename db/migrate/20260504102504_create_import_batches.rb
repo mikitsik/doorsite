@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class CreateImportBatches < ActiveRecord::Migration[8.1]
   def change
     create_table :import_batches do |t|
       t.references :product_source, null: false, foreign_key: true
 
-      t.string :status, null: false, default: "pending"
+      t.string :status, null: false, default: 'pending'
       t.integer :imported_count, null: false, default: 0
       t.integer :updated_count, null: false, default: 0
       t.integer :failed_count, null: false, default: 0

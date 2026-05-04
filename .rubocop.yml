@@ -1,8 +1,65 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+plugins:
+  - rubocop-rails
+  - rubocop-rspec
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "db/queue_schema.rb"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+    - "log/**/*"
+
+Rails/BulkChangeTable:
+  Exclude:
+    - "db/migrate/**/*"
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - "app/services/importers/**/*"
+
+RSpec/MultipleExpectations:
+  Max: 12
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "db/migrate/**/*"
+    - "config/routes.rb"
+
+Metrics/ClassLength:
+  Max: 220
+
+Metrics/MethodLength:
+  Max: 35
+  Exclude:
+    - "db/migrate/**/*"
+
+Metrics/AbcSize:
+  Max: 40
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - "db/migrate/**/*"
+    - "spec/**/*"
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/NestedGroups:
+  Max: 4
+
+Rails/FilePath:
+  Enabled: false

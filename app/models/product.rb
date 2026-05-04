@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
 class Product < ApplicationRecord
+  belongs_to :product_source, optional: true
+  belongs_to :import_batch, optional: true
+
   validates :slug, presence: true, uniqueness: true
   validates :title, presence: true
   validates :brand, presence: true
@@ -33,7 +38,7 @@ class Product < ApplicationRecord
     SEARCHABLE_FIELDS
       .map { |field| attributes[field] || attributes[field.to_s] }
       .compact
-      .join(" ")
+      .join(' ')
       .squish
       .downcase
   end

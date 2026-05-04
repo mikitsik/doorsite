@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProductSources < ActiveRecord::Migration[8.1]
   def change
     create_table :product_sources do |t|
@@ -5,7 +7,7 @@ class CreateProductSources < ActiveRecord::Migration[8.1]
       t.string :source_type, null: false
       t.string :url
       t.boolean :enabled, null: false, default: true
-      t.string :sync_strategy, null: false, default: "manual"
+      t.string :sync_strategy, null: false, default: 'manual'
       t.jsonb :settings, null: false, default: {}
       t.datetime :last_synced_at
 

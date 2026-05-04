@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddImportFieldsToProducts < ActiveRecord::Migration[8.1]
   def change
     add_column :products, :source_price, :decimal, precision: 10, scale: 2
@@ -10,10 +12,10 @@ class AddImportFieldsToProducts < ActiveRecord::Migration[8.1]
     add_reference :products, :product_source, foreign_key: true
     add_reference :products, :import_batch, foreign_key: true
 
-    add_index :products, [ :external_id, :product_source_id ],
-      unique: true,
-      where: "external_id IS NOT NULL",
-      name: "index_products_on_external_id_and_source"
+    add_index :products, %i[external_id product_source_id],
+              unique: true,
+              where: 'external_id IS NOT NULL',
+              name: 'index_products_on_external_id_and_source'
 
     add_index :products, :vendor_code
   end
