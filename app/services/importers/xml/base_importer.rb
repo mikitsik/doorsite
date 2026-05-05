@@ -13,7 +13,6 @@ module Importers
       end
 
       def call
-        batch = nil
         batch = create_batch
 
         batch.update!(status: 'processing', started_at: Time.current)
@@ -62,26 +61,45 @@ module Importers
 
         is_new_record = product.new_record?
 
-        product.assign_attributes(
-          slug: safe_slug(data[:title], product),
+        product.assign_attributes(product_attributes(data, product, batch))
+        product.save!
+
+        increment_counter(batch, is_new_record ? :imported_count : :updated_count)
+
+        product
+      end
+
+      def product_attributes(data, product, batch)
+        {
+          slug: safe_slug(data, product),
           title: data[:title],
           brand: data[:brand],
+          dealer: data[:dealer],
+          door_type: data[:door_type],
           category: data[:category],
+          collection: data[:collection],
           source_price: data[:source_price],
           price: data[:price],
+          old_price: data[:old_price],
+          discount: data[:discount],
           currency: data[:currency],
           image_url: data[:image_url],
           description: data[:description],
           source_url: data[:source_url],
           vendor_code: data[:vendor_code],
+          color: data[:color],
+          material: data[:material],
+          finish: data[:finish],
+          glass: data[:glass],
+          country_of_origin: data[:country_of_origin],
+          source_category: data[:source_category],
+          source_category_id: data[:source_category_id],
+          available: data[:available],
           raw_data: data[:raw_data],
+          searchable_text: data[:searchable_text],
           active: data[:active],
           import_batch: batch
-        )
-
-        product.save!
-
-        increment_counter(batch, is_new_record ? :imported_count : :updated_count)
+        }.compact
       end
 
       def increment_counter(batch, counter)
@@ -89,7 +107,7 @@ module Importers
       end
 
       def text(node, selector)
-        node.at_css(selector)&.text.to_s.squish
+        node.at_css(selector)&.text.to_s.squish.presence
       end
 
       def decimal(value)
@@ -108,21 +126,36 @@ module Importers
         end
       end
 
-      def safe_slug(base, product)
-        normalized_base = base.to_s.parameterize.presence || 'product'
-
+      def safe_slug(data, product)
         return product.slug if product.persisted? && product.slug.present?
 
-        candidate = normalized_base
-        return candidate unless Product.where(slug: candidate).where.not(id: product.id).exists?
+        base = data[:slug].presence || data[:title]
+        normalized_base = normalize_slug(base)
 
+        return normalized_base unless slug_exists?(normalized_base, product)
+
+        with_source = with_source_prefix(normalized_base)
+        return with_source unless slug_exists?(with_source, product)
+
+        with_suffix(with_source, data)
+      end
+
+      def normalize_slug(value)
+        value.to_s.parameterize.presence || 'product'
+      end
+
+      def with_source_prefix(slug)
         source_prefix = @product_source.name.to_s.parameterize.presence || 'source'
-        candidate = "#{source_prefix}-#{normalized_base}"
+        "#{source_prefix}-#{slug}"
+      end
 
-        return candidate unless Product.where(slug: candidate).where.not(id: product.id).exists?
+      def with_suffix(slug, data)
+        suffix = data[:external_id].to_s.parameterize.presence || SecureRandom.hex(4)
+        "#{slug}-#{suffix}"
+      end
 
-        suffix = product.external_id.to_s.parameterize.presence || SecureRandom.hex(4)
-        "#{source_prefix}-#{normalized_base}-#{suffix}"
+      def slug_exists?(slug, product)
+        Product.where(slug:).where.not(id: product.id).exists?
       end
 
       def each_item

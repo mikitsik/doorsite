@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_04_104357) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_05_122606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -47,19 +47,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_104357) do
 
   create_table "products", force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.boolean "available", default: true, null: false
     t.string "brand", null: false
     t.string "category", null: false
+    t.string "collection"
+    t.string "color"
+    t.string "country_of_origin"
     t.datetime "created_at", null: false
     t.string "currency", default: "BYN", null: false
+    t.string "dealer"
     t.text "description"
+    t.decimal "discount", precision: 5, scale: 2
+    t.string "door_type"
     t.string "external_id"
+    t.string "finish"
+    t.string "glass"
     t.string "image_url"
     t.bigint "import_batch_id"
+    t.string "material"
+    t.decimal "old_price", precision: 10, scale: 2
     t.decimal "price", precision: 10, scale: 2
     t.bigint "product_source_id"
     t.jsonb "raw_data", default: {}, null: false
     t.text "searchable_text"
     t.string "slug", null: false
+    t.string "source_category"
+    t.string "source_category_id"
     t.decimal "source_price", precision: 10, scale: 2
     t.string "source_url"
     t.string "title", null: false
@@ -68,11 +81,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_104357) do
     t.index ["active"], name: "index_products_on_active"
     t.index ["brand"], name: "index_products_on_brand"
     t.index ["category"], name: "index_products_on_category"
+    t.index ["dealer"], name: "index_products_on_dealer"
+    t.index ["door_type"], name: "index_products_on_door_type"
     t.index ["external_id", "product_source_id"], name: "index_products_on_external_id_and_source", unique: true, where: "(external_id IS NOT NULL)"
     t.index ["import_batch_id"], name: "index_products_on_import_batch_id"
     t.index ["product_source_id"], name: "index_products_on_product_source_id"
     t.index ["searchable_text"], name: "index_products_on_searchable_text_trgm", opclass: :gin_trgm_ops, using: :gin
     t.index ["slug"], name: "index_products_on_slug", unique: true
+    t.index ["source_category_id"], name: "index_products_on_source_category_id"
     t.index ["vendor_code"], name: "index_products_on_vendor_code"
   end
 

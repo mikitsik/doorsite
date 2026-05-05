@@ -51,7 +51,7 @@ RSpec.describe Importers::ImporterFactory do
 
         product = Product.find_by!(external_id: 'm-1', product_source: source)
         expect(product.title).to eq('Дверь Магна 1')
-        expect(product.category).to eq('Входные металлические двери')
+        expect(product.category).to eq('Входные двери')
         expect(product.price.to_s).to eq('744.9')
         expect(product.image_url).to eq('https://example.com/magna.jpg')
         expect(product.vendor_code).to eq('MG-1')
@@ -105,7 +105,7 @@ RSpec.describe Importers::ImporterFactory do
         product = Product.find_by!(external_id: '6507', product_source: source)
         expect(product.title).to eq('Ручка K.EST.Q52.MEGA')
         expect(product.brand).to eq('Elporta')
-        expect(product.category).to eq('Двери')
+        expect(product.category).to eq('Другое')
         expect(product.price.to_s).to eq('76.38')
         expect(product.image_url).to eq('https://example.com/original.jpg')
         expect(product.raw_data).to include('id' => '6507')
