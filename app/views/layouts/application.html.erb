@@ -46,13 +46,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body data-controller="catalog-animation">
+  <body>
     <%= render "layout/flash" %>
     <%= render "layout/header" %>
 
     <%= yield %>
 
     <%= render "layout/footer" %>
-    <%= render "shared/catalog_animation_layer" %>
   </body>
 </html>

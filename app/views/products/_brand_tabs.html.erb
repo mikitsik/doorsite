@@ -19,7 +19,7 @@
 
 <div class="brand-links">
   <% brand_links.each do |brand| %>
-    <a href="<%= brand[:href] %>" class="btn btn__brand <%= brand_modifier_map[brand[:class_name]] %>" data-action="click->catalog-animation#play">
+    <a href="<%= brand[:href] %>" class="btn btn__brand <%= brand_modifier_map[brand[:class_name]] %>">
       <% if (logo = brand_logos[brand[:class_name]]) %>
         <%= image_tag logo[:src], class: "brand-logo", alt: logo[:alt], loading: "lazy" %>
       <% else %>
