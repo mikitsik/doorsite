@@ -14,11 +14,22 @@
         Современные двери для квартиры, дома и офиса
       </h1>
 
-      <p class="hero__text">
-        Премиум и эконом класс<br>
-        Качественная установка<br>
-        Гарантия
-      </p>
+      <div class="hero__text">
+        <div class="hero__text-item">
+          <%= inline_svg_tag "icons/premium_eco.svg" %>
+          <span>Премиум и эконом класс</span>
+        </div>
+
+        <div class="hero__text-item">
+          <%= inline_svg_tag "icons/quality_inst.svg" %>
+          <span>Качественная установка</span>
+        </div>
+
+        <div class="hero__text-item">
+          <%= inline_svg_tag "icons/warranty.svg" %>
+          <span>Гарантия</span>
+        </div>
+      </div>
 
       <div class="hero__actions">
         <a href="#catalog" class="btn btn__hero-primary">Смотреть каталог</a>

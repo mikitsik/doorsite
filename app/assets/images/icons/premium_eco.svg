@@ -1,0 +1,6 @@
+<svg class="benefit-icon benefit-icon--premium" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M14 24L23 14H41L50 24L32 50L14 24Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M23 14L27 24L32 50L37 24L41 14" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M14 24H50" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M49 10L51 16L57 18L51 20L49 26L47 20L41 18L47 16L49 10Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>

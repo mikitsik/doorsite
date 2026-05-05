@@ -1,0 +1,7 @@
+<svg class="benefit-icon benefit-icon--installation" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M23 42L42 23" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="M40 13C45 11 51 12 55 16L47 24L40 17L48 9C45 8 42 8 40 9C35 11 32 16 33 22L16 39C13 42 13 47 16 50C19 53 24 53 27 50L44 33C50 34 55 31 57 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="22" cy="44" r="3" stroke="currentColor" stroke-width="3"/>
+  <path d="M14 18H28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M21 11V25" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+</svg>

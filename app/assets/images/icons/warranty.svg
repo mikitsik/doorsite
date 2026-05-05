@@ -1,0 +1,6 @@
+<svg class="benefit-icon benefit-icon--warranty" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M32 7L51 14V28C51 40 43 50 32 56C21 50 13 40 13 28V14L32 7Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M22 32L29 39L43 24" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 48L10 56L22 52" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M47 48L54 56L42 52" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+</svg>
