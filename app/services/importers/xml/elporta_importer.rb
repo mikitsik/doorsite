@@ -3,6 +3,8 @@
 module Importers
   module Xml
     class ElportaImporter < BaseImporter
+      include CatalogClassifier
+
       DEALER = 'Elporta'
       BRAND = 'Elporta'
 
@@ -134,23 +136,11 @@ module Importers
       end
 
       def map_door_type(source_category)
-        source = source_category.to_s.downcase
-
-        return 'interior' if source.match?(/межкомнат/)
-        return 'entrance' if source.match?(/вход/)
-
-        'unknown'
+        map_door_type_from(source_category)
       end
 
       def map_category(source_category)
-        case map_door_type(source_category)
-        when 'interior'
-          'Межкомнатные двери'
-        when 'entrance'
-          'Входные двери'
-        else
-          'Другое'
-        end
+        map_category_from(map_door_type(source_category))
       end
 
       def find_property_value(product, pattern)

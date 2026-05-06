@@ -68,6 +68,18 @@ RSpec.describe Importers::ImporterFactory do
         File.write(file_path, <<~XML)
           <?xml version="1.0" encoding="UTF-8"?>
           <catalog>
+            <categories>
+              <category>
+                <id>486</id>
+                <title>Ручки</title>
+              </category>
+            </categories>
+
+            <colors></colors>
+            <glasses></glasses>
+            <properties></properties>
+            <propertyValues></propertyValues>
+
             <products>
               <product>
                 <id>6507</id>
@@ -105,7 +117,8 @@ RSpec.describe Importers::ImporterFactory do
         product = Product.find_by!(external_id: '6507', product_source: source)
         expect(product.title).to eq('Ручка K.EST.Q52.MEGA')
         expect(product.brand).to eq('Elporta')
-        expect(product.category).to eq('Другое')
+        expect(product.door_type).to eq('hardware')
+        expect(product.category).to eq('Фурнитура')
         expect(product.price.to_s).to eq('76.38')
         expect(product.image_url).to eq('https://example.com/original.jpg')
         expect(product.raw_data).to include('id' => '6507')

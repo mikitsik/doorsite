@@ -18,7 +18,9 @@ class ProductsController < ApplicationController
                 .limit(@catalog_expanded ? 24 : 12)
   end
 
-  def show; end
+  def show
+    @product = Product.find_by(slug: params[:id]) || Product.find(params[:id])
+  end
 
   private
 
@@ -29,23 +31,6 @@ class ProductsController < ApplicationController
   end
 
   def filter_by_catalog_category(scope)
-    case @active_category
-    when "entrance"
-      scope.where(door_type: "entrance")
-    when "interior"
-      scope.where(door_type: "interior")
-    when "systems"
-      scope.where(
-        "source_category ILIKE :q OR category ILIKE :q OR searchable_text ILIKE :q",
-        q: "%раздвиж%"
-      )
-    when "hardware"
-      scope.where(
-        "source_category ILIKE :q OR category ILIKE :q OR searchable_text ILIKE :q",
-        q: "%фурнитур%"
-      )
-    else
-      scope
-    end
+    scope.where(door_type: @active_category)
   end
 end

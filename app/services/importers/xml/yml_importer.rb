@@ -3,6 +3,8 @@
 module Importers
   module Xml
     class YmlImporter < BaseImporter
+      include CatalogClassifier
+
       DEALER = 'Magna'
 
       private
@@ -84,26 +86,18 @@ module Importers
 
       def map_door_type(offer, source_category)
         source = [
-          param(offer, 'Назначение двери'),
           source_category,
+          param(offer, 'Назначение двери'),
+          param(offer, 'Тип'),
+          param(offer, 'Тип двери'),
           text(offer, 'name')
-        ].compact.join(' ').downcase
+        ].compact.join(' ')
 
-        return 'interior' if source.match?(/межкомнат/)
-        return 'entrance' if source.match?(/вход|металлическ|термо|улич/)
-
-        'unknown'
+        map_door_type_from(source)
       end
 
       def map_category(offer, source_category)
-        case map_door_type(offer, source_category)
-        when 'interior'
-          'Межкомнатные двери'
-        when 'entrance'
-          'Входные двери'
-        else
-          'Другое'
-        end
+        map_category_from(map_door_type(offer, source_category))
       end
 
       def normalize_color(value)
