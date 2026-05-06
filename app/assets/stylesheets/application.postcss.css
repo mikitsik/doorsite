@@ -14,8 +14,8 @@
 @import "./sections/hero.css";
 @import "./sections/benefits.css";
 @import "./sections/shared.css";
-@import "./sections/categories.css";
 @import "./sections/catalog.css";
+@import "./sections/brand_section.css";
 @import "./sections/steps.css";
 
 @import "./pages/product-show.css";

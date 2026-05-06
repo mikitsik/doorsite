@@ -1,6 +1,11 @@
-<section class="catalog-section" id="catalog">
+<section class="catalog-categories">
   <div class="container">
-    <h2>Каталог дверей</h2>
-    <%= render "products/brand_tabs" %>
+    <h2>Популярные категории</h2>
+
+    <div class="catalog-categories__grid">
+      <% featured_categories.each_with_index do |item, index| %>
+        <%= render "products/category_card", item:, index: %>
+      <% end %>
+    </div>
   </div>
 </section>

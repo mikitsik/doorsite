@@ -1,7 +1,5 @@
 <main>
-  <%= render "products/hero" %>
-  <%= render "products/benefits" %>
-  <%= render "products/popular_categories", featured_categories: @featured_categories %>
-  <%= render "products/catalog" %>
+  <%= render "products/catalog", featured_categories: @featured_categories %>
+  <%= render "products/brand_section" %>
   <%= render "shared/how_to_order" %>
 </main>

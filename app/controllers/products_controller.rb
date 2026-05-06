@@ -21,15 +21,15 @@ class ProductsController < ApplicationController
         href: '#catalog'
       },
       {
-        title: 'Установка входных дверей',
+        title: 'Дверные системы',
         price: 'от 980 BYN',
-        image_name: 'vhodnye-real.webp',
+        image_name: 'system.webp',
         href: '#catalog'
       },
       {
-        title: 'Установка межкомнатных дверей',
+        title: 'Фурнитура',
         price: 'от 380 BYN',
-        image_name: 'mezk-real.webp',
+        image_name: 'furniture.webp',
         href: '#catalog'
       }
     ]
