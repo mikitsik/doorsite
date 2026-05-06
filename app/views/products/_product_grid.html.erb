@@ -1,0 +1,47 @@
+<div class="product-grid">
+  <% products.each do |product| %>
+    <article class="product-card">
+      <a href="#" class="product-card__image-link">
+        <%= image_tag(
+          product.image_url.presence || "placeholder.webp",
+          class: "product-card__image",
+          alt: product.title
+        ) %>
+      </a>
+
+      <div class="product-card__content">
+        <div class="product-card__meta">
+          <% if product.brand.present? %>
+            <span class="product-card__brand">
+              <%= product.brand %>
+            </span>
+          <% end %>
+
+          <% if product.category.present? %>
+            <span class="product-card__category">
+              <%= product.category %>
+            </span>
+          <% end %>
+        </div>
+
+        <h3 class="product-card__title">
+          <%= product.title %>
+        </h3>
+
+        <div class="product-card__bottom">
+          <div class="product-card__price">
+            <% if product.price.present? %>
+              от <%= product.price.to_i %> BYN
+            <% else %>
+              Цена уточняется
+            <% end %>
+          </div>
+
+          <a href="#" class="btn btn--light">
+            Подробнее
+          </a>
+        </div>
+      </div>
+    </article>
+  <% end %>
+</div>

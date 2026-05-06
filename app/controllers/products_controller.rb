@@ -1,41 +1,51 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  def index
-    @products = Product.active
-    @products = @products.where('title ILIKE ?', "%#{params[:q]}%") if params[:q].present?
-    @products = @products.where(brand: params[:brand]) if params[:brand].present?
-    @products = @products.order(created_at: :desc)
+  CATALOG_CATEGORIES = %w[
+    entrance
+    interior
+    systems
+    hardware
+  ].freeze
 
-    @featured_categories = [
-      {
-        title: 'Входные двери',
-        price: 'от 420 BYN',
-        image_name: 'vhodnye-model.webp',
-        href: '#catalog'
-      },
-      {
-        title: 'Межкомнатные двери',
-        price: 'от 510 BYN',
-        image_name: 'mezk-model.webp',
-        href: '#catalog'
-      },
-      {
-        title: 'Дверные системы',
-        price: 'от 980 BYN',
-        image_name: 'system.webp',
-        href: '#catalog'
-      },
-      {
-        title: 'Фурнитура',
-        price: 'от 380 BYN',
-        image_name: 'furniture.webp',
-        href: '#catalog'
-      }
-    ]
+  DEFAULT_CATEGORY = 'entrance'
+
+  def index
+    @products = Product
+                .where(active: true)
+                .then { |scope| filter_by_catalog_category(scope) }
+                .order(created_at: :desc)
+                .limit(@catalog_expanded ? 24 : 12)
   end
 
-  def show
-    @product = Product.active.find_by!(slug: params[:id])
+  def show; end
+
+  private
+
+  def active_category
+    return params[:category] if CATALOG_CATEGORIES.include?(params[:category])
+
+    DEFAULT_CATEGORY
+  end
+
+  def filter_by_catalog_category(scope)
+    case @active_category
+    when "entrance"
+      scope.where(door_type: "entrance")
+    when "interior"
+      scope.where(door_type: "interior")
+    when "systems"
+      scope.where(
+        "source_category ILIKE :q OR category ILIKE :q OR searchable_text ILIKE :q",
+        q: "%раздвиж%"
+      )
+    when "hardware"
+      scope.where(
+        "source_category ILIKE :q OR category ILIKE :q OR searchable_text ILIKE :q",
+        q: "%фурнитур%"
+      )
+    else
+      scope
+    end
   end
 end

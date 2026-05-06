@@ -3,9 +3,46 @@
     <h2>Популярные категории</h2>
 
     <div class="catalog-categories__grid">
-      <% featured_categories.each_with_index do |item, index| %>
-        <%= render "products/category_card", item:, index: %>
-      <% end %>
+      <%= render "products/category_card",
+        active: @active_category == "entrance",
+        position: 1,
+        title: "Входные двери",
+        price: "от 420 BYN",
+        image_name: "vhodnye-model.webp",
+        href: root_path(category: "entrance", anchor: "catalog") %>
+
+      <%= render "products/category_card",
+        active: @active_category == "interior",
+        position: 2,
+        title: "Межкомнатные двери",
+        price: "от 510 BYN",
+        image_name: "mezk-model.webp",
+        href: root_path(category: "interior", anchor: "catalog") %>
+
+      <%= render "products/category_card",
+        active: @active_category == "systems",
+        position: 3,
+        title: "Дверные системы",
+        price: "от 980 BYN",
+        image_name: "system.webp",
+        href: root_path(category: "systems", anchor: "catalog") %>
+
+      <%= render "products/category_card",
+        active: @active_category == "hardware",
+        position: 4,
+        title: "Фурнитура",
+        price: "от 380 BYN",
+        image_name: "furniture.webp",
+        href: root_path(category: "hardware", anchor: "catalog") %>
     </div>
   </div>
 </section>
+
+<%= turbo_frame_tag "catalog" do %>
+  <section id="catalog" class="catalog-section">
+    <div class="container">
+      <%= render "products/product_grid", products: @products %>
+      <%= render "products/catalog_toggle" %>
+    </div>
+  </section>
+<% end %>

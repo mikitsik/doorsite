@@ -10,6 +10,7 @@
 @import "./components/forms.css";
 @import "./components/flash.css";
 @import "./components/call-dropdown.css";
+@import "./components/product-grid.css";
 
 @import "./sections/hero.css";
 @import "./sections/benefits.css";
