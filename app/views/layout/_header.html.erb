@@ -31,7 +31,7 @@
                       method: :get,
                       data: {
                         controller: "catalog-filter",
-                        turbo_frame: "catalog_frame"
+                        turbo_frame: "catalog"
                       },
                       class: "search-form header__search" do %>
           <%= hidden_field_tag :brand, params[:brand], data: { catalog_filter_target: "brandField" } %>

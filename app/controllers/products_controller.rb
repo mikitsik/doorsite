@@ -11,9 +11,12 @@ class ProductsController < ApplicationController
   DEFAULT_CATEGORY = 'entrance'
 
   def index
+    @active_category = active_category
+    @catalog_expanded = params[:catalog] == 'full'
+
     @products = Product
                 .where(active: true)
-                .then { |scope| filter_by_catalog_category(scope) }
+                .where(door_type: @active_category)
                 .order(created_at: :desc)
                 .limit(@catalog_expanded ? 24 : 12)
   end
@@ -28,9 +31,5 @@ class ProductsController < ApplicationController
     return params[:category] if CATALOG_CATEGORIES.include?(params[:category])
 
     DEFAULT_CATEGORY
-  end
-
-  def filter_by_catalog_category(scope)
-    scope.where(door_type: @active_category)
   end
 end
