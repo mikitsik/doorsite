@@ -1,30 +1,13 @@
-@media (max-width: 60rem) {  /* ~960px */
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-3);
-
-    .step-card:first-child {
-      grid-column: 2 / 4;
-    }
-
-    .step-card:nth-child(2) {
-      grid-column: 1 / 3;
-    }
-
-    .step-card:last-child {
-      grid-column: 3 / 5;
-    }
-  }
-}
-
 @media (max-width: 48rem) {      /* ~768px */
-
   .container {
     padding-inline: var(--space-4);
   }
 
   .hero {
+    &__inner {
+      background-position: 57% center;
+    }
+
     &__content {
       padding-top: 0;
     }
@@ -43,41 +26,6 @@
       width: 100%;
     }
   }
-
-  .catalog-categories {
-    &__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  .brand {
-    &-links {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    &-logo {
-      height: 2rem;
-    }
-  }
-
-  .steps-grid {
-    grid-template-columns: 1fr;
-
-    .step-card {
-
-      &:first-child {
-        grid-column: auto;
-      }
-
-      &:nth-child(2) {
-        grid-column: auto;
-      }
-
-      &:last-child {
-        grid-column: auto;
-      }
-    }
-  }
 }
 
 @media (max-width: 30rem) {   /* ~480 */
@@ -86,6 +34,10 @@
   }
 
   .hero {
+    &__inner {
+      background-position: 59% center;
+    }
+
     &__title {
       font-size: 2.5rem;
       letter-spacing: -0.04em;
@@ -94,25 +46,6 @@
     &__contact-row {
       flex-direction: column;
       align-items: flex-start;
-    }
-  }
-
-  .step-card {
-    padding: var(--space-3);
-    gap: 0;
-
-    &__number {
-      font-size: 3rem;
-    }
-  }
-
-  .catalog-categories,
-  .catalog-section,
-  .how-to-order {
-    padding-block: var(--space-6);
-
-    h2 {
-      font-size: 1.625rem;
     }
   }
 }
@@ -134,29 +67,5 @@
         margin-right: 0.625rem;
       }
     }
-  }
-
-  .catalog-categories {
-    &__grid {
-      gap: var(--space-2);
-    }
-  }
-
-  .category-card {
-    &__title {
-      font-size: 1rem;
-      padding: 0 var(--space-2);
-      min-height: 4rem;
-      display: flex;
-      align-items: center;
-    }
-
-    &__price-row {
-      padding: var(--space-2) var(--space-2) var(--space-2);
-    }
-  }
-
-  .brand-links {
-    gap: var(--space-2);
   }
 }
