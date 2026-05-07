@@ -3,9 +3,11 @@
 module Importers
   module Xml
     class YmlImporter < BaseImporter
-      include CatalogClassifier
+      include CatalogTreeClassifier
+      include CategoryPathNormalizer
 
       DEALER = 'Magna'
+      CATALOG_SOURCE = 'magna'
 
       private
 
@@ -15,25 +17,57 @@ module Importers
 
       def map_item(offer)
         category_id = text(offer, 'categoryId')
-        source_category = category_name(category_id)
+        category_path = category_path(category_id)
+        source_category = category_path.last&.dig(:title)
+        catalog_section = catalog_section_for(offer, category_path)
 
         source_price = decimal(text(offer, 'price'))
         old_price = decimal(text(offer, 'oldprice'))
 
+        base_product_data(offer, catalog_section).merge(
+          catalog_data(category_id, category_path, source_category, catalog_section),
+          price_data(source_price, old_price),
+          detail_data(offer),
+          import_data(offer, source_category)
+        )
+      end
+
+      def base_product_data(offer, catalog_section)
         {
           external_id: offer['id'],
           slug: build_slug(offer),
           title: text(offer, 'name'),
           brand: brand(offer),
           dealer: DEALER,
-          door_type: map_door_type(offer, source_category),
-          category: map_category(offer, source_category),
-          collection: offer['group_id'],
+          door_type: catalog_section,
+          category: catalog_section_title(catalog_section),
+          collection: offer['group_id']
+        }
+      end
+
+      def catalog_data(category_id, category_path, source_category, catalog_section)
+        {
+          catalog_source: CATALOG_SOURCE,
+          catalog_section: catalog_section,
+          source_category: source_category,
+          source_category_id: category_id,
+          source_category_title: source_category,
+          source_category_path: category_path
+        }
+      end
+
+      def price_data(source_price, old_price)
+        {
           source_price: source_price,
           price: source_price,
           old_price: old_price,
           discount: calculate_discount(source_price, old_price),
-          currency: text(offer, 'currencyId') || 'BYN',
+          currency: 'BYN'
+        }
+      end
+
+      def detail_data(offer)
+        {
           image_url: text(offer, 'picture'),
           source_url: text(offer, 'url'),
           description: clean_description(text(offer, 'description')),
@@ -42,9 +76,12 @@ module Importers
           material: material(offer),
           finish: finish(offer),
           glass: param(offer, 'Стекло'),
-          country_of_origin: param(offer, 'Страна производитель') || text(offer, 'country_of_origin'),
-          source_category: source_category,
-          source_category_id: category_id,
+          country_of_origin: param(offer, 'Страна производитель') || text(offer, 'country_of_origin')
+        }
+      end
+
+      def import_data(offer, source_category)
+        {
           available: offer['available'] == 'true',
           active: true,
           raw_data: raw_data(offer),
@@ -52,29 +89,71 @@ module Importers
         }
       end
 
+      def catalog_section_for(offer, category_path)
+        source = [
+          param(offer, 'Назначение двери'),
+          text(offer, 'name'),
+          category_path.pluck(:title).join(' ')
+        ].compact.join(' ').downcase
+
+        map_catalog_section(source)
+      end
+
       def categories
-        @categories ||= doc.css('category').to_h do |category|
-          [category['id'].to_s, category.text.to_s.squish]
+        @categories ||= doc.css('category').each_with_object({}) do |category, hash|
+          id = category['id'].to_s
+
+          hash[id] = {
+            id: id,
+            title: category.text.to_s.squish,
+            parent_id: category['parentId'].presence&.to_s,
+            position: 0
+          }
         end
       end
 
-      def category_name(category_id)
-        categories[category_id.to_s]
+      def category_path(category_id)
+        path = []
+        current = categories[category_id.to_s]
+
+        while current.present?
+          path.unshift(
+            id: current[:id],
+            title: current[:title],
+            position: current[:position]
+          )
+
+          current = categories[current[:parent_id].to_s]
+        end
+
+        normalized_category_path(path)
+      end
+
+      def build_slug(offer)
+        [
+          DEALER,
+          offer['id'],
+          text(offer, 'name')
+        ].compact.join(' ')
       end
 
       def brand(offer)
-        param(offer, 'Производитель') || text(offer, 'vendor') || DEALER
+        param(offer, 'Производитель') ||
+          text(offer, 'vendor') ||
+          DEALER
       end
 
       def color(offer)
         param(offer, 'Цвет (Межкомнатные двери)') ||
-          param(offer, 'Цвет') ||
           param(offer, 'Цвет снаружи') ||
-          param(offer, 'Цвет внутри')
+          param(offer, 'Цвет внутри') ||
+          param(offer, 'Цвет')
       end
 
       def material(offer)
         param(offer, 'Материал') ||
+          param(offer, 'Материал двери') ||
+          param(offer, 'Материал полотна') ||
           param(offer, 'Наполнение двери')
       end
 
@@ -84,77 +163,31 @@ module Importers
           param(offer, 'Отделка внутри')
       end
 
-      def map_door_type(offer, source_category)
-        source = [
-          source_category,
-          param(offer, 'Назначение двери'),
-          param(offer, 'Тип'),
-          param(offer, 'Тип двери'),
-          text(offer, 'name')
-        ].compact.join(' ')
-
-        map_door_type_from(source)
-      end
-
-      def map_category(offer, source_category)
-        map_category_from(map_door_type(offer, source_category))
+      def param(offer, name)
+        offer.css('param').find { |param_node| param_node['name'] == name }&.text.to_s.squish.presence
       end
 
       def normalize_color(value)
-        value.to_s
-             .squish
-             .sub(/\Aэмаль\s+/i, '')
-             .presence
+        value.to_s.squish.presence
       end
 
-      def param(offer, name)
-        offer.css('param').find { |node| node['name'] == name }&.text&.squish
-      end
+      def calculate_discount(source_price, old_price)
+        return nil if source_price.blank? || old_price.blank? || old_price.zero?
 
-      def text(node, selector)
-        node.at_css(selector)&.text&.squish.presence
-      end
-
-      def decimal(value)
-        return nil if value.blank?
-
-        BigDecimal(value.to_s.tr(',', '.'))
-      end
-
-      def calculate_discount(price, old_price)
-        return nil if price.blank? || old_price.blank? || old_price.zero?
-
-        (((old_price - price) / old_price) * 100).round(2)
+        (((old_price - source_price) / old_price) * 100).round
       end
 
       def clean_description(value)
-        ActionView::Base.full_sanitizer.sanitize(value.to_s).squish.presence
-      end
-
-      def build_slug(offer)
-        base = [
-          DEALER,
-          offer['group_id'],
-          offer['id'],
-          text(offer, 'name'),
-          color(offer)
-        ].compact.join(' ')
-
-        base.parameterize
+        value.to_s.gsub(/<[^>]*>/, ' ').squish.presence
       end
 
       def raw_data(offer)
         {
-          'id' => offer['id'],
-          'group_id' => offer['group_id'],
-          'available' => offer['available'],
-          'params' => offer.css('param').to_h { |param_node| [param_node['name'], param_node.text.squish] },
-          'category_id' => text(offer, 'categoryId'),
-          'category_name' => category_name(text(offer, 'categoryId')),
-          'vendor' => text(offer, 'vendor'),
-          'vendor_code' => text(offer, 'vendorCode'),
-          'url' => text(offer, 'url'),
-          'picture' => text(offer, 'picture')
+          attributes: offer.attributes.transform_values(&:value),
+          fields: children_to_hash(offer),
+          params: offer.css('param').to_h do |param_node|
+                    [param_node['name'], param_node.text.to_s.squish]
+                  end
         }
       end
 
@@ -162,15 +195,15 @@ module Importers
         [
           text(offer, 'name'),
           brand(offer),
-          DEALER,
           source_category,
-          map_category(offer, source_category),
+          param(offer, 'Производитель'),
+          param(offer, 'Назначение двери'),
+          param(offer, 'Стекло'),
           color(offer),
           material(offer),
           finish(offer),
-          param(offer, 'Стекло'),
           text(offer, 'vendorCode')
-        ].compact.join(' ').squish
+        ].compact.join(' ').downcase.squish
       end
     end
   end

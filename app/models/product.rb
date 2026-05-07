@@ -24,6 +24,7 @@ class Product < ApplicationRecord
 
   belongs_to :product_source, optional: true
   belongs_to :import_batch, optional: true
+  belongs_to :catalog_category, optional: true
 
   before_validation :normalize_door_type
   before_save :assign_searchable_text
@@ -47,6 +48,8 @@ class Product < ApplicationRecord
   scope :interior, -> { where(door_type: 'interior') }
   scope :systems, -> { where(door_type: 'systems') }
   scope :hardware, -> { where(door_type: 'hardware') }
+  scope :by_catalog_section, ->(section) { where(catalog_section: section) }
+  scope :ordered_by_catalog, -> { joins(:catalog_category).order('catalog_categories.position ASC', :brand, :title) }
 
   def to_param
     slug

@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_05_122606) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_131803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "catalog_categories", force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.integer "depth", default: 0, null: false
+    t.string "kind", null: false
+    t.bigint "parent_id"
+    t.jsonb "path", default: [], null: false
+    t.integer "position", default: 0, null: false
+    t.string "slug", null: false
+    t.string "source", null: false
+    t.string "source_category_id"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kind"], name: "index_catalog_categories_on_kind"
+    t.index ["parent_id"], name: "index_catalog_categories_on_parent_id"
+    t.index ["path"], name: "index_catalog_categories_on_path", using: :gin
+    t.index ["position"], name: "index_catalog_categories_on_position"
+    t.index ["slug"], name: "index_catalog_categories_on_slug", unique: true
+    t.index ["source", "source_category_id"], name: "index_catalog_categories_on_source_and_source_category_id", unique: true
+    t.index ["source"], name: "index_catalog_categories_on_source"
+    t.index ["source_category_id"], name: "index_catalog_categories_on_source_category_id"
+  end
 
   create_table "import_batches", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -49,6 +72,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_122606) do
     t.boolean "active", default: true, null: false
     t.boolean "available", default: true, null: false
     t.string "brand", null: false
+    t.bigint "catalog_category_id"
+    t.string "catalog_section"
     t.string "category", null: false
     t.string "collection"
     t.string "color"
@@ -73,6 +98,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_122606) do
     t.string "slug", null: false
     t.string "source_category"
     t.string "source_category_id"
+    t.jsonb "source_category_path", default: [], null: false
+    t.string "source_category_title"
     t.decimal "source_price", precision: 10, scale: 2
     t.string "source_url"
     t.string "title", null: false
@@ -80,6 +107,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_122606) do
     t.string "vendor_code"
     t.index ["active"], name: "index_products_on_active"
     t.index ["brand"], name: "index_products_on_brand"
+    t.index ["catalog_category_id"], name: "index_products_on_catalog_category_id"
+    t.index ["catalog_section"], name: "index_products_on_catalog_section"
     t.index ["category"], name: "index_products_on_category"
     t.index ["dealer"], name: "index_products_on_dealer"
     t.index ["door_type"], name: "index_products_on_door_type"
@@ -89,10 +118,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_122606) do
     t.index ["searchable_text"], name: "index_products_on_searchable_text_trgm", opclass: :gin_trgm_ops, using: :gin
     t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["source_category_id"], name: "index_products_on_source_category_id"
+    t.index ["source_category_path"], name: "index_products_on_source_category_path", using: :gin
     t.index ["vendor_code"], name: "index_products_on_vendor_code"
   end
 
+  add_foreign_key "catalog_categories", "catalog_categories", column: "parent_id"
   add_foreign_key "import_batches", "product_sources"
+  add_foreign_key "products", "catalog_categories"
   add_foreign_key "products", "import_batches"
   add_foreign_key "products", "product_sources"
 end

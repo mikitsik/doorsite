@@ -60,8 +60,9 @@ module Importers
         )
 
         is_new_record = product.new_record?
+        catalog_category = find_or_create_catalog_category(data)
 
-        product.assign_attributes(product_attributes(data, product, batch))
+        product.assign_attributes(product_attributes(data, product, batch, catalog_category))
         product.save!
 
         increment_counter(batch, is_new_record ? :imported_count : :updated_count)
@@ -69,7 +70,7 @@ module Importers
         product
       end
 
-      def product_attributes(data, product, batch)
+      def product_attributes(data, product, batch, catalog_category)
         {
           slug: safe_slug(data, product),
           title: data[:title],
@@ -78,6 +79,8 @@ module Importers
           door_type: data[:door_type],
           category: data[:category],
           collection: data[:collection],
+          catalog_category: catalog_category,
+          catalog_section: data[:catalog_section],
           source_price: data[:source_price],
           price: data[:price],
           old_price: data[:old_price],
@@ -94,12 +97,65 @@ module Importers
           country_of_origin: data[:country_of_origin],
           source_category: data[:source_category],
           source_category_id: data[:source_category_id],
+          source_category_title: data[:source_category_title],
+          source_category_path: data[:source_category_path],
           available: data[:available],
           raw_data: data[:raw_data],
           searchable_text: data[:searchable_text],
           active: data[:active],
           import_batch: batch
         }.compact
+      end
+
+      def find_or_create_catalog_category(data)
+        path = data[:source_category_path]
+        return nil if path.blank?
+
+        parent = nil
+
+        path.each_with_index do |node, index|
+          parent = upsert_catalog_category(
+            node: node,
+            parent: parent,
+            depth: index,
+            full_path: path.first(index + 1),
+            data: data
+          )
+        end
+
+        parent
+      end
+
+      def upsert_catalog_category(node:, parent:, depth:, full_path:, data:)
+        source = data[:catalog_source]
+        source_category_id = node[:id].to_s
+
+        category = CatalogCategory.find_or_initialize_by(
+          source: source,
+          source_category_id: source_category_id
+        )
+
+        category.assign_attributes(
+          slug: catalog_category_slug(source, source_category_id, node[:title]),
+          title: node[:title],
+          kind: data[:catalog_section],
+          parent: parent,
+          position: node[:position].presence || 0,
+          depth: depth,
+          path: full_path,
+          active: true
+        )
+
+        category.save!
+        category
+      end
+
+      def catalog_category_slug(source, source_category_id, title)
+        [
+          source,
+          source_category_id,
+          title
+        ].compact.join(' ').parameterize
       end
 
       def increment_counter(batch, counter)
