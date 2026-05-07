@@ -120,7 +120,10 @@ RSpec.describe Importers::ImporterFactory do
         expect(product.door_type).to eq('hardware')
         expect(product.category).to eq('Фурнитура')
         expect(product.price.to_s).to eq('76.38')
-        expect(product.image_url).to eq('https://example.com/original.jpg')
+        expect(product.image_url).to eq('https://example.com/medium.jpg')
+        expect(product.image_thumbnail_url).to eq('https://example.com/thumb.jpg')
+        expect(product.image_medium_url).to eq('https://example.com/medium.jpg')
+        expect(product.image_original_url).to eq('https://example.com/original.jpg')
         expect(product.raw_data).to include('id' => '6507')
       end
     end

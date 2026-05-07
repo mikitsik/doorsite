@@ -2,8 +2,11 @@
 
 require 'rails_helper'
 
-# rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
 RSpec.describe Importers::Xml::ElportaImporter do
+  subject(:importer) do
+    described_class.new(product_source:, file_path:)
+  end
+
   let(:product_source) do
     ProductSource.create!(
       name: 'Elporta XML',
@@ -144,7 +147,10 @@ RSpec.describe Importers::Xml::ElportaImporter do
       expect(product.finish).to eq('Эко Шпон')
       expect(product.glass).to eq('Без стекла')
       expect(product.country_of_origin).to eq('Беларусь')
-      expect(product.image_url).to eq('https://example.com/original.jpg')
+      expect(product.image_url).to eq('https://example.com/medium.jpg')
+      expect(product.image_thumbnail_url).to eq('https://example.com/thumb.jpg')
+      expect(product.image_medium_url).to eq('https://example.com/medium.jpg')
+      expect(product.image_original_url).to eq('https://example.com/original.jpg')
       expect(product.source_url).to eq('https://elporta.by/catalog/legno-39-milk-oak')
       expect(product.available).to be(true)
       expect(product.active).to be(true)
@@ -170,6 +176,29 @@ RSpec.describe Importers::Xml::ElportaImporter do
       expect(product.import_batch).to be_present
       expect(product_source.reload.last_synced_at).to be_present
     end
+
+    it 'sets catalog section fields for imported products' do
+      importer.call
+
+      product = Product.find_by!(dealer: 'Elporta')
+
+      expect(product.catalog_section).to be_present
+      expect(product.catalog_section).to eq('entrance').or eq('interior').or eq('systems').or eq('hardware')
+      expect(product.category).to be_present
+      expect(product.source_category_id).to be_present
+      expect(product.source_category_path).to be_present
+    end
+
+    it 'sets catalog_section for Elporta product' do
+      importer.call
+
+      product = Product.find_by!(dealer: 'Elporta')
+
+      expect(product.catalog_section).to eq('interior')
+      expect(product.door_type).to eq('interior')
+      expect(product.category).to eq('Межкомнатные двери')
+      expect(product.source_category_id).to be_present
+      expect(product.source_category_path).to be_present
+    end
   end
-  # rubocop:enable RSpec/ExampleLength, RSpec/MultipleExpectations
 end

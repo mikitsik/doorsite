@@ -3,6 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Importers::Xml::YmlImporter do
+  subject(:importer) do
+    described_class.new(product_source:, file_path:)
+  end
+
   let(:product_source) do
     ProductSource.create!(
       name: 'Magna XML',
@@ -84,5 +88,16 @@ RSpec.describe Importers::Xml::YmlImporter do
     expect(batch.imported_count).to eq(1)
     expect(batch.updated_count).to eq(0)
     expect(batch.failed_count).to eq(0)
+  end
+
+  it 'sets catalog section fields for Magna products' do
+    importer.call
+
+    products = Product.where(dealer: 'Magna')
+
+    expect(products).to be_exists
+    expect(products.where(catalog_section: nil)).to be_empty
+    expect(products.where(category: [nil, ''])).to be_empty
+    expect(products.where(source_category_id: [nil, ''])).to be_empty
   end
 end

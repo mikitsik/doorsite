@@ -27,6 +27,7 @@ module Importers
         base_product_data(offer, catalog_section).merge(
           catalog_data(category_id, category_path, source_category, catalog_section),
           price_data(source_price, old_price),
+          image_data(offer),
           detail_data(offer),
           import_data(offer, source_category)
         )
@@ -66,9 +67,19 @@ module Importers
         }
       end
 
+      def image_data(offer)
+        image = image_url(offer)
+
+        {
+          image_url: image,
+          image_thumbnail_url: image,
+          image_medium_url: image,
+          image_original_url: image
+        }
+      end
+
       def detail_data(offer)
         {
-          image_url: text(offer, 'picture'),
           source_url: text(offer, 'url'),
           description: clean_description(text(offer, 'description')),
           vendor_code: text(offer, 'vendorCode'),
@@ -163,6 +174,10 @@ module Importers
           param(offer, 'Отделка внутри')
       end
 
+      def image_url(offer)
+        text(offer, 'picture')
+      end
+
       def param(offer, name)
         offer.css('param').find { |param_node| param_node['name'] == name }&.text.to_s.squish.presence
       end
@@ -182,12 +197,18 @@ module Importers
       end
 
       def raw_data(offer)
+        image = image_url(offer)
+
         {
           attributes: offer.attributes.transform_values(&:value),
           fields: children_to_hash(offer),
           params: offer.css('param').to_h do |param_node|
                     [param_node['name'], param_node.text.to_s.squish]
-                  end
+                  end,
+          image_url: image,
+          image_thumbnail_url: image,
+          image_medium_url: image,
+          image_original_url: image
         }
       end
 

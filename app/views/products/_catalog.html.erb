@@ -1,0 +1,109 @@
+<main>
+  <section class="catalog" id="catalog">
+    <div class="container catalog__inner">
+      <aside class="catalog__sidebar" aria-label="Категории каталога">
+        <h2 class="catalog__sidebar-title">Каталог</h2>
+
+        <details class="catalog-menu" <%= "open" if @active_category == "entrance" %>>
+          <summary class="catalog-menu__summary">
+            Входные двери
+          </summary>
+
+          <nav class="catalog-menu__list">
+            <%= link_to "Все", root_path(category: "entrance", filter: "all", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_category == 'entrance' && @active_filter == 'all'}" %>
+            <%= link_to "Уличные", root_path(category: "entrance", filter: "street", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'street'}" %>
+            <%= link_to "С терморазрывом", root_path(category: "entrance", filter: "thermal", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'thermal'}" %>
+            <%= link_to "Квартирные", root_path(category: "entrance", filter: "apartment", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'apartment'}" %>
+            <%= link_to "Со стеклом", root_path(category: "entrance", filter: "glass", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'glass'}" %>
+            <%= link_to "Металл-МДФ", root_path(category: "entrance", filter: "metal_mdf", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'metal_mdf'}" %>
+            <%= link_to "МДФ-МДФ", root_path(category: "entrance", filter: "mdf_mdf", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'mdf_mdf'}" %>
+          </nav>
+        </details>
+
+        <details class="catalog-menu" <%= "open" if @active_category == "interior" %>>
+          <summary class="catalog-menu__summary">
+            Межкомнатные двери
+          </summary>
+
+          <nav class="catalog-menu__list">
+            <%= link_to "Все", root_path(category: "interior", filter: "all", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_category == 'interior' && @active_filter == 'all'}" %>
+            <%= link_to "Экошпон", root_path(category: "interior", filter: "eco_veneer", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'eco_veneer'}" %>
+            <%= link_to "Эмаль", root_path(category: "interior", filter: "enamel", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'enamel'}" %>
+            <%= link_to "ПВХ", root_path(category: "interior", filter: "pvc", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'pvc'}" %>
+            <%= link_to "Массив", root_path(category: "interior", filter: "massive", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'massive'}" %>
+            <%= link_to "Шпон", root_path(category: "interior", filter: "veneer", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'veneer'}" %>
+            <%= link_to "CPL", root_path(category: "interior", filter: "cpl", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'cpl'}" %>
+            <%= link_to "Полипропилен", root_path(category: "interior", filter: "polypropylene", anchor: "catalog"), class: "catalog-menu__link #{'is-active' if @active_filter == 'polypropylene'}" %>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="catalog__content">
+        <div class="catalog__head">
+          <div>
+            <p class="catalog__eyebrow">Каталог дверей</p>
+            <h2 class="catalog__title">
+              <%= @active_category == "interior" ? "Межкомнатные двери" : "Входные двери" %>
+            </h2>
+          </div>
+
+          <div class="catalog__count">
+            <%= @total_products %> товаров
+          </div>
+        </div>
+
+        <div class="catalog-grid">
+          <% @products.each do |product| %>
+            <article class="product-card">
+              <%= link_to product_path(product), class: "product-card__image-wrap" do %>
+                <% if product.image_url.present? %>
+                  <%= image_tag product.image_url, class: "product-card__image", loading: "lazy", alt: product.title %>
+                <% else %>
+                  <div class="product-card__placeholder">Нет фото</div>
+                <% end %>
+              <% end %>
+
+              <div class="product-card__body">
+                <div class="product-card__meta">
+                  <%= product.brand %>
+                </div>
+
+                <h3 class="product-card__title">
+                  <%= link_to product.title, product_path(product) %>
+                </h3>
+
+                <div class="product-card__bottom">
+                  <div class="product-card__price">
+                    <% if product.price.present? %>
+                      от <%= number_to_currency(product.price, unit: "BYN", format: "%n %u") %>
+                    <% else %>
+                      Цена по запросу
+                    <% end %>
+                  </div>
+
+                  <%= render "shared/call_dropdown" %>
+                </div>
+              </div>
+            </article>
+          <% end %>
+        </div>
+
+        <% if @total_pages > 1 %>
+          <nav class="catalog-pagination" aria-label="Пагинация каталога">
+            <% if @page > 1 %>
+              <%= link_to "← Назад", root_path(category: @active_category, filter: @active_filter, page: @page - 1, anchor: "catalog"), class: "catalog-pagination__link" %>
+            <% end %>
+
+            <% (1..@total_pages).each do |page| %>
+              <%= link_to page, root_path(category: @active_category, filter: @active_filter, page: page, anchor: "catalog"), class: "catalog-pagination__link #{'is-active' if page == @page}" %>
+            <% end %>
+
+            <% if @page < @total_pages %>
+              <%= link_to "Далее →", root_path(category: @active_category, filter: @active_filter, page: @page + 1, anchor: "catalog"), class: "catalog-pagination__link" %>
+            <% end %>
+          </nav>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</main>

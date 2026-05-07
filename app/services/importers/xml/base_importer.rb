@@ -54,6 +54,8 @@ module Importers
       end
 
       def import_product(data, batch)
+        validate_mapped_data!(data)
+
         product = Product.find_or_initialize_by(
           external_id: data[:external_id],
           product_source: @product_source
@@ -68,6 +70,23 @@ module Importers
         increment_counter(batch, is_new_record ? :imported_count : :updated_count)
 
         product
+      end
+
+      def validate_mapped_data!(data)
+        required_keys = %i[
+          external_id
+          title
+          catalog_section
+          category
+          source_category_id
+          source_category_path
+        ]
+
+        missing_keys = required_keys.select { |key| data[key].blank? }
+
+        return if missing_keys.blank?
+
+        raise ArgumentError, "Missing mapped product fields: #{missing_keys.join(', ')}"
       end
 
       def product_attributes(data, product, batch, catalog_category)
@@ -87,6 +106,9 @@ module Importers
           discount: data[:discount],
           currency: data[:currency],
           image_url: data[:image_url],
+          image_thumbnail_url: data[:image_thumbnail_url],
+          image_medium_url: data[:image_medium_url],
+          image_original_url: data[:image_original_url],
           description: data[:description],
           source_url: data[:source_url],
           vendor_code: data[:vendor_code],

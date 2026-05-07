@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_131803) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_154906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -87,6 +87,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_131803) do
     t.string "external_id"
     t.string "finish"
     t.string "glass"
+    t.string "image_medium_url"
+    t.string "image_original_url"
+    t.string "image_thumbnail_url"
     t.string "image_url"
     t.bigint "import_batch_id"
     t.string "material"

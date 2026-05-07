@@ -6,10 +6,12 @@ module Importers
       private
 
       def map_catalog_section(source)
-        return 'entrance' if entrance?(source)
-        return 'interior' if interior?(source)
-        return 'hardware' if hardware?(source)
-        return 'systems' if systems?(source)
+        text = source.to_s.downcase
+
+        return 'hardware' if hardware?(text)
+        return 'systems' if systems?(text)
+        return 'entrance' if entrance?(text)
+        return 'interior' if interior?(text)
 
         'systems'
       end
@@ -20,10 +22,45 @@ module Importers
           'interior' => 'Межкомнатные двери',
           'systems' => 'Дверные системы',
           'hardware' => 'Фурнитура'
-        }.fetch(section, 'Другое')
+        }.fetch(section, 'Дверные системы')
       end
 
-      def entrance?(source)
+      def hardware?(text)
+        [
+          'фурнитур',
+          'ручк',
+          'замок',
+          'замки',
+          'защелк',
+          'защёлк',
+          'петл',
+          'цилиндр',
+          'фиксатор',
+          'накладк',
+          'шпингалет',
+          'засов',
+          'упор',
+          'ограничитель',
+          'глазок',
+          'порог',
+          'сердцевин',
+          'ролик',
+          'направляющ',
+          'ручки купе'
+        ].any? { |keyword| text.include?(keyword) }
+      end
+
+      def systems?(text)
+        [
+          'раздвиж',
+          'складн',
+          'скрыт',
+          'портал',
+          'дверные системы'
+        ].any? { |keyword| text.include?(keyword) }
+      end
+
+      def entrance?(text)
         %w[
           входн
           металлическ
@@ -35,53 +72,37 @@ module Importers
           магнабел
           металл-мдф
           мдф-мдф
-        ].any? { |keyword| source.include?(keyword) }
+        ].any? { |keyword| text.include?(keyword) }
       end
 
-      def interior?(source)
+      def interior?(text)
         [
           'межкомнат',
           'эко шпон',
           'экошпон',
           'эмаль',
-          'пвх',
+          'полипропилен',
+          'эксимер',
+          'винил',
+          'массив',
+          'шпон',
+          'флекс',
+          'cpl',
+          'эмалит',
           'ламинац',
+          'porta x',
+          'porta z',
+          'classico',
+          'neoclassico',
+          'vetro',
+          'simple',
+          'bravo',
+          'moda',
+          'prima',
+          'legno',
           'olovi',
-          'оливи',
-          'амати',
-          'бона',
-          'флэш',
-          'стандарт',
-          'перфето',
-          'финские'
-        ].any? { |keyword| source.include?(keyword) }
-      end
-
-      def systems?(source)
-        %w[
-          раздвиж
-          складн
-          скрыт
-          портал
-          система
-        ].any? { |keyword| source.include?(keyword) }
-      end
-
-      def hardware?(source)
-        %w[
-          фурнитур
-          ручк
-          замк
-          защёлк
-          защелк
-          петл
-          цилиндр
-          накладк
-          фиксатор
-          шпингалет
-          упор
-          глазк
-        ].any? { |keyword| source.include?(keyword) }
+          'оливи'
+        ].any? { |keyword| text.include?(keyword) }
       end
     end
   end

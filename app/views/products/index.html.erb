@@ -1,2 +1,3 @@
-<main>
-</main>
+<%= turbo_frame_tag "catalog" do %>
+  <%= render "products/catalog", products: @products %>
+<% end %>

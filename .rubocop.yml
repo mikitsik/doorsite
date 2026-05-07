@@ -25,6 +25,9 @@ Rails/SkipsModelValidations:
 
 RSpec/MultipleExpectations:
   Max: 12
+  Exclude:
+    - "spec/services/importers/xml/*_importer_spec.rb"
+    - "spec/services/importers/importer_factory_xml_spec.rb"
 
 Style/Documentation:
   Enabled: false
@@ -37,9 +40,11 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
   Max: 220
+  Exclude:
+    - "app/services/importers/xml/*_importer.rb"
 
 Metrics/MethodLength:
-  Max: 35
+  Max: 40
   Exclude:
     - "db/migrate/**/*"
 
@@ -57,6 +62,9 @@ Layout/LineLength:
 
 RSpec/ExampleLength:
   Max: 20
+  Exclude:
+    - "spec/services/importers/xml/*_importer_spec.rb"
+    - "spec/services/importers/importer_factory_xml_spec.rb"
 
 RSpec/NestedGroups:
   Max: 4

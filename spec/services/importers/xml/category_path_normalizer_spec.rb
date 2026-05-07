@@ -23,7 +23,7 @@ RSpec.describe Importers::Xml::CategoryPathNormalizer do
 
     result = normalizer.call(path)
 
-    expect(result.first).to include(id: 'entrance-root', title: 'Входные двери')
+    expect(result.first).to include(source_category_id: 'entrance-root', title: 'Входные двери')
     expect(result.last).to include(id: '853')
   end
 
@@ -34,7 +34,7 @@ RSpec.describe Importers::Xml::CategoryPathNormalizer do
 
     result = normalizer.call(path)
 
-    expect(result.first).to include(id: 'interior-root', title: 'Межкомнатные двери')
+    expect(result.first).to include(source_category_id: 'interior-root', title: 'Межкомнатные двери')
   end
 
   it 'does not duplicate existing root' do

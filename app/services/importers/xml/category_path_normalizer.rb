@@ -5,95 +5,51 @@ module Importers
     module CategoryPathNormalizer
       private
 
-      def normalized_category_path(path)
-        return path if path.blank?
+      def normalized_category_path(path, catalog_section = nil)
+        section = catalog_section.presence || inferred_catalog_section(path)
 
-        titles = path_titles(path)
+        root = {
+          source: 'internal',
+          source_category_id: "#{section}-root",
+          title: normalized_root_title(section),
+          position: nil
+        }
 
-        return normalized_path(path, 'entrance-root', 'Входные двери') if entrance_path?(titles)
-        return normalized_path(path, 'interior-root', 'Межкомнатные двери') if interior_path?(titles)
-        return normalized_path(path, 'systems-root', 'Дверные системы') if systems_path?(titles)
-        return normalized_path(path, 'hardware-root', 'Фурнитура') if hardware_path?(titles)
+        tail = Array(path).reject do |item|
+          item[:title].to_s == root[:title]
+        end
 
-        path
+        [root, *tail]
       end
 
-      def path_titles(path)
-        path.pluck(:title).join(' ').downcase
+      def category_path_text(path)
+        Array(path).pluck(:title).compact.join(' ').squish
       end
 
-      def entrance_path?(titles)
-        %w[
-          входн
-          металлическ
-          терморазрыв
-          термо
-          уличн
-          квартирн
-          промет
-          магнабел
-          металл-мдф
-          мдф-мдф
-        ].any? { |keyword| titles.include?(keyword) }
+      def inferred_catalog_section(path)
+        text = category_path_text(path)
+
+        return map_catalog_section(text) if respond_to?(:map_catalog_section, true)
+
+        downcased = text.downcase
+
+        return 'hardware' if downcased.match?(/фурнитур|ручк|замок|защёл|защел|петл|цилиндр/)
+        return 'systems' if downcased.match?(/раздвиж|складн|скрыт|портал/)
+        return 'entrance' if downcased.match?(/входн|металлическ|термо|уличн|квартирн/)
+        return 'interior' if downcased.match?(/межкомнат|экошпон|эко шпон|эмаль|шпон|массив/)
+
+        'systems'
       end
 
-      def interior_path?(titles)
-        [
-          'межкомнат',
-          'эко шпон',
-          'экошпон',
-          'эмаль',
-          'пвх',
-          'ламинац',
-          'olovi',
-          'оливи',
-          'амати',
-          'бона',
-          'флэш',
-          'стандарт',
-          'перфето',
-          'финские'
-        ].any? { |keyword| titles.include?(keyword) }
-      end
+      def normalized_root_title(section)
+        return catalog_section_title(section) if respond_to?(:catalog_section_title, true)
 
-      def systems_path?(titles)
-        %w[
-          раздвиж
-          складн
-          скрыт
-          портал
-          система
-        ].any? { |keyword| titles.include?(keyword) }
-      end
-
-      def hardware_path?(titles)
-        %w[
-          фурнитур
-          ручк
-          замк
-          защёлк
-          защелк
-          петл
-          цилиндр
-          накладк
-          фиксатор
-          шпингалет
-          упор
-          глазк
-        ].any? { |keyword| titles.include?(keyword) }
-      end
-
-      def normalized_path(path, root_id, root_title)
-        return path if path.first[:title] == root_title
-
-        [
-          {
-            id: root_id,
-            title: root_title,
-            position: 0
-          },
-          *path
-        ]
+        {
+          'entrance' => 'Входные двери',
+          'interior' => 'Межкомнатные двери',
+          'systems' => 'Дверные системы',
+          'hardware' => 'Фурнитура'
+        }.fetch(section, 'Дверные системы')
       end
     end
   end

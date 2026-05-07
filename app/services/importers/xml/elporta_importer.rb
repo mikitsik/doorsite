@@ -3,7 +3,8 @@
 module Importers
   module Xml
     class ElportaImporter < BaseImporter
-      include CatalogClassifier
+      include CatalogTreeClassifier
+      include CategoryPathNormalizer
 
       DEALER = 'Elporta'
       BRAND = 'Elporta'
@@ -16,26 +17,65 @@ module Importers
 
       def map_item(product)
         category_id = text(product, 'category_id')
-        source_category = category_name(category_id)
+        raw_category_path = category_path(category_id)
+        catalog_section = catalog_section_for(product, raw_category_path)
+        normalized_path = normalized_category_path(raw_category_path, catalog_section)
 
-        source_price = decimal(text(product, 'price'))
-        old_price = decimal(text(product, 'old_price'))
+        base_product_data(product, catalog_section).merge(
+          catalog_data(category_id, normalized_path, catalog_section),
+          price_data(product),
+          product_details(product),
+          import_data(product, normalized_path, catalog_section)
+        )
+      end
 
+      def base_product_data(product, catalog_section)
         {
           external_id: text(product, 'id'),
           slug: build_slug(product),
           title: text(product, 'title'),
           brand: BRAND,
           dealer: DEALER,
-          door_type: map_door_type(source_category),
-          category: map_category(source_category),
-          collection: source_category,
+          door_type: catalog_section,
+          catalog_section: catalog_section,
+          category: catalog_section_title(catalog_section),
+          collection: category_name(text(product, 'category_id'))
+        }
+      end
+
+      def catalog_data(category_id, normalized_path, _catalog_section)
+        source_category = category_name(category_id)
+
+        {
+          catalog_source: source_key,
+          source_category: source_category,
+          source_category_title: source_category,
+          source_category_id: category_id,
+          source_category_path: normalized_path
+        }
+      end
+
+      def price_data(product)
+        source_price = decimal(text(product, 'price'))
+        old_price = decimal(text(product, 'old_price'))
+
+        {
           source_price: source_price,
           price: source_price,
           old_price: old_price,
           discount: decimal(text(product, 'discount')) || calculate_discount(source_price, old_price),
-          currency: 'BYN',
+          currency: 'BYN'
+        }
+      end
+
+      def product_details(product)
+        source_category = category_name(text(product, 'category_id'))
+
+        {
           image_url: image_url(product),
+          image_thumbnail_url: image_thumbnail_url(product),
+          image_medium_url: image_medium_url(product),
+          image_original_url: image_original_url(product),
           source_url: text(product, 'url'),
           description: description(product),
           vendor_code: nil,
@@ -44,20 +84,61 @@ module Importers
           finish: finish(product, source_category),
           glass: glass_name(text(product, 'glass_id')),
           country_of_origin: 'Беларусь',
-          source_category: source_category,
-          source_category_id: category_id,
           available: true,
-          active: true,
-          raw_data: raw_data(product),
-          searchable_text: searchable_text(product, source_category)
+          active: true
         }
+      end
+
+      def import_data(product, normalized_path, catalog_section)
+        source_category = category_name(text(product, 'category_id'))
+
+        {
+          raw_data: raw_data(product, normalized_path),
+          searchable_text: searchable_text(product, source_category, catalog_section)
+        }
+      end
+
+      def catalog_section_for(product, path)
+        source = [
+          category_path_text(path),
+          text(product, 'title'),
+          color_name(text(product, 'color_id')),
+          glass_name(text(product, 'glass_id')),
+          description(product)
+        ].compact.join(' ')
+
+        map_catalog_section(source)
       end
 
       def categories
         @categories ||= doc.css('categories category').each_with_object({}) do |category, hash|
           id = text(category, 'id')
-          hash[id] = text(category, 'title')
+
+          hash[id] = {
+            id: id,
+            title: text(category, 'title'),
+            parent_id: text(category, 'parent_id'),
+            position: text(category, 'position')
+          }
         end
+      end
+
+      def category_path(category_id)
+        path = []
+        current = categories[category_id.to_s]
+
+        while current.present?
+          path.unshift(
+            source: source_key,
+            source_category_id: current[:id],
+            title: current[:title],
+            position: current[:position]
+          )
+
+          current = categories[current[:parent_id].to_s]
+        end
+
+        path
       end
 
       def colors
@@ -75,9 +156,7 @@ module Importers
       end
 
       def properties
-        @properties ||= doc
-                        .xpath('/catalog/properties/property')
-                        .each_with_object({}) do |property, hash|
+        @properties ||= doc.xpath('/catalog/properties/property').each_with_object({}) do |property, hash|
           id = text(property, 'id')
           hash[id] = text(property, 'title')
         end
@@ -97,7 +176,7 @@ module Importers
       end
 
       def category_name(category_id)
-        categories[category_id.to_s]
+        categories.dig(category_id.to_s, :title)
       end
 
       def color_name(color_id)
@@ -108,10 +187,20 @@ module Importers
         glasses[glass_id.to_s]
       end
 
+      def image_thumbnail_url(product)
+        text(product, 'pictures picture thumbnail')
+      end
+
+      def image_medium_url(product)
+        text(product, 'pictures picture medium')
+      end
+
+      def image_original_url(product)
+        text(product, 'pictures picture original')
+      end
+
       def image_url(product)
-        %w[original medium thumbnail].filter_map do |size|
-          text(product, "pictures picture #{size}")
-        end.first
+        image_medium_url(product) || image_original_url(product) || image_thumbnail_url(product)
       end
 
       def description(product)
@@ -120,7 +209,6 @@ module Importers
         return nil if values.blank?
 
         values.map { |item| "#{item[:property]}: #{item[:value]}" }
-              .compact
               .join('. ')
               .squish
               .presence
@@ -133,14 +221,6 @@ module Importers
       def finish(product, source_category)
         find_property_value(product, /покрытие|отделка|эмаль|шпон|полипропилен|экошпон|эко шпон/i) ||
           source_category
-      end
-
-      def map_door_type(source_category)
-        map_door_type_from(source_category)
-      end
-
-      def map_category(source_category)
-        map_category_from(map_door_type(source_category))
       end
 
       def find_property_value(product, pattern)
@@ -162,10 +242,6 @@ module Importers
             value: property_value['title']
           }
         end
-      end
-
-      def text(node, selector)
-        node.at_css(selector)&.text&.squish.presence
       end
 
       def decimal(value)
@@ -191,13 +267,14 @@ module Importers
         base.parameterize
       end
 
-      def raw_data(product)
+      def raw_data(product, normalized_path)
         {
           'id' => text(product, 'id'),
           'title' => text(product, 'title'),
           'url' => text(product, 'url'),
           'category_id' => text(product, 'category_id'),
           'category_name' => category_name(text(product, 'category_id')),
+          'category_path' => normalized_path,
           'color_id' => text(product, 'color_id'),
           'color_name' => color_name(text(product, 'color_id')),
           'glass_id' => text(product, 'glass_id'),
@@ -207,16 +284,19 @@ module Importers
           'discount' => text(product, 'discount'),
           'label' => text(product, 'label'),
           'image_url' => image_url(product),
+          'image_thumbnail_url' => image_thumbnail_url(product),
+          'image_medium_url' => image_medium_url(product),
+          'image_original_url' => image_original_url(product),
           'properties' => resolved_property_values(product)
         }
       end
 
-      def searchable_text(product, source_category)
+      def searchable_text(product, source_category, catalog_section)
         [
           text(product, 'title'),
           BRAND,
           DEALER,
-          map_category(source_category),
+          catalog_section_title(catalog_section),
           source_category,
           color_name(text(product, 'color_id')),
           glass_name(text(product, 'glass_id')),
@@ -224,6 +304,10 @@ module Importers
           finish(product, source_category),
           description(product)
         ].compact.join(' ').squish
+      end
+
+      def source_key
+        'elporta'
       end
     end
   end
