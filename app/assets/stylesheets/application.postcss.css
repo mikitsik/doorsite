@@ -4,20 +4,17 @@
 
 @import "./components/buttons.css";
 
-@import "./layout/header.css";
-@import "./layout/footer.css";
 
-@import "./components/forms.css";
 @import "./components/flash.css";
 @import "./components/call-dropdown.css";
 @import "./components/product-grid.css";
 
 @import "./sections/hero.css";
-@import "./sections/benefits.css";
 @import "./sections/shared.css";
 @import "./sections/catalog.css";
 @import "./sections/brand_section.css";
 @import "./sections/steps.css";
+@import "./layout/footer.css";
 
 @import "./pages/product-show.css";
 @import "./layout/responsive.css";

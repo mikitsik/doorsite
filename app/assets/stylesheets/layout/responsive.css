@@ -1,12 +1,4 @@
 @media (max-width: 60rem) {  /* ~960px */
-  .benefit {
-    &__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-1);
-      padding-block: var(--space-2);
-    }
-  }
-
   .steps-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -14,26 +6,14 @@
 
     .step-card:first-child {
       grid-column: 2 / 4;
-      /* display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center; */
     }
 
     .step-card:nth-child(2) {
       grid-column: 1 / 3;
-      /* display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center; */
     }
 
     .step-card:last-child {
       grid-column: 3 / 5;
-      /* display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center; */
     }
   }
 }
@@ -44,38 +24,6 @@
     padding-inline: var(--space-4);
   }
 
-  .header {
-    &__main-container {
-      grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas:
-        "logo button"
-        "search search";
-      align-items: center;
-      gap: var(--space-3);
-    }
-
-    &__top {
-      justify-content: space-around;
-    }
-
-    &__logo {
-      grid-area: logo;
-      justify-self: center;
-    }
-
-    &__search {
-      grid-area: search;
-    }
-
-    .btn__call {
-      grid-area: button;
-    }
-  }
-
-  .search-button {
-    height: 2.75rem;
-  }
-
   .hero {
     &__content {
       padding-top: 0;
@@ -84,22 +32,19 @@
     &__title {
       font-size: 3.1875rem;
     }
-  }
 
-  .benefit {
-    &-item {
-      &__icon {
-        width: 2.75rem;
-        height: 2.75rem;
-      }
+    &__call-button {
+      font-size: 1.25rem;
+      padding: 1.125rem 1.875rem;
+    }
 
-      &__text {
-        font-size: 0.875rem;
-      }
+    &__benefit {
+      transform: none;
+      width: 100%;
     }
   }
 
-  .popular-categories {
+  .catalog-categories {
     &__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -140,41 +85,15 @@
     padding-inline: var(--space-3);
   }
 
-  .header {
-    .search-button {
-      height: 2.5rem;
-    }
-
-    &__logo {
-      font-size: 2.375rem;
-    }
-
-    &__main .container {
-      grid-template-columns: 1fr;
-    }
-  }
-
   .hero {
-    &__inner {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
     &__title {
       font-size: 2.5rem;
       letter-spacing: -0.04em;
     }
-  }
 
-  .benefit {
-    &__grid {
-      grid-template-columns: 1fr;
-    }
-
-    &-item {
-      &__text {
-        font-size: 0.8125rem;
-      }
+    &__contact-row {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 
@@ -187,7 +106,7 @@
     }
   }
 
-  .popular-categories,
+  .catalog-categories,
   .catalog-section,
   .how-to-order {
     padding-block: var(--space-6);
@@ -199,16 +118,6 @@
 }
 
 @media (max-width: 26rem) {   /* ~416 */
-  .header {
-    .search-button {
-      height: 2.25rem;
-    }
-
-    &__main .btn__call {
-      display: none;
-    }
-  }
-
   .btn {
     padding: 0.75rem 1.125rem;
   }
@@ -217,9 +126,17 @@
     &__inner {
       min-height: 29.25rem;
     }
+
+    &__call-button{
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: 0.625rem;
+      }
+    }
   }
 
-  .popular-categories {
+  .catalog-categories {
     &__grid {
       gap: var(--space-2);
     }

@@ -1,6 +1,11 @@
 <section class="hero" style="--hero-bg: url('<%= asset_path("hero-room.webp") %>');">
   <div class="container hero__inner">
     <div class="hero__content">
+      <%= link_to root_path, class: "hero__logo" do %>
+        <span class="hero__logo-dark">Дверной.</span>
+        <span class="hero__logo-light">бел</span>
+      <% end %>
+
       <div class="hero__eyebrow">
         <span class="hero__eyebrow-badge">
           <span class="hero__eyebrow-icon">
@@ -31,9 +36,57 @@
         </div>
       </div>
 
-      <div class="hero__actions">
-        <a href="#catalog" class="btn btn__hero-primary">Смотреть каталог</a>
-        <%= render "shared/call_dropdown" %>
+      <div class="hero__contact-row">
+        <div class="call-dropdown call-dropdown--hero" data-controller="call-dropdown">
+          <button
+            type="button"
+            class="btn hero__call-button btn__call call-dropdown__toggle"
+            data-action="click->call-dropdown#toggle"
+            aria-expanded="false"
+            aria-haspopup="menu"
+          >
+            <%= inline_svg_tag "icons/phone.svg" %>
+            Позвонить
+          </button>
+
+          <div class="call-dropdown__menu" data-call-dropdown-target="menu">
+            <a href="tel:+375292746333" class="call-dropdown__link">
+              <span class="call-dropdown__label">MTC +375 (29) 274-63-33</span>
+            </a>
+
+            <a href="tel:+375296685529" class="call-dropdown__link">
+              <span class="call-dropdown__label">A1 +375 (29) 668-55-29</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__phones">
+          <a href="tel:+375292746333">+375 (29) 274-63-33</a>
+          <a href="tel:+375296685529">+375 (29) 668-55-29</a>
+          <span>пн-вс 8:00 – 22:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__benefit" aria-label="Преимущества">
+      <div class="hero__benefit-item">
+        <%= inline_svg_tag "icons/credit.svg" %>
+        <span>Рассрочка<br>0% и кредит</span>
+      </div>
+
+      <div class="hero__benefit-item">
+        <%= inline_svg_tag "icons/select.svg" %>
+        <span>Подбор<br>оптимального<br>варианта</span>
+      </div>
+
+      <div class="hero__benefit-item">
+        <%= inline_svg_tag "icons/mesure-delivery.svg" %>
+        <span>Замер, доставка,<br>чистый монтаж</span>
+      </div>
+
+      <div class="hero__benefit-item">
+        <%= inline_svg_tag "icons/call.svg" %>
+        <span>Консультация<br>по телефону</span>
       </div>
     </div>
   </div>
