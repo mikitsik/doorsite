@@ -3,18 +3,12 @@
 @import "./base/global.css";
 
 @import "./components/buttons.css";
-
-
 @import "./components/flash.css";
-@import "./components/call-dropdown.css";
-@import "./components/product-grid.css";
 
-@import "./sections/hero.css";
-@import "./sections/shared.css";
-@import "./sections/catalog.css";
-@import "./sections/brand_section.css";
-@import "./sections/steps.css";
-@import "./layout/footer.css";
+@import "./home/hero.css";
+
+@import "./shared/call-dropdown.css";
 
 @import "./pages/product-show.css";
+@import "./layout/footer_cta.css";
 @import "./layout/responsive.css";
