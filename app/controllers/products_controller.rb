@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
 
   DEFAULT_CATEGORY = 'entrance'
 
-  PRODUCTS_PER_PAGE = 12
+  PRODUCTS_PER_PAGE = 24
 
   def index
     @active_category = active_category
