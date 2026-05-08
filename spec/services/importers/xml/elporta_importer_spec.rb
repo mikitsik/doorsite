@@ -200,5 +200,154 @@ RSpec.describe Importers::Xml::ElportaImporter do
       expect(product.source_category_id).to be_present
       expect(product.source_category_path).to be_present
     end
+
+    context 'when importing an Elporta entrance door with hardware words in the description' do
+      let(:xml) do
+        <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <catalog>
+            <categories>
+              <category>
+                <id>500</id>
+                <title>Входные двери</title>
+                <position>1</position>
+              </category>
+            </categories>
+
+            <colors>
+              <color>
+                <id>20</id>
+                <title>Graphite</title>
+              </color>
+            </colors>
+
+            <glasses>
+              <color>
+                <id>1</id>
+                <title>Без стекла</title>
+              </color>
+            </glasses>
+
+            <properties />
+            <propertyValues />
+
+            <products>
+              <product>
+                <id>7001</id>
+                <title>Porta S-2P (металл-мдф)</title>
+                <url>https://elporta.by/catalog/porta-s-2p</url>
+                <category_id>500</category_id>
+                <color_id>20</color_id>
+                <glass_id>1</glass_id>
+                <price>999.00</price>
+                <description>Комплектуется ручками, замками и петлями.</description>
+              </product>
+            </products>
+          </catalog>
+        XML
+      end
+
+      it 'classifies Porta S-2P as entrance, not hardware' do
+        importer.call
+
+        product = Product.find_by!(external_id: '7001', product_source:)
+
+        expect(product.catalog_section).to eq('entrance')
+        expect(product.door_type).to eq('entrance')
+        expect(product.category).to eq('Входные двери')
+      end
+    end
+
+    context 'when importing an Elporta interior product from an explicit interior category' do
+      let(:xml) do
+        <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <catalog>
+            <categories>
+              <category>
+                <id>40</id>
+                <title>Межкомнатные двери</title>
+                <position>1</position>
+              </category>
+            </categories>
+
+            <colors />
+            <glasses />
+            <properties />
+            <propertyValues />
+
+            <products>
+              <product>
+                <id>7002</id>
+                <title>Porta S Interior</title>
+                <url>https://elporta.by/catalog/porta-s-interior</url>
+                <category_id>40</category_id>
+                <price>555.00</price>
+                <description>Комплектуется ручками и замками.</description>
+              </product>
+            </products>
+          </catalog>
+        XML
+      end
+
+      it 'keeps the product classified as interior' do
+        importer.call
+
+        product = Product.find_by!(external_id: '7002', product_source:)
+
+        expect(product.catalog_section).to eq('interior')
+        expect(product.door_type).to eq('interior')
+        expect(product.category).to eq('Межкомнатные двери')
+      end
+    end
+
+    context 'when importing an explicit hardware category product' do
+      let(:xml) do
+        <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <catalog>
+            <categories>
+              <category>
+                <id>900</id>
+                <title>Фурнитура</title>
+                <position>1</position>
+              </category>
+              <category>
+                <id>901</id>
+                <title>Ручки</title>
+                <parent_id>900</parent_id>
+                <position>2</position>
+              </category>
+            </categories>
+
+            <colors />
+            <glasses />
+            <properties />
+            <propertyValues />
+
+            <products>
+              <product>
+                <id>8001</id>
+                <title>Porta S ручка дверная Nova</title>
+                <url>https://elporta.by/catalog/nova-handle</url>
+                <category_id>901</category_id>
+                <price>120.00</price>
+                <description>Фурнитура для дверей.</description>
+              </product>
+            </products>
+          </catalog>
+        XML
+      end
+
+      it 'keeps explicit hardware categories as hardware' do
+        importer.call
+
+        product = Product.find_by!(external_id: '8001', product_source:)
+
+        expect(product.catalog_section).to eq('hardware')
+        expect(product.door_type).to eq('hardware')
+        expect(product.category).to eq('Фурнитура')
+      end
+    end
   end
 end
