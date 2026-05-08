@@ -1,10 +1,17 @@
 <section class="hero" style="--hero-bg: url('<%= asset_path("hero-room.webp") %>');">
   <div class="container hero__inner">
     <div class="hero__content">
-      <%= link_to root_path, class: "hero__logo" do %>
-        <span class="hero__logo-dark">Дверной.</span>
-        <span class="hero__logo-light">бел</span>
-      <% end %>
+      <div class="hero__topbar">
+        <%= link_to root_path, class: "hero__logo" do %>
+          <span class="hero__logo-dark">Дверной.</span>
+          <span class="hero__logo-light">бел</span>
+        <% end %>
+        <div class="hero__phones">
+          <a href="tel:+375292746333">+375 (29) 274-63-33</a>
+          <a href="tel:+375296685529">+375 (29) 668-55-29</a>
+          <span>пн-вс 8:00 – 22:00</span>
+        </div>
+      </div>
 
       <div class="hero__eyebrow">
         <span class="hero__eyebrow-badge">
@@ -36,7 +43,12 @@
         </div>
       </div>
 
-      <div class="hero__contact-row">
+      <div class="hero__actions">
+        <%= link_to "#catalog", class: "btn hero__catalog-button" do %>
+          <%= inline_svg_tag "icons/catalog.svg" %>
+          Каталог
+        <% end %>
+
         <div class="call-dropdown call-dropdown--hero" data-controller="call-dropdown">
           <button
             type="button"
@@ -58,12 +70,6 @@
               <span class="call-dropdown__label">A1 +375 (29) 668-55-29</span>
             </a>
           </div>
-        </div>
-
-        <div class="hero__phones">
-          <a href="tel:+375292746333">+375 (29) 274-63-33</a>
-          <a href="tel:+375296685529">+375 (29) 668-55-29</a>
-          <span>пн-вс 8:00 – 22:00</span>
         </div>
       </div>
     </div>

@@ -58,86 +58,81 @@
     font-size: 0.9375rem;
     font-weight: 600;
   }
-}
 
-.catalog-menu {
-  border-top: 1px solid rgba(112, 78, 42, 0.12);
-
-  &:last-child {
-    border-bottom: 1px solid rgba(112, 78, 42, 0.12);
-  }
-
-  &__summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    color: #34281f;
-    font-size: 1rem;
-    font-weight: 800;
-    cursor: pointer;
-    list-style: none;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-
-    &::after {
-      content: "⌄";
-      color: var(--color-primary);
-      font-size: 1rem;
-      transition: transform var(--motion-fast) var(--ease-standard);
-    }
-  }
-
-  &[open] .catalog-menu__summary::after {
-    transform: rotate(180deg);
-  }
-
-  &__list {
+  &-grid {
     display: grid;
-    gap: 0.375rem;
-    padding: 0 0 1rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-3);
   }
 
-  &__link {
-    display: block;
-    padding: 0.625rem 0.75rem;
-    border-radius: var(--radius-md);
-    color: var(--color-text-soft);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    transition:
-      background-color var(--motion-fast) var(--ease-standard),
-      color var(--motion-fast) var(--ease-standard),
-      transform var(--motion-fast) var(--ease-standard);
+  &-menu {
+    border-top: 1px solid rgba(112, 78, 42, 0.12);
 
-    &:hover {
-      background: rgba(202, 164, 114, 0.12);
-      color: #34281f;
-      transform: translateX(0.125rem);
+    &:last-child {
+      border-bottom: 1px solid rgba(112, 78, 42, 0.12);
     }
 
-    &.is-active {
-      background: linear-gradient(135deg, rgba(227, 166, 79, 0.22), rgba(184, 120, 47, 0.16));
+    &__summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
       color: #34281f;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      list-style: none;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &::after {
+        content: "⌄";
+        color: var(--color-primary);
+        font-size: 1rem;
+        transition: transform var(--motion-fast) var(--ease-standard);
+      }
+    }
+
+    &[open] .catalog-menu__summary::after {
+      transform: rotate(180deg);
+    }
+
+    &__list {
+      display: grid;
+      gap: 0.375rem;
+      padding: 0 0 1rem;
+    }
+
+    &__link {
+      display: block;
+      padding: 0.625rem 0.75rem;
+      border-radius: var(--radius-md);
+      color: var(--color-text-soft);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      transition:
+        background-color var(--motion-fast) var(--ease-standard),
+        color var(--motion-fast) var(--ease-standard),
+        transform var(--motion-fast) var(--ease-standard);
+
+      &:hover {
+        background: rgba(202, 164, 114, 0.12);
+        color: #34281f;
+        transform: translateX(0.125rem);
+      }
+
+      &.is-active {
+        background: linear-gradient(135deg, rgba(227, 166, 79, 0.22), rgba(184, 120, 47, 0.16));
+        color: #34281f;
+      }
     }
   }
-}
-
-.catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
 }
 
 .product-card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
   background: rgba(255, 255, 255, 0.82);
   box-shadow: var(--shadow-card);
   transition:
@@ -151,7 +146,6 @@
 
   &__image-wrap {
     display: block;
-    aspect-ratio: 4 / 3;
     background: #f1ede7;
     overflow: hidden;
   }
@@ -161,7 +155,7 @@
     height: 100%;
     object-fit: contain;
     display: block;
-    padding: var(--space-3);
+    padding: var(--space-1);
   }
 
   &__placeholder {
@@ -174,8 +168,8 @@
 
   &__body {
     display: grid;
-    gap: var(--space-2);
-    padding: var(--space-3);
+    gap: var(--space-1);
+    padding: var(--space-2);
   }
 
   &__meta {
@@ -187,24 +181,13 @@
   }
 
   &__title {
-    min-height: 2.75rem;
-    margin: 0;
     color: #34281f;
     font-size: 1rem;
-    line-height: 1.35;
     letter-spacing: -0.02em;
 
     a:hover {
       color: var(--color-primary);
     }
-  }
-
-  &__bottom {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-2);
-    align-items: center;
-    margin-top: var(--space-2);
   }
 
   &__price {

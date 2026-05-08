@@ -17,8 +17,6 @@
     z-index: 9999;
 
     width: max-content;
-    min-width: min(15rem, calc(100vw - 2rem));
-    max-width: calc(100vw - 2rem);
 
     padding: 0.375rem;
     border: 1px solid var(--color-border-strong);

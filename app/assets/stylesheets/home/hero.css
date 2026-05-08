@@ -56,6 +56,11 @@
     padding-top: 0.375rem;
   }
 
+  &__topbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__logo {
     display: inline-flex;
     align-items: baseline;
@@ -65,7 +70,7 @@
     letter-spacing: -0.045em;
     white-space: nowrap;
     text-decoration: none;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     animation: hero-fade-up 0.6s ease-out both;
     animation-delay: 0s;
 
@@ -159,12 +164,13 @@
     }
   }
 
-  &__contact-row {
+  &__actions {
     position: relative;
     z-index: 6;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     animation: hero-fade-up 0.6s ease-out both;
     animation-delay: 0.24s;
   }
@@ -174,7 +180,7 @@
     border-radius: 0.5rem;
     border: 0;
     background: linear-gradient(135deg, #e3a64f 0%, #b8782f 100%);
-    color: #fff;
+    color: rgba(255, 248, 240, 0.96);
     font-size: 1.375rem;
     font-weight: 800;
     box-shadow:
@@ -189,6 +195,64 @@
       width: 1.5rem;
       height: 1.5rem;
       margin-right: 1rem;
+    }
+  }
+
+  &__catalog-button {
+    padding: 1.25rem 3.375rem 1.25rem 2.625rem;
+    border-radius: 0.5rem;
+    border: 0;
+    font-size: 1.375rem;
+    font-weight: 800;
+    background:
+      linear-gradient(
+        135deg,
+        #8b6a52 0%,
+        #5f4635 48%,
+        #3f2d21 100%
+      );
+
+    color: rgba(255, 248, 240, 0.96);
+
+    box-shadow:
+      0 1rem 2rem rgba(73, 50, 31, 0.18),
+      0 0.25rem 0.75rem rgba(73, 50, 31, 0.08);
+
+    transition:
+      transform var(--motion-fast) var(--ease-standard),
+      box-shadow var(--motion-fast) var(--ease-standard),
+      background var(--motion-fast) var(--ease-standard);
+
+    &:hover {
+      background:
+        linear-gradient(
+          135deg,
+          #9a775d 0%,
+          #6c4f3b 48%,
+          #4a3527 100%
+        );
+    }
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 1rem;
+      stroke-width: 2;
+    }
+
+    &:hover {
+      transform: translateY(-0.125rem);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(84, 64, 49, 0.98) 0%,
+          rgba(52, 38, 28, 0.98) 100%
+        );
+
+      box-shadow:
+        0 1.25rem 2.5rem rgba(33, 24, 17, 0.22),
+        0 0.5rem 1rem rgba(33, 24, 17, 0.12);
     }
   }
 

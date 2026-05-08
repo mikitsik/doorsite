@@ -1,58 +1,63 @@
-<div class="product-show">
-  <div class="container">
-    <div class="product-show__back">
-      <%= link_to "← Назад в каталог", root_path %>
-    </div>
-
-    <div class="product-show__grid">
-      <div>
-        <% if @product.image_url.present? %>
-          <img src="<%= @product.image_url %>" alt="<%= @product.title %>">
-        <% else %>
-          <div class="product-card__placeholder">Нет изображения</div>
-        <% end %>
+<%= turbo_frame_tag "catalog" do %>
+  <section class="product-show">
+    <div class="container">
+      <div class="product-show__back">
+        <%= link_to "← Назад в каталог",
+            root_path(category: params[:category], anchor: "catalog"),
+            class: "btn btn--light",
+            data: { turbo_frame: "catalog" } %>
       </div>
 
-      <div>
-        <div class="product-show__brand"><%= @product.brand %></div>
-
-        <h1 class="product-show__title"><%= @product.title %></h1>
-
-        <div class="product-show__meta">
-          <strong>Бренд:</strong> <%= @product.brand %>
-        </div>
-
-        <div class="product-show__meta">
-          <strong>Категория:</strong> <%= @product.category %>
-        </div>
-
-        <div class="product-show__price">
-          <% if @product.price.present? %>
-            <%= number_with_precision(@product.price, precision: 2) %> <%= @product.currency %>
+      <div class="product-show__grid">
+        <div>
+          <% if @product.image_url.present? %>
+            <img src="<%= @product.image_url %>" alt="<%= @product.title %>">
           <% else %>
-            Цена по запросу
+            <div class="product-card__placeholder">Нет изображения</div>
           <% end %>
         </div>
 
-        <div class="product-show__phones">
-          <div><a href="tel:+375292746333">+375 (29) 274-63-33</a></div>
-          <div><a href="tel:+375296685529">+375 (29) 668-55-29</a></div>
-        </div>
+        <div>
+          <div class="product-show__brand"><%= @product.brand %></div>
 
-        <div class="product-show__actions">
-          <a href="tel" class="btn btn__call">Позвонить</a>
-          <%= link_to "Назад в каталог", root_path, class: "btn btn--light" %>
-        </div>
+          <h1 class="product-show__title"><%= @product.title %></h1>
 
-        <% if @product.description.present? %>
-          <div class="product-show__description">
-            <h2>Описание</h2>
-            <div class="product-show__description-body">
-              <%= simple_format(@product.description) %>
-            </div>
+          <div class="product-show__meta">
+            <strong>Бренд:</strong> <%= @product.brand %>
           </div>
-        <% end %>
+
+          <div class="product-show__meta">
+            <strong>Категория:</strong> <%= @product.category %>
+          </div>
+
+          <div class="product-show__price">
+            <% if @product.price.present? %>
+              <%= number_with_precision(@product.price, precision: 2) %> <%= @product.currency %>
+            <% else %>
+              Цена по запросу
+            <% end %>
+          </div>
+
+          <div class="product-show__phones">
+            <div><a href="tel:+375292746333">+375 (29) 274-63-33</a></div>
+            <div><a href="tel:+375296685529">+375 (29) 668-55-29</a></div>
+          </div>
+
+          <div class="product-show__actions">
+            <a href="tel" class="btn btn__call">Позвонить</a>
+            <%= link_to "Назад в каталог", root_path, class: "btn btn--light" %>
+          </div>
+
+          <% if @product.description.present? %>
+            <div class="product-show__description">
+              <h2>Описание</h2>
+              <div class="product-show__description-body">
+                <%= simple_format(@product.description) %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+<% end %>

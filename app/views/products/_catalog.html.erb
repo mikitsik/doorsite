@@ -55,7 +55,7 @@
         <div class="catalog-grid">
           <% @products.each do |product| %>
             <article class="product-card">
-              <%= link_to product_path(product), class: "product-card__image-wrap" do %>
+              <%= link_to product_path(product), class: "product-card__image-wrap", data: { turbo_frame: "catalog" } do %>
                 <% if product.image_url.present? %>
                   <%= image_tag product.image_url, class: "product-card__image", loading: "lazy", alt: product.title %>
                 <% else %>
@@ -69,19 +69,15 @@
                 </div>
 
                 <h3 class="product-card__title">
-                  <%= link_to product.title, product_path(product) %>
+                  <%= link_to product.title, product_path(product), data: { turbo_frame: "catalog" } %>
                 </h3>
 
-                <div class="product-card__bottom">
-                  <div class="product-card__price">
-                    <% if product.price.present? %>
-                      от <%= number_to_currency(product.price, unit: "BYN", format: "%n %u") %>
-                    <% else %>
-                      Цена по запросу
-                    <% end %>
-                  </div>
-
-                  <%= render "shared/call_dropdown" %>
+                <div class="product-card__price">
+                  <% if product.price.present? %>
+                    от <%= number_to_currency(product.price, unit: "BYN", format: "%n %u") %>
+                  <% else %>
+                    Цена по запросу
+                  <% end %>
                 </div>
               </div>
             </article>
