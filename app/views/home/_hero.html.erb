@@ -44,7 +44,7 @@
       </div>
 
       <div class="hero__actions">
-        <%= link_to "#catalog", class: "btn hero__catalog-button" do %>
+        <%= link_to "#catalog", class: "btn hero__actions-btn hero__catalog-button" do %>
           <%= inline_svg_tag "icons/catalog.svg" %>
           Каталог
         <% end %>
@@ -52,7 +52,7 @@
         <div class="call-dropdown call-dropdown--hero" data-controller="call-dropdown">
           <button
             type="button"
-            class="btn hero__call-button btn__call call-dropdown__toggle"
+            class="btn hero__actions-btn hero__call-button btn__call call-dropdown__toggle"
             data-action="click->call-dropdown#toggle"
             aria-expanded="false"
             aria-haspopup="menu"
