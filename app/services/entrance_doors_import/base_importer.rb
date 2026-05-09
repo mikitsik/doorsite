@@ -25,11 +25,12 @@ module EntranceDoorsImport
     end
 
     def decimal(value)
-      return if value.blank?
+      source = value.to_s.tr(',', '.')
+      number = source[/\d+(?:\.\d+)?/]
 
-      BigDecimal(value.to_s.tr(',', '.'))
-    rescue ArgumentError
-      nil
+      return if number.blank?
+
+      BigDecimal(number)
     end
 
     def integer_from(value)

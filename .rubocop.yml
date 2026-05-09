@@ -41,7 +41,7 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Max: 220
   Exclude:
-    - "app/services/importers/xml/*_importer.rb"
+    - "app/services/entrance_doors_import/elporta_importer.rb"
 
 Metrics/MethodLength:
   Max: 40
