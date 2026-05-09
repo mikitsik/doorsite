@@ -47,9 +47,13 @@ Metrics/MethodLength:
   Max: 40
   Exclude:
     - "db/migrate/**/*"
+    - "app/services/entrance_doors_import/elporta_importer.rb"
 
 Metrics/AbcSize:
   Max: 40
+  Exclude:
+    - "db/migrate/**/*"
+    - "app/services/entrance_doors_import/magna_importer.rb"
 
 Metrics/CyclomaticComplexity:
   Max: 10

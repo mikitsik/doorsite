@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_154906) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_09_130713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -36,6 +36,55 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_154906) do
     t.index ["source", "source_category_id"], name: "index_catalog_categories_on_source_and_source_category_id", unique: true
     t.index ["source"], name: "index_catalog_categories_on_source"
     t.index ["source_category_id"], name: "index_catalog_categories_on_source_category_id"
+  end
+
+  create_table "entrance_doors", force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.boolean "available", default: true, null: false
+    t.string "brand"
+    t.string "category"
+    t.string "collection"
+    t.string "construction_type"
+    t.string "country_of_origin"
+    t.datetime "created_at", null: false
+    t.string "currency"
+    t.string "dealer"
+    t.text "description"
+    t.string "external_id"
+    t.string "filling"
+    t.string "glass"
+    t.integer "height_mm"
+    t.string "image_url"
+    t.string "inner_color"
+    t.string "inner_finish"
+    t.integer "locks_count"
+    t.string "material"
+    t.decimal "metal_thickness_mm", precision: 5, scale: 2
+    t.decimal "old_price", precision: 10, scale: 2
+    t.string "opening_direction"
+    t.string "opening_side"
+    t.string "outer_color"
+    t.string "outer_finish"
+    t.decimal "price", precision: 10, scale: 2
+    t.jsonb "raw_data", default: {}, null: false
+    t.integer "sealing_contours_count"
+    t.text "searchable_text"
+    t.string "series"
+    t.decimal "source_price", precision: 10, scale: 2
+    t.string "source_url"
+    t.boolean "thermal_break", default: false, null: false
+    t.integer "thickness_mm"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.string "use_case"
+    t.integer "warranty_months"
+    t.integer "width_mm"
+    t.index ["active"], name: "index_entrance_doors_on_active"
+    t.index ["available"], name: "index_entrance_doors_on_available"
+    t.index ["brand"], name: "index_entrance_doors_on_brand"
+    t.index ["category"], name: "index_entrance_doors_on_category"
+    t.index ["dealer", "external_id"], name: "index_entrance_doors_on_dealer_and_external_id", unique: true
+    t.index ["series"], name: "index_entrance_doors_on_series"
   end
 
   create_table "import_batches", force: :cascade do |t|
