@@ -1,6 +1,7 @@
 .catalog {
   padding: var(--space-4) 0;
   background: #f4eee6;
+  scroll-margin-top: 0.5rem;
 
   &__inner {
     display: grid;

@@ -1,80 +1,82 @@
 <main>
-  <section class="catalog" id="catalog">
-    <div class="container catalog__inner">
-      <div class="catalog__toolbar">
-        <div class="catalog__head">
-          <h2 class="catalog__title">Входные двери</h2>
+  <section class="catalog" id="catalog" data-controller="catalog-scroll">
+    <turbo-frame id="catalog">
+      <div class="container catalog__inner">
+        <div class="catalog__toolbar">
+          <div class="catalog__head">
+            <h2 class="catalog__title">Входные двери</h2>
+          </div>
+
+          <div class="catalog__count">
+            <%= @total_products %> шт
+          </div>
         </div>
 
-        <div class="catalog__count">
-          <%= @total_products %> шт
-        </div>
-      </div>
+        <div class="catalog-grid">
+          <% @products.each do |product| %>
+            <article class="product-card">
+              <%= link_to product_path(product), class: "product-card__image-wrap", data: { turbo_frame: "catalog" } do %>
+                <% if product.image_url.present? %>
+                  <%= image_tag product.image_url, class: "product-card__image", loading: "lazy", alt: product.title %>
+                <% else %>
+                  <div class="product-card__placeholder">Нет фото</div>
+                <% end %>
+              <% end %>
 
-      <div class="catalog-grid">
-        <% @products.each do |product| %>
-          <article class="product-card">
-            <%= link_to product_path(product), class: "product-card__image-wrap", data: { turbo_frame: "catalog" } do %>
-              <% if product.image_url.present? %>
-                <%= image_tag product.image_url, class: "product-card__image", loading: "lazy", alt: product.title %>
+              <div class="product-card__body">
+                <div class="product-card__meta"><%= product.brand %></div>
+
+                <h3 class="product-card__title">
+                  <%= link_to product.title, product_path(product), data: { turbo_frame: "catalog" } %>
+                </h3>
+
+                <div class="product-card__price">
+                  <% if product.price.present? %>
+                    от <%= number_to_currency(product.price, unit: "BYN", format: "%n %u") %>
+                  <% else %>
+                    Цена по запросу
+                  <% end %>
+                </div>
+              </div>
+            </article>
+          <% end %>
+        </div>
+
+        <% if @total_pages > 1 %>
+          <nav class="catalog-pagination" aria-label="Пагинация каталога">
+            <% if @page > 1 %>
+              <%= link_to "←",
+                          root_path(page: @page - 1, anchor: "catalog"),
+                          class: "catalog-pagination__link catalog-pagination__link--arrow",
+                          "aria-label": "Предыдущая страница" %>
+            <% else %>
+              <span class="catalog-pagination__link catalog-pagination__link--arrow is-disabled"
+                    aria-disabled="true">←</span>
+            <% end %>
+
+            <% compact_pagination_pages(@page, @total_pages).each do |item| %>
+              <% if item == :ellipsis %>
+                <span class="catalog-pagination__ellipsis">…</span>
               <% else %>
-                <div class="product-card__placeholder">Нет фото</div>
+                <%= link_to item,
+                            root_path(page: item, anchor: "catalog"),
+                            class: "catalog-pagination__link #{'is-active' if item == @page}",
+                            "aria-current": ("page" if item == @page) %>
               <% end %>
             <% end %>
 
-            <div class="product-card__body">
-              <div class="product-card__meta"><%= product.brand %></div>
-
-              <h3 class="product-card__title">
-                <%= link_to product.title, product_path(product), data: { turbo_frame: "catalog" } %>
-              </h3>
-
-              <div class="product-card__price">
-                <% if product.price.present? %>
-                  от <%= number_to_currency(product.price, unit: "BYN", format: "%n %u") %>
-                <% else %>
-                  Цена по запросу
-                <% end %>
-              </div>
-            </div>
-          </article>
+            <% if @page < @total_pages %>
+              <%= link_to "→",
+                          root_path(page: @page + 1, anchor: "catalog"),
+                          class: "catalog-pagination__link catalog-pagination__link--arrow",
+                          "aria-label": "Следующая страница" %>
+            <% else %>
+              <span class="catalog-pagination__link catalog-pagination__link--arrow is-disabled"
+                    aria-disabled="true">→</span>
+            <% end %>
+          </nav>
         <% end %>
       </div>
-
-      <% if @total_pages > 1 %>
-        <nav class="catalog-pagination" aria-label="Пагинация каталога">
-          <% if @page > 1 %>
-            <%= link_to "←",
-                        root_path(page: @page - 1, anchor: "catalog"),
-                        class: "catalog-pagination__link catalog-pagination__link--arrow",
-                        "aria-label": "Предыдущая страница" %>
-          <% else %>
-            <span class="catalog-pagination__link catalog-pagination__link--arrow is-disabled"
-                  aria-disabled="true">←</span>
-          <% end %>
-
-          <% compact_pagination_pages(@page, @total_pages).each do |item| %>
-            <% if item == :ellipsis %>
-              <span class="catalog-pagination__ellipsis">…</span>
-            <% else %>
-              <%= link_to item,
-                          root_path(page: item, anchor: "catalog"),
-                          class: "catalog-pagination__link #{'is-active' if item == @page}",
-                          "aria-current": ("page" if item == @page) %>
-            <% end %>
-          <% end %>
-
-          <% if @page < @total_pages %>
-            <%= link_to "→",
-                        root_path(page: @page + 1, anchor: "catalog"),
-                        class: "catalog-pagination__link catalog-pagination__link--arrow",
-                        "aria-label": "Следующая страница" %>
-          <% else %>
-            <span class="catalog-pagination__link catalog-pagination__link--arrow is-disabled"
-                  aria-disabled="true">→</span>
-          <% end %>
-        </nav>
-      <% end %>
-    </div>
+    </turbo-frame>
   </section>
 </main>
