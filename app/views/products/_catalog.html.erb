@@ -43,10 +43,35 @@
 
       <% if @total_pages > 1 %>
         <nav class="catalog-pagination" aria-label="Пагинация каталога">
-          <% 1.upto(@total_pages) do |page| %>
-            <%= link_to page,
-                        root_path(page: page, anchor: "catalog"),
-                        class: "catalog-pagination__link #{'is-active' if page == @page}" %>
+          <% if @page > 1 %>
+            <%= link_to "←",
+                        root_path(page: @page - 1, anchor: "catalog"),
+                        class: "catalog-pagination__link catalog-pagination__link--arrow",
+                        "aria-label": "Предыдущая страница" %>
+          <% else %>
+            <span class="catalog-pagination__link catalog-pagination__link--arrow is-disabled"
+                  aria-disabled="true">←</span>
+          <% end %>
+
+          <% compact_pagination_pages(@page, @total_pages).each do |item| %>
+            <% if item == :ellipsis %>
+              <span class="catalog-pagination__ellipsis">…</span>
+            <% else %>
+              <%= link_to item,
+                          root_path(page: item, anchor: "catalog"),
+                          class: "catalog-pagination__link #{'is-active' if item == @page}",
+                          "aria-current": ("page" if item == @page) %>
+            <% end %>
+          <% end %>
+
+          <% if @page < @total_pages %>
+            <%= link_to "→",
+                        root_path(page: @page + 1, anchor: "catalog"),
+                        class: "catalog-pagination__link catalog-pagination__link--arrow",
+                        "aria-label": "Следующая страница" %>
+          <% else %>
+            <span class="catalog-pagination__link catalog-pagination__link--arrow is-disabled"
+                  aria-disabled="true">→</span>
           <% end %>
         </nav>
       <% end %>
