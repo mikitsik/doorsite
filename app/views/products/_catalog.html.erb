@@ -2,74 +2,8 @@
   <section class="catalog" id="catalog">
     <div class="container catalog__inner">
       <div class="catalog__toolbar">
-        <div>
-          <p class="catalog__eyebrow">Каталог дверей</p>
+        <div class="catalog__head">
           <h2 class="catalog__title">Входные двери</h2>
-        </div>
-
-        <div class="catalog-filters">
-          <%= link_to root_path(anchor: "catalog"),
-                      class: "catalog-filters__chip #{'is-active' if @active_filter == 'all'}" do %>
-            <span class="catalog-filters__check">
-              <%= "✓" if @active_filter == "all" %>
-            </span>
-
-            Все
-          <% end %>
-
-          <%= link_to root_path(filter: "street", anchor: "catalog"),
-                      class: "catalog-filters__chip #{'is-active' if @active_filter == 'street'}" do %>
-            <span class="catalog-filters__check">
-              <%= "✓" if @active_filter == "street" %>
-            </span>
-
-            Уличные
-          <% end %>
-
-          <%= link_to root_path(filter: "thermal", anchor: "catalog"),
-                      class: "catalog-filters__chip #{'is-active' if @active_filter == 'thermal'}" do %>
-            <span class="catalog-filters__check">
-              <%= "✓" if @active_filter == "thermal" %>
-            </span>
-
-            С терморазрывом
-          <% end %>
-
-          <%= link_to root_path(filter: "apartment", anchor: "catalog"),
-                      class: "catalog-filters__chip #{'is-active' if @active_filter == 'apartment'}" do %>
-            <span class="catalog-filters__check">
-              <%= "✓" if @active_filter == "apartment" %>
-            </span>
-
-            Квартирные
-          <% end %>
-
-          <%= link_to root_path(filter: "glass", anchor: "catalog"),
-                      class: "catalog-filters__chip #{'is-active' if @active_filter == 'glass'}" do %>
-            <span class="catalog-filters__check">
-              <%= "✓" if @active_filter == "glass" %>
-            </span>
-
-            Со стеклом
-          <% end %>
-
-          <%= link_to root_path(filter: "metal_mdf", anchor: "catalog"),
-                      class: "catalog-filters__chip #{'is-active' if @active_filter == 'metal_mdf'}" do %>
-            <span class="catalog-filters__check">
-              <%= "✓" if @active_filter == "metal_mdf" %>
-            </span>
-
-            Металл-МДФ
-          <% end %>
-
-          <%= link_to root_path(filter: "mdf_mdf", anchor: "catalog"),
-                      class: "catalog-filters__chip #{'is-active' if @active_filter == 'mdf_mdf'}" do %>
-            <span class="catalog-filters__check">
-              <%= "✓" if @active_filter == "mdf_mdf" %>
-            </span>
-
-            МДФ-МДФ
-          <% end %>
         </div>
 
         <div class="catalog__count">
@@ -111,7 +45,7 @@
         <nav class="catalog-pagination" aria-label="Пагинация каталога">
           <% 1.upto(@total_pages) do |page| %>
             <%= link_to page,
-                        root_path(filter: @active_filter, page: page, anchor: "catalog"),
+                        root_path(page: page, anchor: "catalog"),
                         class: "catalog-pagination__link #{'is-active' if page == @page}" %>
           <% end %>
         </nav>

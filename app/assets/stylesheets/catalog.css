@@ -17,13 +17,6 @@
     min-width: 0;
   }
 
-  &__eyebrow {
-    margin: 0 0 var(--space-1);
-    color: var(--color-muted);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
-
   &__title {
     margin: 0;
     color: #34281f;
@@ -44,65 +37,6 @@
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--space-3);
-  }
-}
-
-.catalog-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: var(--space-3);
-
-  &__chip {
-    min-height: 2.75rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid rgba(112, 78, 42, 0.12);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.72);
-    color: #5b4a3c;
-    font-size: 0.9375rem;
-    font-weight: 700;
-    transition:
-      transform var(--motion-fast) var(--ease-standard),
-      background-color var(--motion-fast) var(--ease-standard),
-      border-color var(--motion-fast) var(--ease-standard),
-      box-shadow var(--motion-fast) var(--ease-standard);
-
-    &:hover {
-      transform: translateY(-1px);
-      border-color: rgba(178, 131, 70, 0.3);
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 0.5rem 1.25rem rgba(73, 50, 31, 0.08);
-    }
-
-    &.is-active {
-      border-color: rgba(178, 131, 70, 0.45);
-      background: linear-gradient(
-        135deg,
-        rgba(227, 166, 79, 0.18),
-        rgba(184, 120, 47, 0.12)
-      );
-      color: #34281f;
-      box-shadow: 0 0.5rem 1.5rem rgba(73, 50, 31, 0.1);
-    }
-  }
-
-  &__check {
-    width: 1.125rem;
-    height: 1.125rem;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 999px;
-    border: 1px solid rgba(112, 78, 42, 0.18);
-    background: rgba(255, 255, 255, 0.9);
-    color: #8a623f;
-    font-size: 0.75rem;
-    font-weight: 900;
-    flex-shrink: 0;
   }
 }
 
@@ -231,14 +165,6 @@
 
     &__title {
       font-size: 1.875rem;
-    }
-  }
-
-  .catalog-filters {
-    &__panel {
-      position: static;
-      width: 100%;
-      margin-top: var(--space-2);
     }
   }
 
