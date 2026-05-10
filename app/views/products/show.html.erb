@@ -42,11 +42,29 @@
         <% end %>
 
         <% if @product.description.present? %>
-          <div class="product-show__description">
+          <div
+            class="product-show__description"
+            data-controller="description-toggle"
+            data-description-toggle-expanded-class="is-expanded"
+          >
             <h2>Описание</h2>
-            <div class="product-show__description-body">
+            <div
+              class="product-show__description-content"
+              data-description-toggle-target="content"
+            >
               <%= simple_format(@product.description) %>
             </div>
+
+            <button
+              type="button"
+              class="btn btn--light product-show__description-toggle"
+              data-action="description-toggle#toggle"
+              data-description-toggle-target="button"
+              aria-expanded="false"
+              hidden
+            >
+              Показать больше
+            </button>
           </div>
         <% end %>
 
