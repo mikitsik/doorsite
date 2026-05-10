@@ -4,7 +4,7 @@
   ["Материал", @product.material]
 ].filter { |_label, value| value.present? } %>
 
-<section class="product-show">
+<section class="product-show" id="product-show">
   <div class="container">
     <div class="product-show__layout">
       <% if @product.image_url.present? %>
@@ -14,7 +14,7 @@
       <% end %>
 
       <div class="product-show__content">
-        <%= link_to "← Назад в каталог", root_path(anchor: "catalog"), class: "btn btn--light product-show__back" %>
+        <%= link_to "← Назад в каталог", params[:back_url].presence || request.referer.presence || root_path(anchor: "catalog"), class: "btn btn--light product-show__back" %>
 
         <% if product_meta.present? %>
           <p class="product-show__meta"><%= product_meta %></p>

@@ -15,7 +15,9 @@
         <div class="catalog-grid">
           <% @products.each do |product| %>
             <article class="product-card">
-              <%= link_to product_path(product), class: "product-card__image-wrap", data: { turbo_frame: "_top" } do %>
+              <%= link_to product_path(product, anchor: "product-show", back_url: url_for(
+                params.permit!.to_h.merge(anchor: "catalog")
+              )), class: "product-card__image-wrap", data: { turbo_frame: "_top" } do %>
                 <% if product.image_url.present? %>
                   <%= image_tag product.image_url, class: "product-card__image", loading: "lazy", alt: product.title %>
                 <% else %>
