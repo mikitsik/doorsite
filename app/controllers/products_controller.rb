@@ -14,6 +14,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    redirect_to root_path
+    @product = EntranceDoor.find(params[:id])
   end
 end

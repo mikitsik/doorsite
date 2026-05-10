@@ -15,7 +15,7 @@
         <div class="catalog-grid">
           <% @products.each do |product| %>
             <article class="product-card">
-              <%= link_to product_path(product), class: "product-card__image-wrap", data: { turbo_frame: "catalog" } do %>
+              <%= link_to product_path(product), class: "product-card__image-wrap", data: { turbo_frame: "_top" } do %>
                 <% if product.image_url.present? %>
                   <%= image_tag product.image_url, class: "product-card__image", loading: "lazy", alt: product.title %>
                 <% else %>
@@ -27,7 +27,7 @@
                 <div class="product-card__meta"><%= product.brand %></div>
 
                 <h3 class="product-card__title">
-                  <%= link_to product.title, product_path(product), data: { turbo_frame: "catalog" } %>
+                  <%= link_to product.title, product_path(product), data: { turbo_frame: "_top" } %>
                 </h3>
 
                 <div class="product-card__price">

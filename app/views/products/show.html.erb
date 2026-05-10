@@ -1,63 +1,51 @@
-<%= turbo_frame_tag "catalog" do %>
-  <section class="product-show">
-    <div class="container">
-      <div class="product-show__back">
-        <%= link_to "← Назад в каталог",
-            root_path(category: params[:category], anchor: "catalog"),
-            class: "btn btn--light",
-            data: { turbo_frame: "catalog" } %>
+<section class="show-product">
+  <div class="container show-product__inner">
+    <%= link_to "← Назад в каталог", root_path(anchor: "catalog"), class: "show-product__back" %>
+
+    <div class="show-product__layout">
+      <div class="show-product__gallery">
+        <% if @product.image_url.present? %>
+          <%= image_tag @product.image_url, class: "show-product__image", alt: @product.title %>
+        <% else %>
+          <div class="show-product__placeholder">Нет фото</div>
+        <% end %>
       </div>
 
-      <div class="product-show__grid">
-        <div>
-          <% if @product.image_url.present? %>
-            <img src="<%= @product.image_url %>" alt="<%= @product.title %>">
+      <div class="show-product__summary">
+        <p class="show-product__meta">
+          <%= [@product.brand, @product.dealer].compact_blank.join(" · ") %>
+        </p>
+
+        <h1 class="show-product__title"><%= @product.title %></h1>
+
+        <div class="show-product__price">
+          <% if @product.price.present? %>
+            <%= number_to_currency(@product.price, unit: "BYN", format: "%n %u") %>
           <% else %>
-            <div class="product-card__placeholder">Нет изображения</div>
+            Цена по запросу
           <% end %>
         </div>
 
-        <div>
-          <div class="product-show__brand"><%= @product.brand %></div>
+        <div class="show-product__facts">
+          <% if @product.use_case.present? %>
+            <div><span>Назначение</span><strong><%= @product.use_case %></strong></div>
+          <% end %>
 
-          <h1 class="product-show__title"><%= @product.title %></h1>
+          <% if @product.construction_type.present? %>
+            <div><span>Конструкция</span><strong><%= @product.construction_type %></strong></div>
+          <% end %>
 
-          <div class="product-show__meta">
-            <strong>Бренд:</strong> <%= @product.brand %>
-          </div>
+          <% if @product.thermal_break.present? %>
+            <div><span>Терморазрыв</span><strong>Да</strong></div>
+          <% end %>
 
-          <div class="product-show__meta">
-            <strong>Категория:</strong> <%= @product.category %>
-          </div>
-
-          <div class="product-show__price">
-            <% if @product.price.present? %>
-              <%= number_with_precision(@product.price, precision: 2) %> <%= @product.currency %>
-            <% else %>
-              Цена по запросу
-            <% end %>
-          </div>
-
-          <div class="product-show__phones">
-            <div><a href="tel:+375292746333">+375 (29) 274-63-33</a></div>
-            <div><a href="tel:+375296685529">+375 (29) 668-55-29</a></div>
-          </div>
-
-          <div class="product-show__actions">
-            <a href="tel" class="btn btn__call">Позвонить</a>
-            <%= link_to "Назад в каталог", root_path, class: "btn btn--light" %>
-          </div>
-
-          <% if @product.description.present? %>
-            <div class="product-show__description">
-              <h2>Описание</h2>
-              <div class="product-show__description-body">
-                <%= simple_format(@product.description) %>
-              </div>
-            </div>
+          <% if @product.glass.present? %>
+            <div><span>Стекло</span><strong><%= @product.glass %></strong></div>
           <% end %>
         </div>
+
+        <%= render "shared/call_dropdown" %>
       </div>
     </div>
-  </section>
-<% end %>
+  </div>
+</section>
