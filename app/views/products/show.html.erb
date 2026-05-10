@@ -1,24 +1,28 @@
-<section class="show-product">
-  <div class="container show-product__inner">
-    <%= link_to "← Назад в каталог", root_path(anchor: "catalog"), class: "show-product__back" %>
+<% product_meta = [@product.brand, @product.dealer].compact_blank.join(" · ") %>
+<% product_details = [
+  ["Назначение", @product.use_case],
+  ["Материал", @product.material]
+].filter { |_label, value| value.present? } %>
 
-    <div class="show-product__layout">
-      <div class="show-product__gallery">
-        <% if @product.image_url.present? %>
-          <%= image_tag @product.image_url, class: "show-product__image", alt: @product.title %>
-        <% else %>
-          <div class="show-product__placeholder">Нет фото</div>
+<section class="product-show">
+  <div class="container">
+    <div class="product-show__layout">
+      <% if @product.image_url.present? %>
+        <%= image_tag @product.image_url, class: "product-show__image", alt: @product.title %>
+      <% else %>
+        <div class="product-show__placeholder">Нет фото</div>
+      <% end %>
+
+      <div class="product-show__content">
+        <%= link_to "← Назад в каталог", root_path(anchor: "catalog"), class: "btn btn--light product-show__back" %>
+
+        <% if product_meta.present? %>
+          <p class="product-show__meta"><%= product_meta %></p>
         <% end %>
-      </div>
 
-      <div class="show-product__summary">
-        <p class="show-product__meta">
-          <%= [@product.brand, @product.dealer].compact_blank.join(" · ") %>
-        </p>
+        <h1 class="product-show__title"><%= @product.title %></h1>
 
-        <h1 class="show-product__title"><%= @product.title %></h1>
-
-        <div class="show-product__price">
+        <div class="product-show__price">
           <% if @product.price.present? %>
             <%= number_to_currency(@product.price, unit: "BYN", format: "%n %u") %>
           <% else %>
@@ -26,25 +30,26 @@
           <% end %>
         </div>
 
-        <div class="show-product__facts">
-          <% if @product.use_case.present? %>
-            <div><span>Назначение</span><strong><%= @product.use_case %></strong></div>
-          <% end %>
+        <% if product_details.any? %>
+          <dl class="product-show__details">
+            <% product_details.each do |label, value| %>
+              <div class="product-show__detail">
+                <dt><%= label %></dt>
+                <dd><%= value %></dd>
+              </div>
+            <% end %>
+          </dl>
+        <% end %>
 
-          <% if @product.construction_type.present? %>
-            <div><span>Конструкция</span><strong><%= @product.construction_type %></strong></div>
-          <% end %>
+        <% if @product.description.present? %>
+          <div class="product-show__description">
+            <h2>Описание</h2>
+            <div class="product-show__description-body">
+              <%= simple_format(@product.description) %>
+            </div>
+          </div>
+        <% end %>
 
-          <% if @product.thermal_break.present? %>
-            <div><span>Терморазрыв</span><strong>Да</strong></div>
-          <% end %>
-
-          <% if @product.glass.present? %>
-            <div><span>Стекло</span><strong><%= @product.glass %></strong></div>
-          <% end %>
-        </div>
-
-        <%= render "shared/call_dropdown" %>
       </div>
     </div>
   </div>
