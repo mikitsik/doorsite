@@ -1,3 +1,9 @@
+@media (max-width: 75rem) {   /* ~1200 */
+  .catalog-grid {
+    gap: var(--space-2);
+  }
+}
+
 @media (max-width: 48rem) {      /* ~768px */
   .container {
     padding-inline: var(--space-4);
@@ -33,6 +39,10 @@
       transform: none;
       width: 100%;
     }
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -77,6 +87,10 @@
       padding: 1rem 2.5rem 1rem 2.125rem;
     }
   }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 26rem) {   /* ~416 */
@@ -95,3 +109,4 @@
     }
   }
 }
+

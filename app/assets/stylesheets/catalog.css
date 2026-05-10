@@ -140,35 +140,3 @@
   }
 }
 
-@media (max-width: 900px) {
-  .catalog {
-    &__toolbar {
-      align-items: start;
-      flex-wrap: wrap;
-    }
-
-    &__count {
-      margin-left: 0;
-    }
-  }
-
-  .catalog-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 560px) {
-  .catalog {
-    &__toolbar {
-      display: grid;
-    }
-
-    &__title {
-      font-size: 1.875rem;
-    }
-  }
-
-  .catalog-grid {
-    grid-template-columns: 1fr;
-  }
-}
