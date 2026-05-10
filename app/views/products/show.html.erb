@@ -7,14 +7,10 @@
 <section class="product-show" id="product-show">
   <div class="container">
     <div class="product-show__layout">
-      <% if @product.image_url.present? %>
-        <%= image_tag @product.image_url, class: "product-show__image", alt: @product.title %>
-      <% else %>
-        <div class="product-show__placeholder">Нет фото</div>
-      <% end %>
-
-      <div class="product-show__content">
-        <%= link_to "← Назад в каталог", params[:back_url].presence || request.referer.presence || root_path(anchor: "catalog"), class: "btn btn--light product-show__back" %>
+      <div class="product-show__summary">
+        <%= link_to "← Назад в каталог",
+                    params[:back_url].presence || request.referer.presence || root_path(anchor: "catalog"),
+                    class: "btn btn--light product-show__back" %>
 
         <% if product_meta.present? %>
           <p class="product-show__meta"><%= product_meta %></p>
@@ -40,35 +36,43 @@
             <% end %>
           </dl>
         <% end %>
-
-        <% if @product.description.present? %>
-          <div
-            class="product-show__description"
-            data-controller="description-toggle"
-            data-description-toggle-expanded-class="is-expanded"
-          >
-            <h2>Описание</h2>
-            <div
-              class="product-show__description-content"
-              data-description-toggle-target="content"
-            >
-              <%= simple_format(@product.description) %>
-            </div>
-
-            <button
-              type="button"
-              class="btn btn--light product-show__description-toggle"
-              data-action="description-toggle#toggle"
-              data-description-toggle-target="button"
-              aria-expanded="false"
-              hidden
-            >
-              Показать больше
-            </button>
-          </div>
-        <% end %>
-
       </div>
+
+      <div class="product-show__media">
+        <% if @product.image_url.present? %>
+          <%= image_tag @product.image_url, class: "product-show__image", alt: @product.title %>
+        <% else %>
+          <div class="product-show__placeholder">Нет фото</div>
+        <% end %>
+      </div>
+
+      <% if @product.description.present? %>
+        <div
+          class="product-show__description"
+          data-controller="description-toggle"
+          data-description-toggle-expanded-class="is-expanded"
+        >
+          <h2>Описание</h2>
+
+          <div
+            class="product-show__description-content"
+            data-description-toggle-target="content"
+          >
+            <%= simple_format(@product.description) %>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn--light product-show__description-toggle"
+            data-action="description-toggle#toggle"
+            data-description-toggle-target="button"
+            aria-expanded="false"
+            hidden
+          >
+            Показать больше
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
