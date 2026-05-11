@@ -8,6 +8,7 @@ module EntranceDoorsImport
     def call
       doc.css('offer').filter_map do |offer|
         next unless entrance_offer?(offer)
+        next if non_door_product?(offer)
 
         upsert_entrance_door!(map_offer(offer))
       end
@@ -17,6 +18,17 @@ module EntranceDoorsImport
 
     def entrance_offer?(offer)
       root_id_for(text(offer, 'categoryId')).in?(ENTRANCE_ROOT_IDS)
+    end
+
+    def non_door_product?(offer)
+      title = text(offer, 'name').to_s.downcase
+
+      %w[
+        набор
+        монтаж
+        утепл
+        комплект
+      ].any? { |word| title.include?(word) }
     end
 
     def map_offer(offer)
