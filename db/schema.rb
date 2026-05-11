@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_10_184300) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_11_083717) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -47,6 +47,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_10_184300) do
     t.integer "sealing_contours_count"
     t.text "searchable_text"
     t.string "series"
+    t.string "slug"
     t.decimal "source_price", precision: 10, scale: 2
     t.string "source_url"
     t.boolean "thermal_break", default: false, null: false
@@ -62,5 +63,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_10_184300) do
     t.index ["category"], name: "index_entrance_doors_on_category"
     t.index ["dealer", "external_id"], name: "index_entrance_doors_on_dealer_and_external_id", unique: true
     t.index ["series"], name: "index_entrance_doors_on_series"
+    t.index ["slug"], name: "index_entrance_doors_on_slug", unique: true
   end
 end

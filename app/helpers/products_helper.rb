@@ -8,6 +8,19 @@ module ProductsHelper
     build_compact_pages(pages)
   end
 
+  def catalog_product_path(product, **)
+    case product
+    when EntranceDoor
+      entrance_door_path(product, **)
+    when InteriorDoor
+      interior_door_path(product, **)
+    when DoorSystem
+      door_system_path(product, **)
+    else
+      raise ArgumentError, "Unknown catalog product: #{product.class.name}"
+    end
+  end
+
   private
 
   def pagination_window(current_page, total_pages)

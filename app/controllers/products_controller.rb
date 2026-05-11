@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
     @products = scope.offset((@page - 1) * PER_PAGE).limit(PER_PAGE)
   end
 
-  def show
-    @product = EntranceDoor.find(params[:id])
+  def show_entrance_door
+    @product = EntranceDoor.find_by!(slug: params[:slug])
+    render :show
   end
 end

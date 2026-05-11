@@ -2,5 +2,16 @@
 
 Rails.application.routes.draw do
   root 'products#index'
-  resources :products, only: %i[index show]
+
+  get '/vhodnaya-dver/:slug',
+      to: 'products#show_entrance_door',
+      as: :entrance_door
+
+  # get '/mezhkomnatnaya-dver/:slug',
+  #     to: 'products#show_interior_door',
+  #     as: :interior_door
+
+  # get '/dvernaya-sistema/:slug',
+  #     to: 'products#show_door_system',
+  #     as: :door_system
 end

@@ -8,8 +8,7 @@
   <div class="container">
     <div class="product-show__layout">
       <div class="product-show__summary">
-        <%= link_to "← Назад в каталог",
-                    params[:back_url].presence || request.referer.presence || root_path(anchor: "catalog"),
+        <%= link_to "← Назад", "javascript:history.back()",
                     class: "btn btn--light product-show__back" %>
 
         <% if product_meta.present? %>
