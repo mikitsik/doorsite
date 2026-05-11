@@ -4,24 +4,21 @@
   <path d="M11 25H7" stroke="currentColor" stroke-linecap="round"/>
 
   <path d="M16 20H38C39.1 20 40 20.9 40 22V45H16C14.9 45 14 44.1 14 43V22C14 20.9 14.9 20 16 20Z"
-        fill="white"
         stroke="currentColor"
         stroke-linejoin="round"/>
 
   <path d="M40 25H48L54 31V43C54 44.1 53.1 45 52 45H40V25Z"
-        fill="white"
         stroke="currentColor"
         stroke-linejoin="round"/>
 
   <path d="M44 30H48L51.5 35H44V30Z"
-        fill="white"
         stroke="currentColor"
         stroke-linejoin="round"/>
 
-  <circle cx="23" cy="45" r="4.5" fill="white" stroke="currentColor"/>
+  <circle cx="23" cy="45" r="4.5" stroke="currentColor"/>
   <circle cx="23" cy="45" r="2" fill="var(--icon-accent, #f2b23c)"/>
 
-  <circle cx="47" cy="45" r="4.5" fill="white" stroke="currentColor"/>
+  <circle cx="47" cy="45" r="4.5" stroke="currentColor"/>
   <circle cx="47" cy="45" r="2" fill="var(--icon-accent, #f2b23c)"/>
 
   <path d="M20 27H31"
@@ -37,9 +34,7 @@
         opacity="0.35"/>
 
   <path d="M18 14H28C30.8 14 33 16.2 33 19C33 21.8 30.8 24 28 24H18C15.2 24 13 21.8 13 19C13 16.2 15.2 14 18 14Z"
-        fill="white"
         stroke="currentColor"
-
         stroke-linejoin="round"/>
 
   <path d="M18 19H28"

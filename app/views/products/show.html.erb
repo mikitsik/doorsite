@@ -1,8 +1,4 @@
-<% product_meta = [@product.brand, @product.dealer].compact_blank.join(" · ") %>
-<% product_details = [
-  ["Назначение", @product.use_case],
-  ["Материал", @product.material]
-].filter { |_label, value| value.present? } %>
+<% product_details = [ @product.use_case, @product.material ].filter { |value| value.present? } %>
 
 <section class="product-show" id="show">
   <div class="container">
@@ -11,15 +7,13 @@
         <%= link_to "← Назад", "javascript:history.back()",
                     class: "btn btn--light product-show__back" %>
 
-        <% if product_meta.present? %>
-          <p class="product-show__meta"><%= product_meta %></p>
-        <% end %>
+        <p class="product-show__meta"><%= @product.brand %></p>
 
         <h1 class="product-show__title"><%= @product.title %></h1>
 
         <div class="product-show__price">
           <% if @product.price.present? %>
-            <%= number_to_currency(@product.price, unit: "BYN", format: "%n %u") %>
+            <%= number_to_currency(@product.price, unit: "руб", format: "%n %u") %>
           <% else %>
             Цена по запросу
           <% end %>
@@ -27,11 +21,8 @@
 
         <% if product_details.any? %>
           <dl class="product-show__details">
-            <% product_details.each do |label, value| %>
-              <div class="product-show__detail">
-                <dt><%= label %></dt>
-                <dd><%= value %></dd>
-              </div>
+            <% product_details.each do |value| %>
+              <p><%= value %></p>
             <% end %>
           </dl>
         <% end %>

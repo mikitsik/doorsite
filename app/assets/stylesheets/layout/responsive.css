@@ -2,6 +2,12 @@
   .catalog-grid {
     gap: var(--space-2);
   }
+
+  .product-show {
+    &__layout {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 }
 
 @media (max-width: 48rem) {      /* ~768px */
@@ -43,13 +49,6 @@
 
   .catalog-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .product-show {
-    &__layout {
-      grid-template-columns: 1fr;
-      gap: var(--space-5);
-    }
   }
 }
 
@@ -114,6 +113,27 @@
     &__ellipsis {
       min-width: 1rem;
       font-size: 0.8125rem;
+    }
+  }
+
+  .product-show {
+    padding-top: var(--space-4);
+
+    &__back {
+      width: 100%;
+    }
+
+    &__layout {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "summary"
+        "media"
+        "description";
+      gap: var(--space-5);
+    }
+
+    &__image {
+      max-height: none;
     }
   }
 }

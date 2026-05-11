@@ -1,7 +1,6 @@
 <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- карта -->
   <path d="M14 19H42C43.1 19 44 19.9 44 21V43C44 44.1 43.1 45 42 45H14C12.9 45 12 44.1 12 43V21C12 19.9 12.9 19 14 19Z"
-        fill="white"
         stroke="currentColor"
         stroke-linejoin="round"/>
 
@@ -24,7 +23,6 @@
   <!-- 0% (сдвинуто вверх и влево) -->
   <g transform="translate(-3 0)">
     <circle cx="50" cy="21" r="8"
-            fill="white"
             stroke="currentColor"/>
 
     <path d="M47.5 21C47.5 19.2 48.8 18 50.5 18C52.2 18 53.5 19.2 53.5 21C53.5 22.8 52.2 24 50.5 24C48.8 24 47.5 22.8 47.5 21Z"
