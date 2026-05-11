@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_11_083717) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_11_173915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -64,5 +64,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_11_083717) do
     t.index ["dealer", "external_id"], name: "index_entrance_doors_on_dealer_and_external_id", unique: true
     t.index ["series"], name: "index_entrance_doors_on_series"
     t.index ["slug"], name: "index_entrance_doors_on_slug", unique: true
+  end
+
+  create_table "interior_doors", force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_interior_doors_on_slug", unique: true
+  end
+
+  create_table "system_doors", force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_system_doors_on_slug", unique: true
   end
 end

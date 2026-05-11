@@ -1,4 +1,35 @@
 <main>
+  <div class="catalog-tabs">
+    <%= link_to "Входные двери",
+        root_path(catalog_type: "entrance_door", anchor: "catalog"),
+        class: ["catalog-tabs__item", ("is-active" if @catalog_type == "entrance_door")] %>
+
+    <%= link_to "Межкомнатные двери",
+        root_path(catalog_type: "interior_door", anchor: "catalog"),
+        class: ["catalog-tabs__item", ("is-active" if @catalog_type == "interior_door")] %>
+
+    <%= link_to "Дверные системы",
+        root_path(catalog_type: "door_system", anchor: "catalog"),
+        class: ["catalog-tabs__item", ("is-active" if @catalog_type == "door_system")] %>
+  </div>
+
+  <div data-controller="filters" class="catalog-filters">
+    <button
+      type="button"
+      class="catalog-filters__toggle"
+      data-action="filters#toggle"
+    >
+      Фильтры
+    </button>
+
+    <div
+      class="catalog-filters__panel <%= "is-open" if @filters_open %>"
+      data-filters-target="panel"
+    >
+      <%= render "products/filters/#{@catalog_type}" %>
+    </div>
+  </div>
+
   <section class="catalog" id="catalog" data-controller="catalog-scroll">
     <turbo-frame id="catalog">
       <div class="container catalog__inner">

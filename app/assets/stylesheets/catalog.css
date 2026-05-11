@@ -39,6 +39,17 @@
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--space-3);
   }
+
+  &-filters {
+    &__panel {
+      display: none;
+      margin-top: var(--space-4);
+    }
+
+    &__panel.is-open {
+      display: block;
+    }
+  }
 }
 
 .product-card {
