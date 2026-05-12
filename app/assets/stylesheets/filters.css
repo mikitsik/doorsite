@@ -1,0 +1,33 @@
+.filters-group {
+  &__title {
+    margin-bottom: 0.9rem;
+    color: var(--color-brown);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  &__options {
+    display: grid;
+    gap: 0.7rem;
+  }
+}
+
+.filters-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__input {
+    inline-size: 1rem;
+    block-size: 1rem;
+    accent-color: #b57a3d;
+    cursor: pointer;
+  }
+
+  &__label {
+    color: rgba(55, 35, 20, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+}

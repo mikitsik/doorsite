@@ -1,0 +1,28 @@
+<div class="filters-group">
+  <div class="filters-group__title">
+    Производитель
+  </div>
+
+  <%= form_with url: root_path(anchor: "catalog"),
+                method: :get,
+                data: { turbo_frame: "catalog" },
+                class: "catalog-filters__form" do %>
+
+    <%= hidden_field_tag :catalog_type, @catalog_type %>
+    <%= hidden_field_tag :filters, "open" %>
+
+    <% @brands.each do |brand| %>
+      <label class="filters-checkbox">
+        <%= check_box_tag(
+          "brands[]",
+          brand,
+          Array(params[:brands]).include?(brand),
+          class: "filters-checkbox__input",
+          onchange: "this.form.requestSubmit()"
+        ) %>
+
+        <span class="filters-checkbox__label"><%= brand %></span>
+      </label>
+    <% end %>
+  <% end %>
+</div>

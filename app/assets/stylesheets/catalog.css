@@ -115,6 +115,11 @@
         color: #4b321f;
       }
     }
+
+    &__form {
+      display: flex;
+      gap: var(--space-5);
+    }
   }
 }
 

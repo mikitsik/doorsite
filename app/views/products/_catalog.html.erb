@@ -42,16 +42,22 @@
           class="catalog-filters__panel <%= "is-open" if @filters_open %>"
           data-filters-target="panel"
         >
-          <%= render "products/filters/#{@catalog_type}" %>
+          <%= render "products/filters/#{@catalog_type}_filter" %>
         </div>
       </div>
 
       <div class="catalog-grid">
-        <% @products.each do |product| %>
+        <% products.each_with_index do |product, index| %>
           <article class="product-card">
             <%= link_to catalog_product_path(product, anchor: "show"), class: "product-card__image-wrap", data: { turbo_frame: "_top" } do %>
               <% if product.image_url.present? %>
-                <%= image_tag product.image_url, class: "product-card__image", loading: "lazy", alt: product.title %>
+                <%= image_tag product.image_url,
+                  class: "product-card__image",
+                  loading: index < 4 ? "eager" : "lazy",
+                  decoding: "async",
+                  fetchpriority: index < 2 ? "high" : "auto",
+                  alt: product.title
+                %>
               <% else %>
                 <div class="product-card__placeholder">Нет фото</div>
               <% end %>
