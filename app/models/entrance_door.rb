@@ -33,7 +33,6 @@ class EntranceDoor < ApplicationRecord
       brand,
       series,
       collection,
-      category,
       use_case,
       construction_type,
       outer_color,

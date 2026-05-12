@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_12_072643) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_12_153040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -68,18 +68,44 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_12_072643) do
 
   create_table "interior_doors", force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.boolean "available", default: true, null: false
     t.string "brand"
     t.string "category"
+    t.string "collection"
     t.datetime "created_at", null: false
     t.string "currency"
+    t.string "dealer"
+    t.text "description"
+    t.string "external_id"
+    t.string "finish"
+    t.string "glass"
+    t.integer "height_mm"
+    t.text "image_medium_url"
+    t.text "image_original_url"
+    t.text "image_thumbnail_url"
     t.string "image_url"
+    t.string "material"
+    t.decimal "old_price", precision: 10, scale: 2
     t.decimal "price", precision: 10, scale: 2
+    t.jsonb "raw_data", default: {}, null: false
+    t.text "searchable_text"
+    t.string "series"
     t.string "slug", null: false
+    t.decimal "source_price", precision: 10, scale: 2
+    t.text "source_url"
+    t.integer "thickness_mm"
     t.string "title", null: false
     t.datetime "updated_at", null: false
+    t.string "variant_color"
+    t.string "variant_group_key"
+    t.string "variant_name"
+    t.integer "width_mm"
     t.index ["brand"], name: "index_interior_doors_on_brand"
     t.index ["category"], name: "index_interior_doors_on_category"
+    t.index ["dealer", "external_id"], name: "index_interior_doors_on_dealer_and_external_id", unique: true
+    t.index ["series"], name: "index_interior_doors_on_series"
     t.index ["slug"], name: "index_interior_doors_on_slug", unique: true
+    t.index ["variant_group_key"], name: "index_interior_doors_on_variant_group_key"
   end
 
   create_table "system_doors", force: :cascade do |t|
