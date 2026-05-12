@@ -7,11 +7,11 @@ Rails.application.routes.draw do
       to: 'products#show_entrance_door',
       as: :entrance_door
 
-  # get '/mezhkomnatnaya-dver/:slug',
-  #     to: 'products#show_interior_door',
-  #     as: :interior_door
+  get '/mezhkomnatnaya-dver/:slug',
+      to: 'products#show_interior_door',
+      as: :interior_door
 
-  # get '/dvernaya-sistema/:slug',
-  #     to: 'products#show_door_system',
-  #     as: :door_system
+  get '/dvernaya-sistema/:slug',
+      to: 'products#show_system_door',
+      as: :system_door
 end

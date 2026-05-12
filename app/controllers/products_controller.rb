@@ -26,6 +26,16 @@ class ProductsController < ApplicationController
     render :show
   end
 
+  def show_interior_door
+    @product = InteriorDoor.find_by!(slug: params[:slug])
+    render :show
+  end
+
+  def show_system_door
+    @product = SystemDoor.find_by!(slug: params[:slug])
+    render :show
+  end
+
   private
 
   def selected_catalog_type

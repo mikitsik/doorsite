@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_11_173915) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_12_072643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -68,19 +68,33 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_11_173915) do
 
   create_table "interior_doors", force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.string "brand"
+    t.string "category"
     t.datetime "created_at", null: false
+    t.string "currency"
+    t.string "image_url"
+    t.decimal "price", precision: 10, scale: 2
     t.string "slug", null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand"], name: "index_interior_doors_on_brand"
+    t.index ["category"], name: "index_interior_doors_on_category"
     t.index ["slug"], name: "index_interior_doors_on_slug", unique: true
   end
 
   create_table "system_doors", force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.string "brand"
+    t.string "category"
     t.datetime "created_at", null: false
+    t.string "currency"
+    t.string "image_url"
+    t.decimal "price", precision: 10, scale: 2
     t.string "slug", null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand"], name: "index_system_doors_on_brand"
+    t.index ["category"], name: "index_system_doors_on_category"
     t.index ["slug"], name: "index_system_doors_on_slug", unique: true
   end
 end

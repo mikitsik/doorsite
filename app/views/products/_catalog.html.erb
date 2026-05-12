@@ -1,18 +1,13 @@
+<%
+  catalog_tabs = {
+    "entrance_doors" => "Входные двери",
+    "interior_doors" => "Межкомнатные двери",
+    "system_doors" => "Дверные системы"
+  }
+  catalog_title = catalog_tabs.fetch(@catalog_type, catalog_tabs["entrance_doors"])
+%>
+
 <main>
-  <div class="catalog-tabs">
-    <%= link_to "Входные двери",
-        root_path(catalog_type: "entrance_door", anchor: "catalog"),
-        class: ["catalog-tabs__item", ("is-active" if @catalog_type == "entrance_door")] %>
-
-    <%= link_to "Межкомнатные двери",
-        root_path(catalog_type: "interior_door", anchor: "catalog"),
-        class: ["catalog-tabs__item", ("is-active" if @catalog_type == "interior_door")] %>
-
-    <%= link_to "Дверные системы",
-        root_path(catalog_type: "door_system", anchor: "catalog"),
-        class: ["catalog-tabs__item", ("is-active" if @catalog_type == "door_system")] %>
-  </div>
-
   <div data-controller="filters" class="catalog-filters">
     <button
       type="button"
@@ -33,9 +28,26 @@
   <section class="catalog" id="catalog" data-controller="catalog-scroll">
     <turbo-frame id="catalog">
       <div class="container catalog__inner">
+        <nav class="catalog-tabs" aria-label="Тип каталога">
+          <%= link_to "Входные двери",
+                      root_path(catalog_type: "entrance_doors", anchor: "catalog"),
+                      class: ["catalog-tabs__item", ("is-active" if @catalog_type == "entrance_doors")],
+                      "aria-current": ("page" if @catalog_type == "entrance_doors") %>
+
+          <%= link_to "Межкомнатные двери",
+                      root_path(catalog_type: "interior_doors", anchor: "catalog"),
+                      class: ["catalog-tabs__item", ("is-active" if @catalog_type == "interior_doors")],
+                      "aria-current": ("page" if @catalog_type == "interior_doors") %>
+
+          <%= link_to "Дверные системы",
+                      root_path(catalog_type: "system_doors", anchor: "catalog"),
+                      class: ["catalog-tabs__item", ("is-active" if @catalog_type == "system_doors")],
+                      "aria-current": ("page" if @catalog_type == "system_doors") %>
+        </nav>
+
         <div class="catalog__toolbar">
           <div class="catalog__head">
-            <h2 class="catalog__title">Входные двери</h2>
+            <h2 class="catalog__title"><%= catalog_title %></h2>
           </div>
 
           <div class="catalog__count">
@@ -77,7 +89,7 @@
           <nav class="catalog-pagination" aria-label="Пагинация каталога">
             <% if @page > 1 %>
               <%= link_to "←",
-                          root_path(page: @page - 1, anchor: "catalog"),
+                          root_path(catalog_type: @catalog_type, page: @page - 1, anchor: "catalog"),
                           class: "catalog-pagination__link catalog-pagination__link--arrow",
                           "aria-label": "Предыдущая страница" %>
             <% else %>
@@ -90,7 +102,7 @@
                 <span class="catalog-pagination__ellipsis">…</span>
               <% else %>
                 <%= link_to item,
-                            root_path(page: item, anchor: "catalog"),
+                            root_path(catalog_type: @catalog_type, page: item, anchor: "catalog"),
                             class: "catalog-pagination__link #{'is-active' if item == @page}",
                             "aria-current": ("page" if item == @page) %>
               <% end %>
@@ -98,7 +110,7 @@
 
             <% if @page < @total_pages %>
               <%= link_to "→",
-                          root_path(page: @page + 1, anchor: "catalog"),
+                          root_path(catalog_type: @catalog_type, page: @page + 1, anchor: "catalog"),
                           class: "catalog-pagination__link catalog-pagination__link--arrow",
                           "aria-label": "Следующая страница" %>
             <% else %>

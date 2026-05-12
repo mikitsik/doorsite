@@ -14,8 +14,8 @@ module ProductsHelper
       entrance_door_path(product, **)
     when InteriorDoor
       interior_door_path(product, **)
-    when DoorSystem
-      door_system_path(product, **)
+    when SystemDoor
+      system_door_path(product, **)
     else
       raise ArgumentError, "Unknown catalog product: #{product.class.name}"
     end
