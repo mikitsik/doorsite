@@ -9,10 +9,9 @@ class InteriorDoor < ApplicationRecord
   before_save :build_searchable_text
 
   validates :dealer, presence: true, inclusion: { in: DEALERS }
-  validates :external_id, presence: true
-  validates :title, presence: true
+  validates :external_id, :title, :variant_group_key, presence: true
   validates :slug, presence: true, uniqueness: true
-  validates :dealer, uniqueness: { scope: :external_id }
+  validates :external_id, uniqueness: { scope: :dealer }
 
   scope :active, -> { where(active: true) }
   scope :available, -> { where(available: true) }

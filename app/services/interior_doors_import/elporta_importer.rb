@@ -167,15 +167,15 @@ module InteriorDoorsImport
     end
 
     def image_thumbnail_url(product)
-      text(product, 'picture')
+      text(product, 'pictures picture thumbnail')
     end
 
     def image_medium_url(product)
-      text(product, 'picture_medium')
+      text(product, 'pictures picture medium')
     end
 
     def image_original_url(product)
-      text(product, 'picture_original')
+      text(product, 'pictures picture original')
     end
 
     def description(product)
