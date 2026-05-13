@@ -1,0 +1,128 @@
+<%
+  product_image_url =
+    @product.image_original_url.presence ||
+    @product.image_medium_url.presence ||
+    @product.image_url.presence ||
+    @product.image_thumbnail_url
+
+  product_meta = [@product.brand.presence, @product.dealer.presence].compact
+
+  product_specs = [
+    ["Категория", @product.category],
+    ["Серия", @product.series],
+    ["Материал", @product.material],
+    ["Покрытие", @product.finish],
+    ["Стекло", @product.glass],
+    ["Цвет", @product.variant_color]
+  ].select { |_label, value| value.present? }
+%>
+
+<section class="product-show product-show--interior" id="show">
+  <div class="container">
+    <div class="product-show__layout">
+      <div class="product-show__summary">
+        <%= link_to "← Назад", "javascript:history.back()",
+                    class: "btn btn--light product-show__back" %>
+
+        <% if product_meta.any? %>
+          <p class="product-show__meta"><%= product_meta.join(" · ") %></p>
+        <% end %>
+
+        <h1 class="product-show__title"><%= @product.title %></h1>
+
+        <div class="product-show__price">
+          <% if @product.price.present? %>
+            <%= number_to_currency(@product.price, unit: "руб", format: "%n %u") %>
+          <% else %>
+            Цена по запросу
+          <% end %>
+        </div>
+
+        <% if @variants.size > 1 %>
+          <div class="product-show__variants" aria-labelledby="product-variants-title">
+            <h2 class="product-show__variants-title" id="product-variants-title">Цвет</h2>
+
+            <div class="product-show__variant-list">
+              <% @variants.each do |variant| %>
+                <%
+                  variant_image_url =
+                    variant.image_thumbnail_url.presence ||
+                    variant.image_medium_url.presence ||
+                    variant.image_url.presence ||
+                    variant.image_original_url
+
+                  variant_label =
+                    variant.variant_color.presence ||
+                    variant.variant_name.presence ||
+                    "Вариант"
+
+                  variant_classes = ["product-show__variant"]
+                  variant_classes << "is-active" if variant.id == @product.id
+                %>
+
+                <%= link_to interior_door_path(variant, anchor: "show"),
+                            class: variant_classes.join(" "),
+                            data: { turbo_frame: "_top", turbo_prefetch: false } do %>
+                  <% if variant_image_url.present? %>
+                    <%= image_tag variant_image_url,
+                                  class: "product-show__variant-thumb",
+                                  alt: variant_label %>
+                  <% end %>
+
+                  <span class="product-show__variant-label"><%= variant_label %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if product_specs.any? %>
+          <dl class="product-show__specs">
+            <% product_specs.each do |label, value| %>
+              <div class="product-show__spec">
+                <dt class="product-show__spec-name"><%= label %></dt>
+                <dd class="product-show__spec-value"><%= value %></dd>
+              </div>
+            <% end %>
+          </dl>
+        <% end %>
+      </div>
+
+      <div class="product-show__media">
+        <% if product_image_url.present? %>
+          <%= image_tag product_image_url, class: "product-show__image", alt: @product.title %>
+        <% else %>
+          <div class="product-show__placeholder">Нет фото</div>
+        <% end %>
+      </div>
+
+      <% if @product.description.present? %>
+        <div
+          class="product-show__description"
+          data-controller="description-toggle"
+          data-description-toggle-expanded-class="is-expanded"
+        >
+          <h2>Описание</h2>
+
+          <div
+            class="product-show__description-content"
+            data-description-toggle-target="content"
+          >
+            <%= simple_format(@product.description) %>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn--light product-show__description-toggle"
+            data-action="description-toggle#toggle"
+            data-description-toggle-target="button"
+            aria-expanded="false"
+            hidden
+          >
+            Показать больше
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

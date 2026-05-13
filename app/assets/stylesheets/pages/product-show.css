@@ -122,6 +122,103 @@
     }
   }
 
+  &__variants {
+    width: 100%;
+    margin: 0 0 var(--space-4);
+  }
+
+  &__variants-title {
+    margin: 0 0 var(--space-2);
+    color: var(--color-muted);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  &__variant-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  &__variant {
+    min-height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.35rem 0.8rem 0.35rem 0.35rem;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 0.25rem 0.75rem rgba(33, 24, 16, 0.04);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    transition:
+      border-color var(--motion-base) var(--ease-standard),
+      box-shadow var(--motion-base) var(--ease-standard),
+      color var(--motion-base) var(--ease-standard);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-primary-dark);
+      border-color: rgba(111, 84, 58, 0.38);
+      box-shadow: var(--shadow-card);
+    }
+
+    &.is-active {
+      color: var(--color-primary-dark);
+      background: var(--color-white, #fff);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 0.1875rem rgba(111, 84, 58, 0.12);
+    }
+  }
+
+  &__variant-thumb {
+    width: 2.25rem;
+    height: 2.25rem;
+    flex: 0 0 auto;
+    border-radius: calc(var(--radius-sm) - 0.125rem);
+    background: var(--color-surface);
+    object-fit: cover;
+  }
+
+  &__variant-label {
+    overflow-wrap: anywhere;
+  }
+
+  &__specs {
+    width: 100%;
+    margin: 0;
+    display: grid;
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__spec {
+    display: grid;
+    grid-template-columns: minmax(7rem, 0.45fr) minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__spec-name {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  &__spec-value {
+    margin: 0;
+    color: var(--color-text);
+    font-weight: 600;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
   &__description-content {
     position: relative;
     max-height: 15rem;
