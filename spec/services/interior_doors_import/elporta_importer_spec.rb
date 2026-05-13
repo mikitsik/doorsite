@@ -47,6 +47,48 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
           </glass>
         </glasses>
 
+        <properties>
+          <property>
+            <id>61</id>
+            <title>Описание</title>
+          </property>
+          <property>
+            <id>16</id>
+            <title>Материал</title>
+          </property>
+          <property>
+            <id>11</id>
+            <title>Отделка</title>
+          </property>
+          <property>
+            <id>25</id>
+            <title>Толщина, мм</title>
+          </property>
+        </properties>
+
+        <propertyValues>
+          <propertyValue>
+            <id>1001</id>
+            <property_id>61</property_id>
+            <title>Описание двери Legno</title>
+          </propertyValue>
+          <propertyValue>
+            <id>1002</id>
+            <property_id>16</property_id>
+            <title>МДФ + массив сосны</title>
+          </propertyValue>
+          <propertyValue>
+            <id>1003</id>
+            <property_id>11</property_id>
+            <title>Эко Шпон</title>
+          </propertyValue>
+          <propertyValue>
+            <id>1004</id>
+            <property_id>25</property_id>
+            <title>36</title>
+          </propertyValue>
+        </propertyValues>
+
         <products>
           <product>
             <id>6507</id>
@@ -54,8 +96,10 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
             <url>https://elporta.by/legno-39-milk-oak</url>
             <category_id>89</category_id>
             <price>76.38</price>
+            <old_price>90.00</old_price>
             <color_id>20</color_id>
             <glass_id>5</glass_id>
+
             <pictures>
               <picture>
                 <thumbnail>https://example.com/thumb.jpg</thumbnail>
@@ -63,6 +107,27 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
                 <original>https://example.com/original.jpg</original>
               </picture>
             </pictures>
+
+            <options>
+              <option>
+                <title>200*60</title>
+              </option>
+            </options>
+
+            <propertyValues>
+              <propertyValue>
+                <id>1001</id>
+              </propertyValue>
+              <propertyValue>
+                <id>1002</id>
+              </propertyValue>
+              <propertyValue>
+                <id>1003</id>
+              </propertyValue>
+              <propertyValue>
+                <id>1004</id>
+              </propertyValue>
+            </propertyValues>
           </product>
 
           <product>
@@ -72,6 +137,12 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
             <category_id>89</category_id>
             <price>80.00</price>
             <color_id>21</color_id>
+
+            <propertyValues>
+              <propertyValue>
+                <id>1001</id>
+              </propertyValue>
+            </propertyValues>
           </product>
 
           <product>
@@ -81,14 +152,6 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
             <price>500.00</price>
           </product>
         </products>
-
-        <propertyValues>
-          <propertyValue>
-            <product_id>6507</product_id>
-            <title>Описание</title>
-            <value><![CDATA[<p>Описание двери Legno</p>]]></value>
-          </propertyValue>
-        </propertyValues>
       </catalog>
     XML
   end
@@ -101,19 +164,59 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
     FileUtils.rm_f(file_path)
   end
 
-  it 'imports only interior doors and resolves color, glass and images' do
-    count = described_class.new(file_path: file_path).call
+  def import!
+    described_class.new(file_path: file_path).call
+  end
+
+  def first_door
+    InteriorDoor.find_by!(external_id: '6507')
+  end
+
+  it 'imports only interior doors' do
+    count = import!
 
     expect(count).to eq(2)
     expect(InteriorDoor.count).to eq(2)
+  end
 
-    first = InteriorDoor.find_by!(external_id: '6507')
+  it 'resolves main product fields' do
+    import!
 
-    expect(first.dealer).to eq('elporta')
-    expect(first.variant_group_key).to eq('elporta:89:legno-39')
-    expect(first.variant_color).to eq('Milk Oak')
-    expect(first.glass).to eq('Magic Fog')
-    expect(first.image_url).to eq('https://example.com/original.jpg')
-    expect(first.description).to eq('Описание двери Legno')
+    expect(first_door.dealer).to eq('elporta')
+    expect(first_door.variant_group_key).to eq('elporta:89:legno-39')
+    expect(first_door.variant_color).to eq('Milk Oak')
+    expect(first_door.glass).to eq('Magic Fog')
+    expect(first_door.image_url).to eq('https://example.com/original.jpg')
+  end
+
+  it 'resolves dimensions and commercial fields' do
+    import!
+
+    expect(first_door.height_mm).to eq(2000)
+    expect(first_door.width_mm).to eq(600)
+    expect(first_door.thickness_mm).to eq(36)
+    expect(first_door.price.to_f).to eq(76.38)
+    expect(first_door.old_price.to_f).to eq(90.0)
+  end
+
+  it 'resolves properties and description blocks' do
+    import!
+
+    expect(first_door.description).to eq('Описание двери Legno МДФ + массив сосны Эко Шпон')
+    expect(first_door.material).to eq('МДФ + массив сосны')
+    expect(first_door.finish).to eq('Эко Шпон')
+    expect(first_door.raw_data['description_blocks']).to include('Описание двери Legno')
+  end
+
+  it 'stores normalized raw properties' do
+    import!
+
+    expect(first_door.raw_data['properties']).to include(
+      {
+        'property_id' => '61',
+        'property' => 'Описание',
+        'title' => 'Описание двери Legno'
+      }
+    )
   end
 end

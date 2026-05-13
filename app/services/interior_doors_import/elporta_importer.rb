@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
+require_relative 'elporta/category_resolver'
+require_relative 'elporta/media_resolver'
+require_relative 'elporta/description_builder'
+
 module InteriorDoorsImport
   class ElportaImporter < BaseImporter
+    include Elporta::CategoryResolver
+    include Elporta::MediaResolver
+    include Elporta::DescriptionBuilder
+
     DEALER = 'elporta'
-    INTERIOR_ROOT_ID = '42'
+    BRAND = 'Elporta'
 
     private
 
@@ -24,22 +32,19 @@ module InteriorDoorsImport
         external_id: text(product, 'id'),
         slug: nil,
         title: title,
-        brand: 'Elporta',
+        brand: BRAND,
         series: category_name(category_id),
         collection: top_series(category_id),
         category: category_name(category_id),
         variant_group_key: variant_group_key(title, category_id),
         variant_name: color_name(color_id),
         variant_color: color_name(color_id),
-        material: material(category_id),
-        finish: finish(category_id),
+        material: material(category_id, product),
+        finish: finish(category_id, product),
         glass: glass_name(text(product, 'glass_id')),
         height_mm: option_height(product),
         width_mm: option_width(product),
-        thickness_mm: property_number(product, %w[
-                                        Толщина полотна
-                                        Толщина двери
-                                      ]),
+        thickness_mm: property_number(product, ['Толщина полотна', 'Толщина полотна/коробки', 'Толщина, мм']),
         price: source_price,
         source_price: source_price,
         old_price: decimal(text(product, 'old_price')),
@@ -56,10 +61,6 @@ module InteriorDoorsImport
       }
     end
 
-    def interior_category?(category_id)
-      path_ids(category_id).include?(INTERIOR_ROOT_ID)
-    end
-
     def categories
       @categories ||= doc.css('catalog categories category').to_h do |category|
         [
@@ -74,56 +75,42 @@ module InteriorDoorsImport
 
     def colors
       @colors ||= doc.css('catalog colors color').to_h do |color|
-        [
-          text(color, 'id'),
-          text(color, 'title')
-        ]
+        [text(color, 'id'), text(color, 'title')]
       end
     end
 
     def glasses
       @glasses ||= doc.css('catalog glasses glass').to_h do |glass|
-        [
-          text(glass, 'id'),
-          text(glass, 'title')
-        ]
+        [text(glass, 'id'), text(glass, 'title')]
+      end
+    end
+
+    def properties
+      @properties ||= doc.css('catalog properties property').to_h do |property|
+        [text(property, 'id'), text(property, 'title')]
       end
     end
 
     def property_values
-      @property_values ||= doc.css('catalog propertyValues propertyValue').group_by do |node|
-        text(node, 'product_id')
+      @property_values ||= doc.css('catalog > propertyValues > propertyValue').to_h do |property_value|
+        [
+          text(property_value, 'id'),
+          {
+            title: text(property_value, 'title'),
+            property_id: text(property_value, 'property_id') || text(property_value, 'propertyId')
+          }
+        ]
       end
     end
 
-    def category_name(category_id)
-      categories.dig(category_id, :title)
-    end
-
-    def path_ids(category_id)
-      ids = []
-      current_id = category_id
-
-      while current_id.present?
-        ids << current_id
-        current_id = categories.dig(current_id, :parent_id)
+    def product_property_values(product)
+      product.css('> propertyValues > propertyValue').filter_map do |property_value|
+        property_values[text(property_value, 'id')]
       end
-
-      ids
-    end
-
-    def top_series(category_id)
-      path = path_ids(category_id)
-
-      return unless path.length >= 2
-
-      category_name(path.first)
     end
 
     def variant_group_key(title, category_id)
-      normalized_title = title.to_s.parameterize
-
-      "#{DEALER}:#{category_id}:#{normalized_title}"
+      "#{DEALER}:#{category_id}:#{title.to_s.parameterize}"
     end
 
     def color_name(color_id)
@@ -134,68 +121,15 @@ module InteriorDoorsImport
       glasses[glass_id]
     end
 
-    def material(category_id)
-      path_titles(category_id).find do |title|
-        [
-          'Эко Шпон',
-          'Полипропилен',
-          'Эксимер',
-          'Флекс Эмаль',
-          'Массив',
-          'Винил',
-          'Хард Флекс',
-          'Эмалит',
-          'CPL',
-          'Финиш Флекс',
-          'Шпон'
-        ].any? { |keyword| title.include?(keyword) }
-      end
-    end
-
-    def finish(category_id)
-      material(category_id)
-    end
-
-    def path_titles(category_id)
-      path_ids(category_id).map { |id| category_name(id) }.compact
-    end
-
-    def image_url(product)
-      image_original_url(product) ||
-        image_medium_url(product) ||
-        image_thumbnail_url(product)
-    end
-
-    def image_thumbnail_url(product)
-      text(product, 'pictures picture thumbnail')
-    end
-
-    def image_medium_url(product)
-      text(product, 'pictures picture medium')
-    end
-
-    def image_original_url(product)
-      text(product, 'pictures picture original')
-    end
-
-    def description(product)
-      description_value = product_property_values(product).find do |node|
-        text(node, 'title') == 'Описание'
-      end
-
-      return if description_value.blank?
-
-      clean_html(text(description_value, 'value'))
-    end
-
     def property_number(product, titles)
       node = product_property_values(product).find do |property|
-        titles.include?(text(property, 'title'))
+        title = property_title(property)
+        titles.any? { |expected| title.to_s.downcase.include?(expected.downcase) }
       end
 
       return if node.blank?
 
-      text(node, 'value').to_s[/\d+/]&.to_i
+      property_value(node).to_s[/\d+/]&.to_i
     end
 
     def option_height(product)
@@ -213,14 +147,7 @@ module InteriorDoorsImport
       match = option.match(/(\d+)\*(\d+)/)
       return unless match
 
-      [
-        match[1].to_i * 10,
-        match[2].to_i * 10
-      ]
-    end
-
-    def product_property_values(product)
-      property_values[text(product, 'id')] || []
+      [match[1].to_i * 10, match[2].to_i * 10]
     end
 
     def raw_data(product)
@@ -228,13 +155,20 @@ module InteriorDoorsImport
         category_id: text(product, 'category_id'),
         color_id: text(product, 'color_id'),
         glass_id: text(product, 'glass_id'),
-        properties: product_property_values(product).map do |node|
-          {
-            title: text(node, 'title'),
-            value: text(node, 'value')
-          }
-        end
+        description_blocks: description_blocks(product),
+        category_path: path_titles(text(product, 'category_id')),
+        properties: raw_properties(product)
       }
+    end
+
+    def raw_properties(product)
+      product_property_values(product).map do |property_value|
+        {
+          property_id: property_value[:property_id],
+          property: property_name(property_value[:property_id]),
+          title: property_value[:title]
+        }
+      end
     end
   end
 end
