@@ -49,16 +49,14 @@
       <div class="catalog-grid">
         <% products.each_with_index do |product, index| %>
           <article class="product-card">
-            <%= link_to catalog_product_path(product, anchor: "show"), class: "product-card__image-wrap", data: {
-              turbo_frame: "_top",
-              turbo_prefetch: false
-            } do %>
+            <%= link_to catalog_product_path(product, anchor: "show"),
+                        class: "product-card__image-wrap",
+                        data: { turbo: false } do %>
               <% if product.image_url.present? %>
                 <%= image_tag product.image_url,
                   class: "product-card__image",
                   loading: index < 4 ? "eager" : "lazy",
                   decoding: "async",
-                  fetchpriority: index < 2 ? "high" : "auto",
                   alt: product.title
                 %>
               <% else %>
@@ -70,7 +68,9 @@
               <div class="product-card__meta"><%= product.brand %></div>
 
               <h3 class="product-card__title">
-                <%= link_to product.title, catalog_product_path(product), data: { turbo_frame: "_top" } %>
+                <%= link_to product.title,
+                        catalog_product_path(product, anchor: "show"),
+                        data: { turbo: false } %>
               </h3>
 
               <div class="product-card__price">

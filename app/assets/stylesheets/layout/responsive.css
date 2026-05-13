@@ -50,6 +50,16 @@
   .catalog-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  .product-show {
+    &__layout {
+      gap: var(--space-4);
+    }
+
+    &__variant {
+      width: 100%;
+    }
+  }
 }
 
 @media (max-width: 30rem) {   /* ~480 */
@@ -140,7 +150,6 @@
         "summary"
         "media"
         "description";
-      gap: var(--space-5);
     }
 
     &__image {
