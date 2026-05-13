@@ -5,8 +5,6 @@
     @product.image_url.presence ||
     @product.image_thumbnail_url
 
-  product_meta = [@product.brand.presence, @product.dealer.presence].compact
-
   product_specs = [
     ["Категория", @product.category],
     ["Серия", @product.series],
@@ -24,9 +22,7 @@
         <%= link_to "← Назад", "javascript:history.back()",
                     class: "btn btn--light product-show__back" %>
 
-        <% if product_meta.any? %>
-          <p class="product-show__meta"><%= product_meta.join(" · ") %></p>
-        <% end %>
+        <p class="product-show__meta"><%= @product.brand %></p>
 
         <h1 class="product-show__title"><%= @product.title %></h1>
 
@@ -62,7 +58,7 @@
 
                 <%= link_to interior_door_path(variant, anchor: "show"),
                             class: variant_classes.join(" "),
-                            data: { turbo_frame: "_top", turbo_prefetch: false } do %>
+                            data: { turbo_frame: "_top", turbo_prefetch: false, turbo_action: "replace" } do %>
                   <% if variant_image_url.present? %>
                     <%= image_tag variant_image_url,
                                   class: "product-show__variant-thumb",
