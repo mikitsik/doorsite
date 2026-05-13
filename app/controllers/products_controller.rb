@@ -26,17 +26,23 @@ class ProductsController < ApplicationController
 
   def show_entrance_door
     @product = EntranceDoor.find_by!(slug: params[:slug])
-    render :show
+    render :show_entrance_door
   end
 
   def show_interior_door
     @product = InteriorDoor.find_by!(slug: params[:slug])
-    render :show
+
+    @variants = InteriorDoor
+                .active
+                .where(variant_group_key: @product.variant_group_key)
+                .order(:variant_color)
+
+    render :show_interior_door
   end
 
   def show_system_door
     @product = SystemDoor.find_by!(slug: params[:slug])
-    render :show
+    render :show_system_door
   end
 
   private
