@@ -5,8 +5,10 @@ export default class extends Controller {
   static classes = ["expanded"]
 
   connect() {
-    this.updateVisibility()
-    this.updateButton()
+    requestAnimationFrame(() => {
+      this.updateVisibility()
+      this.updateButton()
+    })
   }
 
   toggle() {
@@ -15,7 +17,8 @@ export default class extends Controller {
   }
 
   updateVisibility() {
-    const collapsible = this.contentTarget.scrollHeight > this.contentTarget.clientHeight + 1
+    const collapsible =
+      this.contentTarget.scrollHeight > this.contentTarget.clientHeight + 1
 
     this.element.classList.toggle("is-collapsible", collapsible)
     this.buttonTarget.hidden = !collapsible
