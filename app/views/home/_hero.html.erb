@@ -2,9 +2,11 @@
   <div class="container hero__inner">
     <div class="hero__content">
       <div class="hero__topbar">
-        <%= link_to root_path, class: "hero__logo" do %>
-          <span class="hero__logo-dark">Дверной.</span>
-          <span class="hero__logo-light">бел</span>
+        <%= link_to root_path, class: "hero__logo", aria_label: "Дверной.бел" do %>
+          <span class="hero__logo-text">
+            <span class="hero__logo-dark">ДВЕРНОЙ.</span>
+            <span class="hero__logo-light">БЕЛ</span>
+          </span>
         <% end %>
         <div class="hero__phones">
           <a href="tel:+375292746333">+375 (29) 274-63-33</a>

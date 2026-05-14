@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <% site_name = "Дверной.бел" %>
-    <% default_title = "Купить двери в Беларуси — входные и межкомнатные двери | #{site_name}" %>
+    <% site_name = "ДВЕРНОЙ.БЕЛ" %>
+    <% default_title = "#{site_name} — купить и установить входные и межкомнатные двери" %>
 
     <% default_description = "Каталог входных и межкомнатных дверей в Беларуси. Поможем выбрать дверь для квартиры, дома или офиса. Цены, рассрочка, кредит, доставка и установка." %>
 
@@ -12,6 +12,7 @@
 
     <title><%= page_title %></title>
 
+    <meta name="google-site-verification" content="Y9Fy5srpZICkDdjg2XgXNlvNpBN_nR2NOA3bsAGiBrI" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8">
     <meta name="description" content="<%= page_description %>">
@@ -39,6 +40,16 @@
     <meta name="twitter:title" content="<%= page_title %>">
     <meta name="twitter:description" content="<%= page_description %>">
     <meta name="twitter:image" content="<%= asset_url 'og-image.jpg' %>">
+
+    <script type="application/ld+json">
+    <%= raw({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "ДВЕРНОЙ.БЕЛ",
+      url: "https://дверной.бел",
+      logo: "https://дверной.бел/icon.png"
+    }.to_json) %>
+    </script>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
