@@ -1,6 +1,6 @@
 .product-show {
   background: var(--color-surface);
-  padding: var(--space-5) 0 3.75rem;
+  padding: var(--space-5) 0 1.75rem;
 
   &__layout {
     display: grid;
@@ -80,7 +80,58 @@
   }
 
   &__back {
-    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    opacity: 0.72;
+
+    color: #5b4636;
+    text-decoration: none;
+
+    transition:
+      transform var(--motion-fast),
+      opacity var(--motion-fast);
+
+    &.back_top {
+      margin-bottom: var(--space-6);
+    }
+
+    &.back_down {
+      margin: var(--space-7) auto 0;
+      justify-content: center;
+      width: fit-content;
+    }
+
+    &:hover {
+      transform: translateX(-0.125rem);
+
+      .product-show__back-icon {
+        transform: translateX(-0.18rem);
+      }
+    }
+
+    &-icon {
+      width: 1.2rem;
+      height: 1.2rem;
+      flex-shrink: 0;
+
+      --icon-circle-color: transparent;
+      --icon-arrow-color: currentColor;
+
+      filter:
+        drop-shadow(0 0.12rem 0.2rem rgba(91, 70, 54, 0.14));
+
+      transition: transform var(--motion-fast);
+    }
+
+    &-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+
+      text-shadow:
+        0 0.06rem 0.12rem rgba(91, 70, 54, 0.08);
+    }
   }
 
   &__meta {
@@ -122,8 +173,8 @@
   &__variant-list {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
-    justify-content: space-around;
+    gap: var(--space-5);
+    margin-top: 1.25rem;
   }
 
   &__variant {
@@ -133,7 +184,7 @@
     gap: var(--space-2);
     padding: 0.35rem 0.8rem 0.35rem 0.35rem;
     color: var(--color-text);
-    background: var(--color-bg);
+    background: var(--color-white, #fff);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     box-shadow: 0 0.25rem 0.75rem rgba(33, 24, 16, 0.04);
@@ -155,9 +206,9 @@
 
     &.is-active {
       color: var(--color-primary-dark);
-      background: var(--color-white, #fff);
+      background: var(--color-bg);
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 0.3rem rgba(111, 84, 58, 0.12);
+      box-shadow: 0 0 0 0.1875rem rgba(111, 84, 58, 0.12);
     }
   }
 

@@ -19,7 +19,10 @@
       <div class="container">
         <div class="product-show__layout">
           <div class="product-show__summary">
-            <%= link_to "← Назад", "javascript:history.back()", class: "btn btn--light product-show__back" %>
+            <%= link_to "javascript:history.back()", class: "product-show__back back_top" do %>
+              <%= inline_svg_tag "icons/back-arrow.svg", class: "product-show__back-icon" %>
+              <span class="product-show__back-label">в каталог</span>
+            <% end %>
 
             <p class="product-show__meta"><%= @product.brand %></p>
 
@@ -116,6 +119,11 @@
             </div>
           <% end %>
         </div>
+
+        <%= link_to "javascript:history.back()", class: "product-show__back back_down" do %>
+          <%= inline_svg_tag "icons/back-arrow.svg", class: "product-show__back-icon" %>
+          <span class="product-show__back-label">в каталог</span>
+        <% end %>
       </div>
     </section>
   <% end %>

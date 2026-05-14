@@ -56,8 +56,13 @@
       gap: var(--space-4);
     }
 
-    &__variant {
-      width: 100%;
+    &__back {
+      margin-inline: auto;
+    }
+
+    &__variant-list {
+      gap: var(--space-4);
+      justify-content: center;
     }
   }
 }
@@ -139,10 +144,6 @@
 
   .product-show {
     padding-top: var(--space-4);
-
-    &__back {
-      width: 100%;
-    }
 
     &__layout {
       grid-template-columns: 1fr;
