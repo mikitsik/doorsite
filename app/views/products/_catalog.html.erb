@@ -16,6 +16,12 @@
     "interior_doors" => "Фильтры межкомнатных",
     "system_doors" => "Фильтры систем"
   }
+
+  mobile_filter_labels = {
+    "entrance_doors" => "Фильтры входных дверей",
+    "interior_doors" => "Фильтры межкомнатных дверей",
+    "system_doors" => "Фильтры дверных систем"
+  }
 %>
 
 <section class="catalog" id="catalog" data-controller="catalog-scroll">
@@ -54,8 +60,11 @@
             </svg>
           </span>
 
-          <span>
+          <span class="catalog-filters__link--desktop">
             <%= filter_labels[@catalog_type] || "Фильтры каталога" %>
+          </span>
+          <span class="catalog-filters__link--mobile">
+            <%= mobile_filter_labels[@catalog_type] || "Фильтры каталога" %>
           </span>
         </button>
 
