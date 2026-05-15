@@ -1,3 +1,21 @@
+<% content_for :structured_data do %>
+  <script type="application/ld+json">
+    <%= raw product_json_ld(product: @product, url: request.original_url) %>
+  </script>
+<% end %>
+
+<% content_for :title,
+  "#{@product.title} — входная дверь купить | ДВЕРНОЙ.БЕЛ" %>
+
+<% content_for :meta_description,
+  [
+    @product.title,
+    @product.brand.presence,
+    @product.category.presence,
+    @product.price.present? ? "Цена от #{@product.price} #{@product.currency.presence || 'BYN'}" : nil,
+    "Входные двери в каталоге ДВЕРНОЙ.БЕЛ: подбор, доставка и установка."
+  ].compact.join(". ") %>
+
 <% product_details = [ @product.use_case, @product.material ].filter { |value| value.present? } %>
 
 <section class="product-show" id="show">

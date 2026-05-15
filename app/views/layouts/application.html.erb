@@ -4,7 +4,7 @@
     <% site_name = "ДВЕРНОЙ.БЕЛ" %>
     <% default_title = "#{site_name} — купить и установить входные и межкомнатные двери" %>
 
-    <% default_description = "Каталог входных и межкомнатных дверей в Беларуси. Поможем выбрать дверь для квартиры, дома или офиса. Цены, рассрочка, кредит, доставка и установка." %>
+    <% default_description = "Каталог входных и межкомнатных дверей по низким ценам. Поможем выбрать дверь для квартиры, дома или офиса. Рассрочка, кредит, доставка и установка." %>
 
     <% page_title = content_for?(:title) ? yield(:title) : default_title %>
     <% page_description = content_for?(:meta_description) ? yield(:meta_description) : default_description %>
@@ -44,21 +44,17 @@
     <meta name="twitter:description" content="<%= page_description %>">
     <meta name="twitter:image" content="<%= asset_url 'og-image.jpg' %>">
 
-    <script type="application/ld+json">
-    <%= raw({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "ДВЕРНОЙ.БЕЛ",
-      url: "https://дверной.бел",
-      logo: "https://дверной.бел/icon.png"
-    }.to_json) %>
-    </script>
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script type="application/ld+json">
+      <%= raw organization_json_ld %>
+    </script>
+
+    <%= yield :structured_data if content_for?(:structured_data) %>
   </head>
 
   <body>
