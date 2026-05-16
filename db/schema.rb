@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_16_101524) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_16_114751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -67,16 +67,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_16_101524) do
   end
 
   create_table "interior_doors", force: :cascade do |t|
-    t.boolean "active", default: true, null: false
-    t.boolean "available", default: true, null: false
     t.string "brand"
     t.datetime "created_at", null: false
-    t.string "currency"
     t.string "dealer"
     t.text "description"
     t.string "door_model"
     t.string "external_id"
-    t.string "finish"
     t.string "glass"
     t.integer "height_mm"
     t.string "hint_tone", default: "unknown", null: false
@@ -85,22 +81,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_16_101524) do
     t.text "image_thumbnail_url"
     t.string "image_url"
     t.string "material"
-    t.decimal "old_price", precision: 10, scale: 2
-    t.decimal "price", precision: 10, scale: 2
     t.jsonb "raw_data", default: {}, null: false
     t.text "searchable_text"
     t.string "series"
     t.string "slug", null: false
     t.decimal "source_price", precision: 10, scale: 2
+    t.string "source_title", null: false
     t.text "source_url"
     t.integer "thickness_mm"
-    t.string "title", null: false
     t.datetime "updated_at", null: false
     t.string "vendor_color"
     t.integer "width_mm"
     t.index ["brand"], name: "index_interior_doors_on_brand"
     t.index ["dealer", "external_id"], name: "index_interior_doors_on_dealer_and_external_id", unique: true
-    t.index ["dealer", "series", "door_model"], name: "index_interior_doors_on_dealer_and_series_and_door_model"
     t.index ["door_model"], name: "index_interior_doors_on_door_model"
     t.index ["hint_tone"], name: "index_interior_doors_on_hint_tone"
     t.index ["series"], name: "index_interior_doors_on_series"
