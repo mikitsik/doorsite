@@ -68,11 +68,11 @@ RSpec.describe InteriorDoorsImport::MagnaImporter do
     expect(InteriorDoor.pluck(:external_id)).to contain_exactly('30490', '30491')
 
     expect(
-      InteriorDoor.distinct.pluck(:variant_group_key)
-    ).to eq(['magna-30489'])
+      InteriorDoor.distinct.pluck(:model_group_key)
+    ).to eq(['magna-emal-lain-08'])
 
     expect(
-      InteriorDoor.pluck(:variant_color)
+      InteriorDoor.pluck(:vendor_color)
     ).to contain_exactly('Эмаль белая', 'Эмаль графит')
 
     expect(InteriorDoor.first.door_model).to eq('ЭМАЛЬ ЛАЙН 08')

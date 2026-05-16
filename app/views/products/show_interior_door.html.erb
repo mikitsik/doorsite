@@ -4,16 +4,15 @@
   </script>
 <% end %>
 
-<% content_for :title,
-  "#{@product.title} — межкомнатная дверь купить | ДВЕРНОЙ.БЕЛ" %>
+<% content_for :title, @product.seo_title %>
 
 <% content_for :meta_description,
   [
-    @product.title,
+    @product.display_title,
     @product.brand.presence,
     @product.series.present? ? "Серия #{@product.series}" : nil,
-    @product.variant_color.present? ? "Цвет #{@product.variant_color}" : nil,
-    @product.price.present? ? "Цена от #{@product.price} #{@product.currency.presence || 'BYN'}" : nil,
+    @product.vendor_color.present? ? "Цвет #{@product.vendor_color}" : nil,
+    @product.source_price.present? ? "Цена от #{@product.source_price} BYN" : nil,
     "Межкомнатные двери в каталоге ДВЕРНОЙ.БЕЛ: подбор, доставка и установка."
   ].compact.join(". ") %>
 
@@ -27,8 +26,9 @@
   product_specs = [
     ["Серия", @product.series],
     ["Материал", @product.material],
-    ["Покрытие", @product.finish],
-    ["Стекло", @product.glass]
+    ["Стекло", @product.glass],
+    ["Цвет", @product.vendor_color],
+    ["Оттенок", @product.hint_tone]
   ].select { |_label, value| value.present? }
 %>
 
@@ -45,11 +45,11 @@
 
             <p class="product-show__meta"><%= @product.brand %></p>
 
-            <h1 class="product-show__title"><%= @product.title %></h1>
+            <h1 class="product-show__title"><%= @product.display_title %></h1>
 
             <div class="product-show__price">
-              <% if @product.price.present? %>
-                <%= number_to_currency(@product.price, unit: "руб", format: "%n %u") %>
+              <% if @product.source_price.present? %>
+                <%= number_to_currency(@product.source_price, unit: "руб", format: "%n %u") %>
               <% else %>
                 Цена по запросу
               <% end %>
@@ -64,44 +64,46 @@
               <% end %>
             <% end %>
 
-            <p class="product-show__spec-name">Цвет</p>
-            <div class="product-show__variant-list">
-              <% @variants.each do |variant| %>
-                <%
-                  variant_image_url =
-                    variant.image_thumbnail_url.presence ||
-                    variant.image_medium_url.presence ||
-                    variant.image_url.presence ||
-                    variant.image_original_url
+            <% if @variants.any? %>
+              <p class="product-show__spec-name">Варианты</p>
+              <div class="product-show__variant-list">
+                <% @variants.each do |variant| %>
+                  <%
+                    variant_image_url =
+                      variant.image_thumbnail_url.presence ||
+                      variant.image_medium_url.presence ||
+                      variant.image_url.presence ||
+                      variant.image_original_url
 
-                  variant_label = variant.variant_color.presence || "Вариант"
+                    variant_label = variant.vendor_color.presence || variant.series.presence || "Вариант"
 
-                  variant_classes = ["product-show__variant"]
-                  variant_classes << "is-active" if variant.id == @product.id
-                %>
+                    variant_classes = ["product-show__variant"]
+                    variant_classes << "is-active" if variant.id == @product.id
+                  %>
 
-                <%= link_to interior_door_path(variant),
-                            class: variant_classes.join(" "),
-                            data: {
-                              turbo_frame: "product_show",
-                              turbo_action: "replace",
-                              turbo_prefetch: false
-                            } do %>
-                  <% if variant_image_url.present? %>
-                    <%= image_tag variant_image_url,
-                                  class: "product-show__variant-thumb",
-                                  alt: variant_label %>
+                  <%= link_to interior_door_path(variant),
+                              class: variant_classes.join(" "),
+                              data: {
+                                turbo_frame: "product_show",
+                                turbo_action: "replace",
+                                turbo_prefetch: false
+                              } do %>
+                    <% if variant_image_url.present? %>
+                      <%= image_tag variant_image_url,
+                                    class: "product-show__variant-thumb",
+                                    alt: variant_label %>
+                    <% end %>
+
+                    <span class="product-show__variant-label"><%= variant_label %></span>
                   <% end %>
-
-                  <span class="product-show__variant-label"><%= variant_label %></span>
                 <% end %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
 
           <div class="product-show__media">
             <% if product_image_url.present? %>
-              <%= image_tag product_image_url, class: "product-show__image", alt: @product.title %>
+              <%= image_tag product_image_url, class: "product-show__image", alt: @product.display_title %>
             <% else %>
               <div class="product-show__placeholder">Нет фото</div>
             <% end %>

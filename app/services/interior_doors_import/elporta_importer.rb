@@ -32,7 +32,7 @@ module InteriorDoorsImport
         door_model: door_model(source_title, vendor_color),
         vendor_color: vendor_color,
         hint_tone: ColorNormalizer.call(vendor_color),
-        material: material(product),
+        material: material(product, category_id),
         glass: glass_name(text(product, 'glass_id')),
         height_mm: option_height(product),
         width_mm: option_width(product),
@@ -44,8 +44,7 @@ module InteriorDoorsImport
         image_original_url: image_original_url(product),
         source_url: text(product, 'url'),
         description: description(product),
-        raw_data: raw_data(product, category_id),
-        model_group_key: model_group_key(door_model)
+        raw_data: raw_data(product, category_id)
       }
     end
 
@@ -115,7 +114,7 @@ module InteriorDoorsImport
       category_path_ids(category_id).reverse.filter_map { |id| categories.dig(id, :title) }
     end
 
-    def series(category_id)
+    def series_name(category_id)
       category_path_titles(category_id)[1]
     end
 
@@ -140,8 +139,8 @@ module InteriorDoorsImport
       glasses[glass_id]
     end
 
-    def material(product)
-      property_value_by_titles(product, ['Материал']) || series(text(product, 'category_id'))
+    def material(product, category_id)
+      property_value_by_titles(product, ['Материал']) || series_name(category_id)
     end
 
     def property_number(product, titles)
@@ -222,13 +221,6 @@ module InteriorDoorsImport
           title: property_value[:title]
         }
       end
-    end
-
-    def model_group_key(door_model)
-      [
-        DEALER,
-        door_model
-      ].compact_blank.map { |part| part.to_s.parameterize }.join('-')
     end
   end
 end

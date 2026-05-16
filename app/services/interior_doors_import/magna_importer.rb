@@ -68,8 +68,7 @@ module InteriorDoorsImport
         image_original_url: text(offer, 'picture'),
         source_url: text(offer, 'url'),
         description: clean_html(text(offer, 'description')),
-        raw_data: raw_data(offer, category_id),
-        model_group_key: model_group_key(door_model)
+        raw_data: raw_data(offer, category_id)
       }
     end
 
@@ -191,13 +190,6 @@ module InteriorDoorsImport
         available: offer['available'],
         params: offer.css('param').to_h { |node| [node['name'], node.text.strip] }
       }
-    end
-
-    def model_group_key(door_model)
-      [
-        DEALER,
-        door_model
-      ].compact_blank.map { |part| part.to_s.parameterize }.join('-')
     end
   end
 end

@@ -7,7 +7,7 @@ module StructuredDataHelper
     {
       '@context': 'https://schema.org',
       '@type': 'Product',
-      name: product.title,
+      name: product_name(product),
       image: image.present? ? [image] : nil,
       description: product.description.to_s.squish.presence,
       brand: {
@@ -18,8 +18,8 @@ module StructuredDataHelper
       offers: {
         '@type': 'Offer',
         url: url,
-        priceCurrency: product.currency.presence || 'BYN',
-        price: product.price.to_s,
+        priceCurrency: 'BYN',
+        price: product_price(product).to_s,
         availability: 'https://schema.org/InStock'
       }
     }.compact.to_json
@@ -36,6 +36,14 @@ module StructuredDataHelper
   end
 
   private
+
+  def product_name(product)
+    product.try(:display_title).presence || product.try(:title).presence || product.try(:source_title).to_s
+  end
+
+  def product_price(product)
+    product.try(:price).presence || product.try(:source_price)
+  end
 
   def product_image_url(product)
     image =

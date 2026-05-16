@@ -6,6 +6,7 @@ class InteriorDoor < ApplicationRecord
   before_validation :normalize_dealer
   before_validation :generate_slug, if: -> { slug.blank? }
   before_validation :build_model_group_key
+
   before_save :build_searchable_text
 
   validates :dealer, presence: true, inclusion: { in: DEALERS }
@@ -38,15 +39,18 @@ class InteriorDoor < ApplicationRecord
     self.slug = [normalized_base, external_id].join('-')
   end
 
+  def build_model_group_key
+    self.model_group_key = [dealer, door_model].compact_blank.map { |part| slugify(part) }.join('-')
+  end
+
   def slugify(value)
-    value.to_s.to_slug.normalize(transliterations: :russian).to_s
+    value.to_s.to_slug.transliterate(:russian).normalize.to_s
   end
 
   def build_searchable_text
     self.searchable_text = [
       'межкомнатная дверь',
       'межкомнатные двери',
-
       source_title,
       brand,
       dealer,
@@ -58,12 +62,5 @@ class InteriorDoor < ApplicationRecord
       glass,
       description
     ].compact_blank.join(' ').squish.downcase
-  end
-
-  def build_model_group_key
-    self.model_group_key = [
-      dealer,
-      door_model
-    ].compact_blank.map { |part| part.to_s.parameterize }.join('-')
   end
 end

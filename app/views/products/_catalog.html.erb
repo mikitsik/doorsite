@@ -78,6 +78,10 @@
 
       <div class="catalog-grid">
         <% products.each_with_index do |product, index| %>
+          <%
+            card_title = product.try(:display_title).presence || product.try(:title).presence || product.try(:source_title)
+            card_price = product.try(:price).presence || product.try(:source_price)
+          %>
           <article class="product-card">
             <%= link_to catalog_product_path(product, anchor: "show"),
                         class: "product-card__image-wrap",
@@ -87,7 +91,7 @@
                   class: "product-card__image",
                   loading: index < 4 ? "eager" : "lazy",
                   decoding: "async",
-                  alt: product.title
+                  alt: card_title
                 %>
               <% else %>
                 <div class="product-card__placeholder">Нет фото</div>
@@ -98,14 +102,14 @@
               <div class="product-card__meta"><%= product.brand %></div>
 
               <h3 class="product-card__title">
-                <%= link_to product.title,
+                <%= link_to card_title,
                         catalog_product_path(product, anchor: "show"),
                         data: { turbo: false } %>
               </h3>
 
               <div class="product-card__price">
-                <% if product.price.present? %>
-                  от <%= number_to_currency(product.price, unit: "BYN", format: "%n %u") %>
+                <% if card_price.present? %>
+                  от <%= number_to_currency(card_price, unit: "BYN", format: "%n %u") %>
                 <% else %>
                   Цена по запросу
                 <% end %>

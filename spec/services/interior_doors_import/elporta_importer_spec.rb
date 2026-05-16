@@ -184,8 +184,8 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
 
     expect(first_door.dealer).to eq('elporta')
     expect(first_door.door_model).to eq('Legno 39')
-    expect(first_door.variant_group_key).to eq('elporta-eko-shpon-legno-legno-39')
-    expect(first_door.variant_color).to eq('Milk Oak')
+    expect(first_door.model_group_key).to eq('elporta-legno-39')
+    expect(first_door.vendor_color).to eq('Milk Oak')
     expect(first_door.glass).to eq('Magic Fog')
     expect(first_door.image_url).to eq('https://example.com/original.jpg')
   end
@@ -196,17 +196,23 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
     expect(first_door.height_mm).to eq(2000)
     expect(first_door.width_mm).to eq(600)
     expect(first_door.thickness_mm).to eq(36)
-    expect(first_door.price.to_f).to eq(76.38)
-    expect(first_door.old_price.to_f).to eq(90.0)
+    expect(first_door.source_price.to_f).to eq(76.38)
+    expect(first_door.raw_data['old_price']).to eq('90.00')
   end
 
   it 'resolves properties and description blocks' do
     import!
 
-    expect(first_door.description).to eq('Описание двери Legno МДФ + массив сосны Эко Шпон')
+    expect(first_door.description).to eq('Описание двери Legno МДФ + массив сосны Эко Шпон 36')
     expect(first_door.material).to eq('МДФ + массив сосны')
-    expect(first_door.finish).to eq('Эко Шпон')
-    expect(first_door.raw_data['description_blocks']).to include('Описание двери Legno')
+    expect(first_door.series).to eq('Эко Шпон')
+    expect(first_door.raw_data['properties']).to include(
+      {
+        'property_id' => '61',
+        'property' => 'Описание',
+        'title' => 'Описание двери Legno'
+      }
+    )
   end
 
   it 'stores normalized raw properties' do

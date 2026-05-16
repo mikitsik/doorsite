@@ -12,10 +12,10 @@ class ProductsController < ApplicationController
 
   def index
     @catalog_type = selected_catalog_type
-    @brands = selected_model.active.where.not(brand: [nil, '']).distinct.order(:brand).pluck(:brand)
+    @brands = selected_model.where.not(brand: [nil, '']).distinct.order(:brand).pluck(:brand)
     @page = [params[:page].to_i, 1].max
 
-    scope = selected_model.active.order(created_at: :desc)
+    scope = selected_model.order(created_at: :desc)
     scope = scope.where(brand: params[:brands]) if params[:brands].present?
 
     @total_products = scope.count
@@ -33,7 +33,6 @@ class ProductsController < ApplicationController
     @product = InteriorDoor.find_by!(slug: params[:slug])
 
     @variants = InteriorDoor
-                .active
                 .where(model_group_key: @product.model_group_key)
                 .order(:series, :vendor_color, :glass)
 
