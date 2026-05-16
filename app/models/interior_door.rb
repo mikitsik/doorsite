@@ -9,8 +9,8 @@ class InteriorDoor < ApplicationRecord
   before_save :build_searchable_text
 
   validates :dealer, presence: true, inclusion: { in: DEALERS }
-  validates :external_id, :title, :variant_group_key, presence: true
   validates :slug, presence: true, uniqueness: true
+  validates :external_id, :title, :door_model, :variant_group_key, presence: true
   validates :external_id, uniqueness: { scope: :dealer }
 
   scope :active, -> { where(active: true) }
@@ -45,6 +45,7 @@ class InteriorDoor < ApplicationRecord
     self.searchable_text = [
       title,
       brand,
+      door_model,
       series,
       collection,
       variant_color,

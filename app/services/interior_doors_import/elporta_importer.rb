@@ -34,10 +34,9 @@ module InteriorDoorsImport
         title: title,
         brand: BRAND,
         series: category_name(category_id),
-        collection: top_series(category_id),
-        category: category_name(category_id),
-        variant_group_key: variant_group_key(title, category_id),
-        variant_name: color_name(color_id),
+        collection: collection_name(category_id),
+        door_model: door_model(title),
+        variant_group_key: variant_group_key(category_id, title),
         variant_color: color_name(color_id),
         material: material(category_id, product),
         finish: finish(category_id, product),
@@ -67,7 +66,7 @@ module InteriorDoorsImport
           text(category, 'id'),
           {
             title: text(category, 'title'),
-            parent_id: text(category, 'parent_id')
+            parent_id: text(category, 'parent_id').presence || text(category, 'parentId').presence
           }
         ]
       end
@@ -109,8 +108,27 @@ module InteriorDoorsImport
       end
     end
 
-    def variant_group_key(title, category_id)
-      "#{DEALER}:#{category_id}:#{title.to_s.parameterize}"
+    def variant_group_key(category_id, title)
+      [
+        DEALER,
+        collection_name(category_id),
+        category_name(category_id),
+        door_model(title)
+      ].compact_blank.map { |part| transliterate_part(part) }.join('-')
+    end
+
+    def transliterate_part(part)
+      part.to_s.to_slug.transliterate(:russian).normalize.to_s
+    end
+
+    def collection_name(category_id)
+      parent_id = categories.dig(category_id, :parent_id)
+
+      categories.dig(parent_id, :title)
+    end
+
+    def door_model(title)
+      title.to_s.squish
     end
 
     def color_name(color_id)

@@ -183,7 +183,8 @@ RSpec.describe InteriorDoorsImport::ElportaImporter do
     import!
 
     expect(first_door.dealer).to eq('elporta')
-    expect(first_door.variant_group_key).to eq('elporta:89:legno-39')
+    expect(first_door.door_model).to eq('Legno 39')
+    expect(first_door.variant_group_key).to eq('elporta-eko-shpon-legno-legno-39')
     expect(first_door.variant_color).to eq('Milk Oak')
     expect(first_door.glass).to eq('Magic Fog')
     expect(first_door.image_url).to eq('https://example.com/original.jpg')

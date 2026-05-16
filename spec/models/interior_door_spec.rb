@@ -19,6 +19,7 @@ RSpec.describe InteriorDoor do
         dealer: 'magna',
         external_id: '100',
         title: 'Door',
+        door_model: 'Door',
         variant_group_key: 'magna:10'
       )
 
@@ -48,6 +49,7 @@ RSpec.describe InteriorDoor do
         dealer: 'magna',
         external_id: '101',
         title: 'Межкомнатная дверь Test',
+        door_model: 'Test',
         brand: 'Юни',
         variant_color: 'Эмаль белая',
         variant_group_key: 'magna:101'

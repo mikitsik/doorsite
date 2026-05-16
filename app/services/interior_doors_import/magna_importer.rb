@@ -26,9 +26,7 @@ module InteriorDoorsImport
         brand: brand(offer),
         series: series_from_category(category_id),
         collection: offer['group_id'],
-        category: category_name(category_id),
         variant_group_key: variant_group_key(offer, title),
-        variant_name: variant_name(offer),
         variant_color: variant_color(offer),
         material: material(offer),
         finish: finish(offer),
@@ -48,7 +46,8 @@ module InteriorDoorsImport
         description: clean_html(text(offer, 'description')),
         available: offer['available'] == 'true',
         active: true,
-        raw_data: raw_data(offer)
+        raw_data: raw_data(offer),
+        door_model: door_model(title)
       }
     end
 
@@ -94,14 +93,10 @@ module InteriorDoorsImport
 
     def variant_group_key(offer, title)
       if offer['group_id'].present?
-        "#{DEALER}:#{offer['group_id']}"
+        "#{DEALER}-#{offer['group_id']}"
       else
-        "#{DEALER}:#{title.to_s.parameterize}"
+        "#{DEALER}-#{door_model(title).parameterize}"
       end
-    end
-
-    def variant_name(offer)
-      variant_color(offer)
     end
 
     def variant_color(offer)
@@ -137,6 +132,13 @@ module InteriorDoorsImport
         vendor_code: text(offer, 'vendorCode'),
         params: offer.css('param').to_h { |node| [node['name'], node.text.strip] }
       }
+    end
+
+    def door_model(title)
+      title.to_s
+           .sub(/\Aмежкомнатная дверь\s+/i, '')
+           .delete('"')
+           .squish
     end
   end
 end

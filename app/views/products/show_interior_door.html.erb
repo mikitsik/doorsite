@@ -74,10 +74,7 @@
                     variant.image_url.presence ||
                     variant.image_original_url
 
-                  variant_label =
-                    variant.variant_color.presence ||
-                    variant.variant_name.presence ||
-                    "Вариант"
+                  variant_label = variant.variant_color.presence || "Вариант"
 
                   variant_classes = ["product-show__variant"]
                   variant_classes << "is-active" if variant.id == @product.id
