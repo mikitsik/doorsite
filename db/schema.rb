@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_16_114751) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_16_153859) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -81,6 +81,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_16_114751) do
     t.text "image_thumbnail_url"
     t.string "image_url"
     t.string "material"
+    t.string "model_group_key"
     t.jsonb "raw_data", default: {}, null: false
     t.text "searchable_text"
     t.string "series"
@@ -96,6 +97,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_16_114751) do
     t.index ["dealer", "external_id"], name: "index_interior_doors_on_dealer_and_external_id", unique: true
     t.index ["door_model"], name: "index_interior_doors_on_door_model"
     t.index ["hint_tone"], name: "index_interior_doors_on_hint_tone"
+    t.index ["model_group_key"], name: "index_interior_doors_on_model_group_key"
     t.index ["series"], name: "index_interior_doors_on_series"
     t.index ["slug"], name: "index_interior_doors_on_slug", unique: true
     t.index ["vendor_color"], name: "index_interior_doors_on_vendor_color"

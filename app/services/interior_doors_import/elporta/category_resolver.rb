@@ -5,6 +5,20 @@ module InteriorDoorsImport
     module CategoryResolver
       INTERIOR_ROOT_ID = '42'
 
+      INTERIOR_SERIES_TITLES = [
+        'Эко Шпон',
+        'Полипропилен',
+        'Эксимер',
+        'Флекс Эмаль',
+        'Массив',
+        'Винил',
+        'Хард Флекс',
+        'Эмалит',
+        'CPL',
+        'Финиш Флекс',
+        'Шпон'
+      ].freeze
+
       private
 
       def interior_category?(category_id)
@@ -28,41 +42,21 @@ module InteriorDoorsImport
       end
 
       def path_titles(category_id)
-        path_ids(category_id).map { |id| category_name(id) }.compact
+        path_ids(category_id).filter_map { |id| category_name(id) }
       end
 
-      def top_series(category_id)
-        path = path_ids(category_id)
-        return if path.length < 2
-
-        category_name(path.first)
+      def series_name(category_id)
+        path_titles(category_id).find { |title| interior_series_title?(title) }
       end
 
-      def material(category_id, product)
-        value_from_description_blocks(product, ['Материал']) ||
-          path_titles(category_id).find do |title|
-            interior_material_title?(title)
-          end
+      def material(product)
+        value_from_description_blocks(product, ['Материал'])
       end
 
-      def finish(category_id, product)
-        value_from_description_blocks(product, %w[Покрытие Отделка]) || material(category_id, product)
-      end
-
-      def interior_material_title?(title)
-        [
-          'Эко Шпон',
-          'Полипропилен',
-          'Эксимер',
-          'Флекс Эмаль',
-          'Массив',
-          'Винил',
-          'Хард Флекс',
-          'Эмалит',
-          'CPL',
-          'Финиш Флекс',
-          'Шпон'
-        ].any? { |keyword| title.include?(keyword) }
+      def interior_series_title?(title)
+        INTERIOR_SERIES_TITLES.any? do |keyword|
+          title.to_s.downcase.include?(keyword.downcase)
+        end
       end
     end
   end

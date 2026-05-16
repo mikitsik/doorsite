@@ -1,17 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'elporta/category_resolver'
-require_relative 'elporta/media_resolver'
-require_relative 'elporta/description_builder'
+require_relative 'color_normalizer'
 
 module InteriorDoorsImport
   class ElportaImporter < BaseImporter
-    include Elporta::CategoryResolver
-    include Elporta::MediaResolver
-    include Elporta::DescriptionBuilder
-
     DEALER = 'elporta'
     BRAND = 'Elporta'
+    INTERIOR_ROOT_ID = '42'
 
     private
 
@@ -22,42 +17,40 @@ module InteriorDoorsImport
     def map_item(product)
       category_id = text(product, 'category_id')
       return unless interior_category?(category_id)
+      return if archived?(product)
 
-      source_price = decimal(text(product, 'price'))
-      title = text(product, 'title')
-      color_id = text(product, 'color_id')
+      source_title = text(product, 'title')
+      vendor_color = color_name(text(product, 'color_id'))
 
       {
         dealer: DEALER,
         external_id: text(product, 'id'),
         slug: nil,
-        title: title,
+        source_title: source_title,
         brand: BRAND,
-        series: category_name(category_id),
-        collection: collection_name(category_id),
-        door_model: door_model(title),
-        variant_group_key: variant_group_key(category_id, title),
-        variant_color: color_name(color_id),
-        material: material(category_id, product),
-        finish: finish(category_id, product),
+        series: series_name(category_id),
+        door_model: door_model(source_title, vendor_color),
+        vendor_color: vendor_color,
+        hint_tone: ColorNormalizer.call(vendor_color),
+        material: material(product),
         glass: glass_name(text(product, 'glass_id')),
         height_mm: option_height(product),
         width_mm: option_width(product),
         thickness_mm: property_number(product, ['Толщина полотна', 'Толщина полотна/коробки', 'Толщина, мм']),
-        price: source_price,
-        source_price: source_price,
-        old_price: decimal(text(product, 'old_price')),
-        currency: 'BYN',
+        source_price: decimal(text(product, 'price')),
         image_url: image_url(product),
         image_thumbnail_url: image_thumbnail_url(product),
         image_medium_url: image_medium_url(product),
         image_original_url: image_original_url(product),
         source_url: text(product, 'url'),
         description: description(product),
-        available: text(product, 'archive') != '1',
-        active: true,
-        raw_data: raw_data(product)
+        raw_data: raw_data(product, category_id),
+        model_group_key: model_group_key(door_model)
       }
+    end
+
+    def archived?(product)
+      text(product, 'archive') == '1'
     end
 
     def categories
@@ -96,39 +89,47 @@ module InteriorDoorsImport
           text(property_value, 'id'),
           {
             title: text(property_value, 'title'),
-            property_id: text(property_value, 'property_id') || text(property_value, 'propertyId')
+            property_id: text(property_value, 'property_id').presence || text(property_value, 'propertyId').presence
           }
         ]
       end
     end
 
-    def product_property_values(product)
-      product.css('> propertyValues > propertyValue').filter_map do |property_value|
-        property_values[text(property_value, 'id')]
+    def interior_category?(category_id)
+      category_path_ids(category_id).include?(INTERIOR_ROOT_ID)
+    end
+
+    def category_path_ids(category_id)
+      ids = []
+      current_id = category_id
+
+      while current_id.present?
+        ids << current_id
+        current_id = categories.dig(current_id, :parent_id)
       end
+
+      ids
     end
 
-    def variant_group_key(category_id, title)
-      [
-        DEALER,
-        collection_name(category_id),
-        category_name(category_id),
-        door_model(title)
-      ].compact_blank.map { |part| transliterate_part(part) }.join('-')
+    def category_path_titles(category_id)
+      category_path_ids(category_id).reverse.filter_map { |id| categories.dig(id, :title) }
     end
 
-    def transliterate_part(part)
-      part.to_s.to_slug.transliterate(:russian).normalize.to_s
+    def series(category_id)
+      category_path_titles(category_id)[1]
     end
 
-    def collection_name(category_id)
-      parent_id = categories.dig(category_id, :parent_id)
-
-      categories.dig(parent_id, :title)
+    def vendor_family(category_id)
+      category_path_titles(category_id)[2]
     end
 
-    def door_model(title)
-      title.to_s.squish
+    def door_model(source_title, vendor_color)
+      source_title.to_s
+                  .delete_suffix(vendor_color.to_s)
+                  .delete('«')
+                  .delete('»')
+                  .delete('"')
+                  .squish
     end
 
     def color_name(color_id)
@@ -139,15 +140,25 @@ module InteriorDoorsImport
       glasses[glass_id]
     end
 
+    def material(product)
+      property_value_by_titles(product, ['Материал']) || series(text(product, 'category_id'))
+    end
+
     def property_number(product, titles)
-      node = product_property_values(product).find do |property|
-        title = property_title(property)
-        titles.any? { |expected| title.to_s.downcase.include?(expected.downcase) }
+      property_value_by_titles(product, titles).to_s[/\d+/]&.to_i
+    end
+
+    def property_value_by_titles(product, titles)
+      product_property_values(product).find do |property_value|
+        property_title = properties[property_value[:property_id].to_s]
+        titles.any? { |title| property_title.to_s.downcase.include?(title.downcase) }
+      end&.dig(:title)
+    end
+
+    def product_property_values(product)
+      product.css('> propertyValues > propertyValue').filter_map do |property_value|
+        property_values[text(property_value, 'id')]
       end
-
-      return if node.blank?
-
-      property_value(node).to_s[/\d+/]&.to_i
     end
 
     def option_height(product)
@@ -168,14 +179,38 @@ module InteriorDoorsImport
       [match[1].to_i * 10, match[2].to_i * 10]
     end
 
-    def raw_data(product)
+    def description(product)
+      clean_html(text(product, 'description')).presence ||
+        raw_properties(product).pluck(:title).compact_blank.join(' ').squish.presence
+    end
+
+    def image_url(product)
+      image_original_url(product) || image_medium_url(product) || image_thumbnail_url(product)
+    end
+
+    def image_thumbnail_url(product)
+      text(product, 'pictures picture thumbnail')
+    end
+
+    def image_medium_url(product)
+      text(product, 'pictures picture medium')
+    end
+
+    def image_original_url(product)
+      text(product, 'pictures picture original')
+    end
+
+    def raw_data(product, category_id)
       {
-        category_id: text(product, 'category_id'),
+        category_id: category_id,
+        category_path: category_path_titles(category_id),
+        vendor_family: vendor_family(category_id),
         color_id: text(product, 'color_id'),
         glass_id: text(product, 'glass_id'),
-        description_blocks: description_blocks(product),
-        category_path: path_titles(text(product, 'category_id')),
-        properties: raw_properties(product)
+        properties: raw_properties(product),
+        archive: text(product, 'archive'),
+        source_price: text(product, 'price'),
+        old_price: text(product, 'old_price')
       }
     end
 
@@ -183,10 +218,17 @@ module InteriorDoorsImport
       product_property_values(product).map do |property_value|
         {
           property_id: property_value[:property_id],
-          property: property_name(property_value[:property_id]),
+          property: properties[property_value[:property_id].to_s],
           title: property_value[:title]
         }
       end
+    end
+
+    def model_group_key(door_model)
+      [
+        DEALER,
+        door_model
+      ].compact_blank.map { |part| part.to_s.parameterize }.join('-')
     end
   end
 end

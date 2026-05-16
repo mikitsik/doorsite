@@ -34,8 +34,8 @@ class ProductsController < ApplicationController
 
     @variants = InteriorDoor
                 .active
-                .where(variant_group_key: @product.variant_group_key)
-                .order(:variant_color)
+                .where(model_group_key: @product.model_group_key)
+                .order(:series, :vendor_color, :glass)
 
     render :show_interior_door
   end
