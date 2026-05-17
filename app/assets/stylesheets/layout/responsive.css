@@ -277,11 +277,5 @@
       }
     }
   }
-
-  .error-page {
-    &__inner {
-      padding: 2.5rem 2rem;
-    }
-  }
 }
 

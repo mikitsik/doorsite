@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get "errors/not_found"
+  get 'errors/not_found'
   root 'products#index'
 
   get '/vhodnaya-dver/:slug',

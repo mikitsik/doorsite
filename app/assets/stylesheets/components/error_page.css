@@ -17,29 +17,17 @@
   }
 
   &__inner {
-    position: relative;
-    z-index: 1;
-    max-width: 42rem;
-    margin: 0 auto;
-    padding: 3.5rem 3rem;
     text-align: center;
-    border: 1px solid rgba(154, 111, 72, 0.14);
-    border-radius: 2rem;
-    background:
-      linear-gradient(180deg, rgba(255, 252, 247, 0.82), rgba(250, 244, 236, 0.68));
-    box-shadow:
-      0 2rem 5rem rgba(76, 51, 28, 0.10),
-      inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(10px);
   }
 
-  &__code {
-    margin: 0 0 1rem;
-    font-size: clamp(5rem, 12vw, 8.5rem);
-    font-weight: 800;
-    line-height: 0.9;
-    letter-spacing: -0.08em;
-    color: rgba(186, 131, 66, 0.16);
+  &__image {
+    display: block;
+    width: min(100%, 30rem);
+    height: auto;
+    margin: -0.5rem auto 1.75rem;
+    border-radius: 0;
+    background: transparent;
+    filter: drop-shadow(0 1.5rem 2.5rem rgba(76, 51, 28, 0.14));
   }
 
   &__title {
@@ -51,7 +39,7 @@
 
   &__text {
     max-width: 31rem;
-    margin: 1.2rem auto;
+    margin: 1.2rem auto 0;
     font-size: 1.05rem;
     line-height: 1.55;
     color: rgba(51, 38, 29, 0.72);
