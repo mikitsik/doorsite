@@ -16,6 +16,7 @@ module InteriorDoorsImport
 
     def map_item(product)
       category_id = text(product, 'category_id')
+      return if vendor_family(category_id).to_s.downcase.include?('нестандарт')
       return unless interior_category?(category_id)
       return if archived?(product)
 

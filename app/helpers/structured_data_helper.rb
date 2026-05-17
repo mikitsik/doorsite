@@ -20,7 +20,28 @@ module StructuredDataHelper
         url: url,
         priceCurrency: 'BYN',
         price: product_price(product).to_s,
-        availability: 'https://schema.org/InStock'
+        availability: 'https://schema.org/InStock',
+
+        shippingDetails: {
+          '@type': 'OfferShippingDetails',
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'BY'
+          }
+        },
+
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+
+          applicableCountry: 'BY',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+
+          merchantReturnDays: 14,
+
+          returnMethod: 'https://schema.org/ReturnInStore',
+
+          returnFees: 'https://schema.org/FreeReturn'
+        }
       }
     }.compact.to_json
   end

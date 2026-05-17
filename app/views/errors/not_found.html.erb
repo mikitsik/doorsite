@@ -1,0 +1,23 @@
+<section class="error-page">
+  <div class="container">
+    <div class="error-page__inner">
+      <p class="error-page__code">
+        404
+      </p>
+
+      <h1 class="error-page__title">
+        Страница не найдена
+      </h1>
+
+      <p class="error-page__text">
+        Возможно, ссылка устарела или товар был удалён из каталога.
+      </p>
+
+      <div class="error-page__actions">
+        <%= link_to "Перейти в каталог",
+                    root_path(anchor: "catalog"),
+                    class: "button button--primary" %>
+      </div>
+    </div>
+  </div>
+</section>

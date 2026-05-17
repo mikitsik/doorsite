@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get "errors/not_found"
   root 'products#index'
 
   get '/vhodnaya-dver/:slug',
@@ -14,4 +15,7 @@ Rails.application.routes.draw do
   get '/dvernaya-sistema/:slug',
       to: 'products#show_system_door',
       as: :system_door
+
+  match '/404', to: 'errors#not_found', via: :all
+  match '*unmatched', to: 'errors#not_found', via: :all
 end
