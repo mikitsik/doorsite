@@ -6,17 +6,17 @@
       </p>
 
       <h1 class="error-page__title">
-        Страница не найдена
+        Эта дверь не открывается
       </h1>
 
       <p class="error-page__text">
-        Возможно, ссылка устарела или товар был удалён из каталога.
+        Возможно, модель была обновлена, перемещена или удалена из каталога
       </p>
 
       <div class="error-page__actions">
-        <%= link_to "Перейти в каталог",
-                    root_path(anchor: "catalog"),
-                    class: "button button--primary" %>
+      <%= link_to "Подобрать другую дверь",
+                  root_path(anchor: "catalog"),
+                  class: "btn btn__call" %>
       </div>
     </div>
   </div>
