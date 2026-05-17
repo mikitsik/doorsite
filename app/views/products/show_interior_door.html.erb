@@ -32,7 +32,7 @@
   ].select { |_label, value| value.present? }
 %>
 
-<div id="show">
+<div id="page-content" data-controller="page-content">
   <%= turbo_frame_tag "product_show" do %>
     <section class="product-show product-show--interior">
       <div class="container">

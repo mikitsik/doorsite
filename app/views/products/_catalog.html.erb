@@ -83,7 +83,7 @@
             card_price = product.try(:price).presence || product.try(:source_price)
           %>
           <article class="product-card">
-            <%= link_to catalog_product_path(product, anchor: "show"),
+            <%= link_to catalog_product_path(product),
                         class: "product-card__image-wrap",
                         data: { turbo: false } do %>
               <% if product.image_url.present? %>
@@ -103,7 +103,7 @@
 
               <h3 class="product-card__title">
                 <%= link_to card_title,
-                        catalog_product_path(product, anchor: "show"),
+                        catalog_product_path(product),
                         data: { turbo: false } %>
               </h3>
 

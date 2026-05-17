@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ErrorsController < ApplicationController
-  layout 'application'
-
   def not_found
-    render status: :not_found
+    render template: 'errors/not_found',
+           status: :not_found,
+           formats: [:html]
   end
 end

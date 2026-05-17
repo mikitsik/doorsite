@@ -1,0 +1,47 @@
+<% content_for :title,
+  "#{@product.title} — дверная система | ДВЕРНОЙ.БЕЛ" %>
+
+<% content_for :meta_description,
+  [
+    @product.title,
+    @product.brand.presence,
+    "Дверные системы в каталоге ДВЕРНОЙ.БЕЛ: подбор, доставка и установка."
+  ].compact.join(". ") %>
+
+<section class="product-show product-show--system" id="page-content" data-controller="page-content">
+  <div class="container">
+    <div class="product-show__layout">
+      <div class="product-show__summary">
+        <%= link_to "← Назад", "javascript:history.back()",
+                    class: "btn btn--light product-show__back" %>
+
+        <p class="product-show__meta"><%= @product.brand %></p>
+
+        <h1 class="product-show__title"><%= @product.title %></h1>
+
+        <div class="product-show__price">
+          Цена по запросу
+        </div>
+      </div>
+
+      <div class="product-show__media">
+        <% if @product.image_url.present? %>
+          <%= image_tag @product.image_url,
+                        class: "product-show__image",
+                        alt: @product.title %>
+        <% else %>
+          <div class="product-show__placeholder">Нет фото</div>
+        <% end %>
+      </div>
+
+      <% if @product.description.present? %>
+        <div class="product-show__description">
+          <h2>Описание</h2>
+          <div class="product-show__description-content">
+            <%= simple_format(@product.description) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
