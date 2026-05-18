@@ -8,7 +8,7 @@
 
     <% page_title = content_for?(:title) ? yield(:title) : default_title %>
     <% page_description = content_for?(:meta_description) ? yield(:meta_description) : default_description %>
-    <% canonical_url = content_for?(:canonical_url) ? yield(:canonical_url) : "https://дверной.бел/" %>
+    <% canonical_url = content_for?(:canonical_url) ? yield(:canonical_url) : request.original_url.split("?").first.split("#").first %>
 
     <title><%= page_title %></title>
 
@@ -21,7 +21,7 @@
     <meta name="description" content="<%= page_description %>">
     <meta name="robots" content="index, follow">
 
-    <link rel="canonical" href="<%= canonical_url %>">
+    <link rel="canonical" href="<%= canonical_url.gsub("дверной.бел", "xn--b1adeqtgm.xn--90ais") %>">
 
     <link rel="icon" href="<%= asset_path 'favicon.ico' %>" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="<%= asset_path 'favicon-32.png' %>">

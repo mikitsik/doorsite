@@ -2,12 +2,9 @@
   <div class="container hero__inner">
     <div class="hero__content">
       <div class="hero__topbar">
-        <%= link_to root_path, class: "hero__logo", aria_label: "дверной.бел" do %>
-          <span class="hero__logo-text">
-            <span class="hero__logo-dark">ДВЕРНОЙ.</span>
-            <span class="hero__logo-light">БЕЛ</span>
-          </span>
-        <% end %>
+        <%= image_tag "logo/logo.webp",
+                    alt: "Logo",
+                    loading: "lazy" %>
         <div class="hero__phones">
           <a href="tel:+375293655228">+375 (29) 365-52-28</a>
           <span>пн-вс 8:00 – 22:00</span>
