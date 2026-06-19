@@ -52,7 +52,7 @@ module StructuredDataHelper
       '@type': 'Organization',
       name: 'ДВЕРНОЙ.БЕЛ',
       url: 'https://дверной.бел',
-      logo: 'https://дверной.бел/icon.png'
+      logo: 'https://xn--b1adeqtgm.xn--90ais/android-chrome-512x512.png'
     }.to_json
   end
 
